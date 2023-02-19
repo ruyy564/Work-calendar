@@ -1,0 +1,15 @@
+.root {
+    display: grid;
+    gap: 5px;
+}
+
+.title {
+    text-align: center;
+}
+
+.body {
+    display: grid;
+    gap: 5px;
+    max-height: 170px;
+    overflow-y: scroll;
+}

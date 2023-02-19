@@ -1,0 +1,21 @@
+.root {
+    display: grid;
+    gap: 10px;
+}
+
+.list {
+    overflow-y: scroll;
+    max-height: 150px;
+}
+
+.addItem {
+    display: grid;
+}
+
+.listItems {
+    display: grid;
+    padding: 10px;
+    grid-template-columns: minmax(50px, 2fr) repeat(2, minmax(30px, 1fr)) repeat(2, 30px);
+    gap: 10px;
+    word-wrap: break-word;
+}

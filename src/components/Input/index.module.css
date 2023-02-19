@@ -1,0 +1,42 @@
+.root {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr;
+    padding: 5px;
+}
+
+.input {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    outline: 1px solid var(--block-color);
+    color: var(--secondary-text);
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+.input:active, .input:focus {
+    outline: 3px solid var(--primary);
+}
+
+.input[type="radio"] {
+    outline: none;
+}
+
+.root:has(.input[type="radio"]) {
+    cursor: pointer;
+}
+
+.text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}

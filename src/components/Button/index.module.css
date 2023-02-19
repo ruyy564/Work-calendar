@@ -1,0 +1,12 @@
+.root {
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--primary);
+    color: var(--primary-text);
+    padding: 10px;
+}
+
+.root:active {
+    background-color: var(--secondary-active);
+}

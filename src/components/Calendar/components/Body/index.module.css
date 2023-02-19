@@ -1,0 +1,25 @@
+.root {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.blockDay {
+    color: var(--block-color);
+}
+
+.currentMonth {
+    cursor: pointer;
+}
+
+.currentMonth:active {
+    background: var(--secondary);
+    color: var(--secondary-text);
+}

@@ -1,0 +1,21 @@
+.root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    background-color: var(--secondary);
+}
+
+.root svg {
+    width: 100%;
+    height: 100%;
+}
+
+.root:active {
+    background-color: var(--secondary-active);
+}

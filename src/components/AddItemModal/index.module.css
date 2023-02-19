@@ -1,0 +1,6 @@
+.root {}
+
+.addItem {
+    display: grid;
+    gap: 5px;
+}
