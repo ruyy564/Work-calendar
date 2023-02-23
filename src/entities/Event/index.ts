@@ -1,6 +1,7 @@
 import { TYPE_WORK } from './constants';
 
 export type PieceWork = {
+  key: string;
   name: string;
   count: number;
   cost: number;
@@ -14,9 +15,22 @@ export type TimeBased = {
   otherHours: number;
 };
 
+export type typeTimeBased = {
+  type: TYPE_WORK.TIME_BASED;
+  data: TimeBased;
+};
+export type typePieceWork = {
+  type: typeof TYPE_WORK.PIECE_WORK;
+  data: PieceWork[];
+};
+export type Event = {
+  date: string;
+} & (typePieceWork | typeTimeBased);
+
+export type EventPayload = Event & {
+  date: string;
+};
+
 export type State = {
-  [key: string]: {
-    type: TYPE_WORK;
-    data: TimeBased | PieceWork;
-  };
+  events: Event[];
 };

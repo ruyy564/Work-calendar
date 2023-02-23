@@ -1,21 +1,18 @@
-import { MODAL_FORMS } from '../../../../entities/Modal/constants';
-import { Modal } from '../../../../entities/Modal';
 import { CalendarDays } from '../../../../entities/Calendar';
 
 import getClasses from '../../../../helpers/getClasses';
 import css from './index.module.css';
 
 type Props = {
-  currentDay: string;
-  currentMonth?: string;
-  currentYears?: string;
+  currentMonth: number;
+  currentYears: number;
   days: CalendarDays;
-  openModal: (modal: Modal) => void;
+  openModal: (date: string) => void;
 };
 
-const Body = ({ days, openModal, currentDay }: Props) => {
+const Body = ({ days, openModal, currentMonth, currentYears }: Props) => {
   const { lastMonthDays, currentMonthDays, nextMonthDays } = days;
-  console.log(currentDay);
+
   return (
     <div className={css.root}>
       {lastMonthDays.map((date, index) => (
@@ -27,9 +24,10 @@ const Body = ({ days, openModal, currentDay }: Props) => {
         <div
           className={getClasses(css.day, css.currentMonth)}
           key={index}
-          onClick={() => openModal(MODAL_FORMS.ADD_EVENT_FORM)}
+          onClick={() =>
+            openModal(`${date}-${currentMonth + 1}-${currentYears}`)
+          }
         >
-          {/* {currentDay === `${date}-${'1'}-${2023}` ? 'yes' : 'no'} */}
           {date}
         </div>
       ))}

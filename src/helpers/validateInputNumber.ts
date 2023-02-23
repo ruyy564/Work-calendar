@@ -1,9 +1,10 @@
-const validateInputNumber = (min?: number, max?: number) => {
-  return function (current: string) {
-    const minCorrent = !min || min <= Number(current);
-    const maxCorrent = !max || max >= Number(current);
-
-    return minCorrent && maxCorrent;
+const validateInputNumber = (min: number, max?: number) => {
+  return function (current: number): string {
+    return String(
+      max
+        ? Math.max(min, Math.min(max, Number(current)))
+        : Math.max(min, Number(current))
+    );
   };
 };
 

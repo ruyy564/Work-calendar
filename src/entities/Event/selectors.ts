@@ -1,9 +1,14 @@
 import type { RootState } from '../../store';
-import { getCurrentMonth } from '../../entities/Calendar/helpers';
+import { Event } from '.';
+// import { getType, getData } from './getters';
 
-export const selectCalendarCurrentDay = (state: RootState): string =>
-  state.calendar.currentDay;
-export const selectCalendarSelectMonth = (state: RootState): string =>
-  getCurrentMonth(state.calendar.selectMonth);
-export const selectCalendarSelectYear = (state: RootState): number =>
-  state.calendar.selectYear;
+export const selectEvent = (
+  state: RootState,
+  date: string
+): Event | undefined => state.events.events.find((item) => item.date === date);
+
+export const selectEventType = (state: RootState, date: string) =>
+  selectEvent(state, date)?.type;
+
+export const selectEventData = (state: RootState, date: string) =>
+  selectEvent(state, date)?.data;

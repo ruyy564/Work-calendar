@@ -1,41 +1,42 @@
-import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
-
-import AddItemModal from '../AddItemModal';
+import { useState } from 'react';
+import AddItemModalContainer from '../../containers/AddItemModalContainer';
 import Button from '../Button';
-import ButtonIcon from '../ButtonIcon';
-
+import { ButtonDelete, ButtonEdit } from '../ButtonIcon';
+import { Props } from '../../containers/FormPlaceworkContainer';
 import css from './index.module.css';
 
-const FormPlacework = () => {
-  const list = [
-    { name: 'S-3234', count: 54, cost: 25135 },
-    { name: 'S-3234', count: 54, cost: 25135 },
-  ];
+const FormPlacework = ({
+  data,
+  type,
+  date,
+  addEvent,
+  deleteItem,
+  saveEvent,
+  openModal,
+}: Props) => {
+  const [selectData, setSelectData] = useState(null);
   return (
     <div className={css.root}>
       <div className={css.list}>
-        {!list.length ? (
-          <div style={{ textAlign: 'center' }}>Пусто...</div>
+        {!data ? (
+          <div style={{ textAlign: 'center' }}>Здесь ничего нет</div>
         ) : (
-          list.map((item) => {
+          Array.isArray(data) &&
+          data.map((item, index) => {
             return (
-              <div className={css.listItems}>
+              <div className={css.listItems} key={`${item}-${index}`}>
                 <div>{item.name}</div>
                 <div>x {item.count}</div>
                 <div>{item.cost}р.</div>
-                <ButtonIcon onClick={() => {}}>
-                  <AiFillEdit />
-                </ButtonIcon>
-                <ButtonIcon onClick={() => {}}>
-                  <AiFillDelete />
-                </ButtonIcon>
+                <ButtonEdit onClick={openModal} />
+                <ButtonDelete onClick={() => {}} />
               </div>
             );
           })
         )}
       </div>
-      <Button onClick={() => {}} text="Добавить изделие" />
-      <AddItemModal />
+      <Button onClick={openModal} text="Добавить изделие" />
+      <AddItemModalContainer date={date} type={type} data={selectData} />
     </div>
   );
 };

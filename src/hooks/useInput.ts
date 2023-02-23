@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export const useInput = (initState: string, validate?: Function) => {
+export const useInput = (initState: string | number, validate?: Function) => {
   const [value, setValue] = useState(initState);
 
-  const changeHandler = (event: React.FormEvent<HTMLInputElement>) => {
-    const currentValue = event.currentTarget.value;
-
-    if (!validate || validate(currentValue)) {
-      setValue(event.currentTarget.value);
-    }
-  };
-
-  const clearValue = () => {
+  useEffect(() => {
     setValue(initState);
+  }, [initState]);
+
+  const changeHandler = (event: React.FormEvent<HTMLInputElement>) => {
+    const currentValue = validate
+      ? validate(event.currentTarget.value)
+      : event.currentTarget.value;
+
+    setValue(currentValue);
   };
 
-  return { value, changeHandler, clearValue };
+  return { value, changeHandler };
 };

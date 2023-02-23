@@ -1,11 +1,13 @@
-import EventModal from '../../components/EventModal';
+import { useState } from 'react';
+
+import EventModalContainer from '../../containers/EventModalContainer';
 import CalendarNav from './components/Nav';
-
-import { Props } from '../../containers/CalendarContainer';
-
-import css from './index.module.css';
 import CalendarHeader from './components/Header';
 import CalendarBody from './components/Body';
+import { Props } from '../../containers/CalendarContainer';
+import { MODAL_FORMS } from '../../entities/Modal/constants';
+
+import css from './index.module.css';
 
 const Calendar = ({
   days,
@@ -16,6 +18,13 @@ const Calendar = ({
   prevMonth,
   openModal,
 }: Props) => {
+  const [selectDate, setSelectDate] = useState('');
+
+  const clickHandler = (date: string) => {
+    setSelectDate(date);
+    openModal(MODAL_FORMS.ADD_EVENT_FORM);
+  };
+
   return (
     <div className={css.root}>
       <CalendarNav
@@ -26,8 +35,13 @@ const Calendar = ({
         prevMonth={prevMonth}
       />
       <CalendarHeader />
-      <CalendarBody days={days} openModal={openModal} currentDay={currentDay} />
-      <EventModal />
+      <CalendarBody
+        days={days}
+        openModal={clickHandler}
+        currentMonth={selectMonth}
+        currentYears={selectYear}
+      />
+      <EventModalContainer date={selectDate} />
     </div>
   );
 };

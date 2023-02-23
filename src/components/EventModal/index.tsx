@@ -1,52 +1,57 @@
-import { useInput } from '../../hooks/useInput';
+import { useState, useEffect } from 'react';
 
 import Input from '../Input';
-import FormSalary from '../FormSalary';
-import FormPlaceWork from '../FormPlacework';
-
+import FormPlaceworkContainer from '../../containers/FormPlaceworkContainer';
+import FormTimeBasedContainer from '../../containers/FormTimeBasedContainer';
 import ModalContainer from '../../containers/ModalContainer';
-
 import { MODAL_FORMS } from '../../entities/Modal/constants';
 import {
   TYPE_WORK,
   RADIO_GROUP_TYPE_WORK,
 } from '../../entities/Event/constants';
+import { Props } from '../../containers/EventModalContainer';
 
 import css from './index.module.css';
 
-type Props = {
-  save?: () => void;
-};
+const EventModal = ({ date, type }: Props) => {
+  const initState = type ? type : TYPE_WORK.TIME_BASED;
+  const [workType, setWorkType] = useState(initState);
 
-const EventModal = ({ save }: Props) => {
-  const typePaid = useInput(TYPE_WORK.TIME_BASED);
+  useEffect(() => {
+    setWorkType(initState);
+  }, [date, type, initState]);
+
+  const changeHandler = (event: React.FormEvent<HTMLInputElement>) => {
+    setWorkType(event.currentTarget.value);
+  };
 
   return (
     <ModalContainer modal={MODAL_FORMS.ADD_EVENT_FORM}>
-      <div>Дата: {'2023-02-20'}</div>
+      <div>Дата: {date}</div>
       <div className={css.groupRadio}>
         <Input
           name={RADIO_GROUP_TYPE_WORK}
-          onChange={typePaid.changeHandler}
+          onChange={changeHandler}
           type="radio"
           text="Повременная"
-          checked={typePaid.value === TYPE_WORK.TIME_BASED}
+          checked={workType === TYPE_WORK.TIME_BASED}
           value={TYPE_WORK.TIME_BASED}
+          disabled={type && type !== TYPE_WORK.TIME_BASED}
         />
         <Input
           name={RADIO_GROUP_TYPE_WORK}
-          onChange={typePaid.changeHandler}
+          onChange={changeHandler}
           type="radio"
-          checked={typePaid.value === TYPE_WORK.PIECE_WORK}
+          checked={workType === TYPE_WORK.PIECE_WORK}
           text="Сдельная"
           value={TYPE_WORK.PIECE_WORK}
+          disabled={type && type !== TYPE_WORK.PIECE_WORK}
         />
       </div>
-
-      {typePaid.value === TYPE_WORK.TIME_BASED ? (
-        <FormSalary />
+      {workType === TYPE_WORK.TIME_BASED ? (
+        <FormTimeBasedContainer date={date} />
       ) : (
-        <FormPlaceWork />
+        <FormPlaceworkContainer date={date} />
       )}
     </ModalContainer>
   );

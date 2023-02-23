@@ -1,12 +1,11 @@
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-
-import ButtonIcon from '../../../ButtonIcon';
+import { getCurrentMonth } from '../../../../entities/Calendar/helpers';
+import { ButtonArrowLeft, ButtonArrowRight } from '../../../ButtonIcon';
 
 import css from './index.module.css';
 
 type Props = {
   currentDay: string;
-  selectMonth: string;
+  selectMonth: number;
   selectYear: number;
   nextMonth: () => void;
   prevMonth: () => void;
@@ -16,14 +15,10 @@ const Nav = ({ selectMonth, selectYear, nextMonth, prevMonth }: Props) => {
   return (
     <div className={css.root}>
       <div className={css.nav}>
-        <ButtonIcon onClick={prevMonth}>
-          <FiChevronLeft />
-        </ButtonIcon>
-        <span className={css.month}>{selectMonth}</span>{' '}
+        <ButtonArrowLeft onClick={prevMonth} />
+        <span className={css.month}>{getCurrentMonth(selectMonth)}</span>{' '}
         <span>{selectYear}</span>
-        <ButtonIcon onClick={nextMonth}>
-          <FiChevronRight />
-        </ButtonIcon>
+        <ButtonArrowRight onClick={nextMonth} />
       </div>
     </div>
   );

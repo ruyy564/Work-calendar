@@ -16,7 +16,7 @@ import { openModal } from '../store/featurs/modalSlice';
 export type Props = {
   days: CalendarDays;
   currentDay: string;
-  selectMonth: string;
+  selectMonth: number;
   selectYear: number;
   nextMonth: () => void;
   prevMonth: () => void;

@@ -10,7 +10,7 @@ type ActionType = {
 const initialState: State = {
   [MODAL_FORMS.ADD_EVENT_FORM]: false,
   [MODAL_FORMS.DOWNLOAD_PAID_LIST_FORM]: false,
-  [MODAL_FORMS.ADD_ITEM_FORM]: true,
+  [MODAL_FORMS.ADD_ITEM_FORM]: false,
 };
 
 export const modalSlice = createSlice({
