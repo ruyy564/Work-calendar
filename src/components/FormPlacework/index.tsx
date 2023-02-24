@@ -11,20 +11,12 @@ import css from './index.module.css';
 type Props = {
   date: string;
   piecesWork?: PieceWork[];
-  addEvent: (event: any) => void;
-  saveEvent?: () => void;
   openModal: () => void;
   deleteItem: (date: string, key: string) => void;
 };
-const FormPlacework = ({
-  piecesWork,
-  date,
-  addEvent,
-  deleteItem,
-  saveEvent,
-  openModal,
-}: Props) => {
-  const [selectData, setSelectData] = useState(null);
+
+const FormPlacework = ({ piecesWork, date, deleteItem, openModal }: Props) => {
+  const [selectData, setSelectData] = useState<null | PieceWork>(null);
   return (
     <div className={css.root}>
       <div className={css.list}>
@@ -38,15 +30,26 @@ const FormPlacework = ({
                 <div>{item.name || 'Нет названия'}</div>
                 <div>x {item.count}</div>
                 <div>{item.cost}р.</div>
-                <ButtonEdit onClick={openModal} />
+                <ButtonEdit
+                  onClick={() => {
+                    setSelectData(item);
+                    openModal();
+                  }}
+                />
                 <ButtonDelete onClick={() => deleteItem(date, item.key)} />
               </div>
             );
           })
         )}
       </div>
-      <Button onClick={openModal} text="Добавить изделие" />
-      <AddItemModalContainer date={date} data={selectData} />
+      <Button
+        onClick={() => {
+          setSelectData(null);
+          openModal();
+        }}
+        text="Добавить изделие"
+      />
+      <AddItemModalContainer date={date} pieceWork={selectData} />
     </div>
   );
 };

@@ -13,13 +13,13 @@ type Props = {
   timeBased?: TimeBased;
   addEvent: (event: any) => void;
   deleteEvent: (date: string) => void;
-  saveEvent: () => void;
+  changeEvent: (event: any) => void;
   closeModal: () => void;
 };
 
 const FormTimeBased = ({
   closeModal,
-  saveEvent,
+  changeEvent,
   addEvent,
   timeBased,
   date,
@@ -27,21 +27,26 @@ const FormTimeBased = ({
 }: Props) => {
   const { costInHour, firstTwoHourRatio, mainWorkTime, otherHours, overTime } =
     useTimeBasedForm(timeBased);
+  const event = {
+    date,
+    [TYPE_WORK.TIME_BASED]: {
+      costInHour: Number(costInHour.value),
+      firstTwoHourRatio: Number(firstTwoHourRatio.value),
+      mainWorkTime: Number(mainWorkTime.value),
+      otherHours: Number(otherHours.value),
+      overTime: Number(overTime.value),
+    },
+  };
 
-  const saveHandler = () => {
-    addEvent({
-      date,
-      [TYPE_WORK.TIME_BASED]: {
-        costInHour: Number(costInHour.value),
-        firstTwoHourRatio: Number(firstTwoHourRatio.value),
-        mainWorkTime: Number(mainWorkTime.value),
-        otherHours: Number(otherHours.value),
-        overTime: Number(overTime.value),
-      },
-    });
+  const addHandler = () => {
+    addEvent(event);
     closeModal();
   };
 
+  const saveHandler = () => {
+    changeEvent(event);
+    closeModal();
+  };
   const deleteHandler = () => {
     deleteEvent(date);
     closeModal();
@@ -96,7 +101,7 @@ const FormTimeBased = ({
           <Button onClick={deleteHandler} text="Удалить" />
         </ButtonGroup>
       ) : (
-        <Button onClick={saveHandler} text="Добавить" />
+        <Button onClick={addHandler} text="Добавить" />
       )}
     </div>
   );

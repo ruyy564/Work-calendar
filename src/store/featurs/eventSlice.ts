@@ -48,7 +48,25 @@ export const eventSlice = createSlice({
         }
       }
     },
-    changeEvent: (state, { payload }: { payload: any }) => {},
+    changeEvent: (state, { payload }: { payload: ActionPayloadAddEvent }) => {
+      const event = state.events.find((item) => item.date === payload.date);
+
+      if (event && payload[TYPE_WORK.TIME_BASED]) {
+        event[TYPE_WORK.TIME_BASED] = payload[TYPE_WORK.TIME_BASED];
+      }
+
+      if (event && payload[TYPE_WORK.PIECE_WORK]) {
+        const item = event[TYPE_WORK.PIECE_WORK]?.find(
+          (item) => item.key === payload[TYPE_WORK.PIECE_WORK]?.key
+        );
+
+        if (item) {
+          item.cost = payload[TYPE_WORK.PIECE_WORK].cost;
+          item.name = payload[TYPE_WORK.PIECE_WORK].name;
+          item.count = payload[TYPE_WORK.PIECE_WORK].count;
+        }
+      }
+    },
     deleteEvent: (
       state,
       { payload }: { payload: ActionPayloadDeleteEvent }

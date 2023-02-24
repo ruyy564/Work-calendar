@@ -15,5 +15,9 @@ export const useInput = (initState: string | number, validate?: Function) => {
     setValue(currentValue);
   };
 
-  return { value, changeHandler };
+  const clear = () => {
+    setValue(initState);
+  };
+
+  return { value, changeHandler, clear };
 };

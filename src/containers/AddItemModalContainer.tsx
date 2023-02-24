@@ -12,7 +12,7 @@ const mapState = (state: RootState, { date }: { date: string }) => ({
 
 const mapDispatch = {
   addEvent: (event: any) => addEvent(event),
-  saveEvent: () => {},
+  changeEvent: (event: any) => changeEvent(event),
   closeModal: () => closeModal(MODAL_FORMS.ADD_ITEM_FORM),
 };
 

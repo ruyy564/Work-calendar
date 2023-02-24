@@ -6,30 +6,45 @@ import generateId from '../../helpers/generateId';
 import { useAddItem } from '../../hooks/useAddItem';
 import ModalContainer from '../../containers/ModalContainer';
 import { MODAL_FORMS } from '../../entities/Modal/constants';
+import { PieceWork } from '../../entities/Event';
 
 import css from './index.module.css';
 
 type Props = {
   date: string;
-  data: any;
+  pieceWork: PieceWork | null;
   addEvent: (event: any) => void;
-  saveEvent: () => void;
+  changeEvent: (event: any) => void;
   closeModal: () => void;
 };
 
-const AddItemModal = ({ date, data, addEvent, closeModal }: Props) => {
-  const { cost, count, name } = useAddItem(data);
+const AddItemModal = ({
+  date,
+  pieceWork,
+  addEvent,
+  closeModal,
+  changeEvent,
+}: Props) => {
+  const { cost, count, name, clear } = useAddItem(pieceWork);
+  const event = {
+    date,
+    [TYPE_WORK.PIECE_WORK]: {
+      key: pieceWork?.key || generateId(),
+      cost: Number(cost.value),
+      count: Number(count.value),
+      name: name.value,
+    },
+  };
+
+  const addHandler = () => {
+    addEvent(event);
+    clear();
+    closeModal();
+  };
 
   const saveHandler = () => {
-    addEvent({
-      date,
-      [TYPE_WORK.PIECE_WORK]: {
-        key: data?.key || generateId(),
-        cost: Number(cost.value),
-        count: Number(count.value),
-        name: name.value,
-      },
-    });
+    changeEvent(event);
+    clear();
     closeModal();
   };
   return (
@@ -53,10 +68,14 @@ const AddItemModal = ({ date, data, addEvent, closeModal }: Props) => {
           value={cost.value}
           onChange={cost.changeHandler}
         />
-        <ButtonGroup>
-          <Button onClick={saveHandler} text="Сохранить" />
-          <Button onClick={closeModal} text="Отменить" />
-        </ButtonGroup>
+        {!pieceWork ? (
+          <Button onClick={addHandler} text="Добавить" />
+        ) : (
+          <ButtonGroup>
+            <Button onClick={saveHandler} text="Сохранить изменения" />
+            <Button onClick={closeModal} text="Отменить" />
+          </ButtonGroup>
+        )}
       </div>
     </ModalContainer>
   );

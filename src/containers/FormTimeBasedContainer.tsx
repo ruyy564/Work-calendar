@@ -18,8 +18,7 @@ const mapState = (state: RootState, { date }: { date: string }) => ({
 
 const mapDispatch = {
   addEvent: (event: any) => addEvent(event),
-  // saveEvent: (event: EventPayload) => changeEvent(event),
-  saveEvent: () => {},
+  changeEvent: (event: any) => changeEvent(event),
   closeModal: () => closeModal(MODAL_FORMS.ADD_EVENT_FORM),
   deleteEvent: (date: string) => deleteEvent({ date }),
 };
