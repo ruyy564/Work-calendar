@@ -7,7 +7,7 @@ import eventReducer from './featurs/eventSlice';
 const reducer = {
   calendar: calendarReducer,
   modalsWindowVisible: modalReducer,
-  events: eventReducer,
+  eventsOfCalendar: eventReducer,
 };
 
 export const store = configureStore({

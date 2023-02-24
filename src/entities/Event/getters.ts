@@ -1,9 +1,10 @@
 import { Event } from '.';
+import { TYPE_WORK } from './constants';
 
-// export const getType = (event: Event) => {
-//   return event?.type;
-// };
+export const getEventTimeBased = (event: Event) => {
+  return event[TYPE_WORK.TIME_BASED];
+};
 
-// export const getData = (event: Event) => {
-//   return event?.data;
-// };
+export const getEventPiecesWork = (event: Event) => {
+  return event[TYPE_WORK.PIECE_WORK];
+};

@@ -4,10 +4,21 @@ import EventModalContainer from '../../containers/EventModalContainer';
 import CalendarNav from './components/Nav';
 import CalendarHeader from './components/Header';
 import CalendarBody from './components/Body';
-import { Props } from '../../containers/CalendarContainer';
+import { CalendarDays } from '../../entities/Calendar';
+import { Modal } from '../../entities/Modal';
 import { MODAL_FORMS } from '../../entities/Modal/constants';
 
 import css from './index.module.css';
+
+type Props = {
+  days: CalendarDays;
+  currentDay: string;
+  selectMonth: number;
+  selectYear: number;
+  nextMonth: () => void;
+  prevMonth: () => void;
+  openModal: (modal: Modal) => void;
+};
 
 const Calendar = ({
   days,

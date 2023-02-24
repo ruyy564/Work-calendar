@@ -1,9 +1,16 @@
 import React from 'react';
 
-import { Props } from '../../containers/ModalContainer';
+import { Modal as ModalType } from '../../entities/Modal';
 import { ButtonClose } from '../ButtonIcon';
 
 import css from './index.module.css';
+
+type Props = {
+  children?: React.ReactNode;
+  isOpen: boolean;
+  modal: ModalType;
+  closeModal: (modal: ModalType) => void;
+};
 
 const Modal = ({ children, isOpen, closeModal, modal }: Props) => {
   const stopPropagation = (event: React.MouseEvent) => {

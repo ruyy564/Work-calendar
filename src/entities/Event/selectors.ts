@@ -1,14 +1,21 @@
 import type { RootState } from '../../store';
 import { Event } from '.';
-// import { getType, getData } from './getters';
+import { getEventPiecesWork, getEventTimeBased } from './getters';
 
 export const selectEvent = (
   state: RootState,
   date: string
-): Event | undefined => state.events.events.find((item) => item.date === date);
+): Event | undefined =>
+  state.eventsOfCalendar.events.find((item) => item.date === date);
 
-export const selectEventType = (state: RootState, date: string) =>
-  selectEvent(state, date)?.type;
+export const selectEventPiecesWork = (state: RootState, date: string) => {
+  const event = selectEvent(state, date);
 
-export const selectEventData = (state: RootState, date: string) =>
-  selectEvent(state, date)?.data;
+  return event ? getEventPiecesWork(event) : undefined;
+};
+
+export const selectEventTimeBased = (state: RootState, date: string) => {
+  const event = selectEvent(state, date);
+
+  return event ? getEventTimeBased(event) : undefined;
+};

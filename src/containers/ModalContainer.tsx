@@ -1,19 +1,16 @@
 import { connect } from 'react-redux';
 
 import Modal from '../components/Modal';
-import { RootState } from '../store';
 import { selectModalVisible } from '../entities/Modal/selectors';
 import { Modal as ModalType } from '../entities/Modal';
+import { RootState } from '../store';
 import { closeModal } from '../store/featurs/modalSlice';
 
-export type Props = {
-  children?: React.ReactNode;
-  isOpen: boolean;
+type Data = {
   modal: ModalType;
-  closeModal: (modal: ModalType) => void;
 };
 
-const mapState = (state: RootState, { modal }: { modal: ModalType }) => ({
+const mapState = (state: RootState, { modal }: Data) => ({
   isOpen: selectModalVisible(state, modal),
 });
 

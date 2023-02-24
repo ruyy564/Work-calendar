@@ -15,20 +15,10 @@ export type TimeBased = {
   otherHours: number;
 };
 
-export type typeTimeBased = {
-  type: TYPE_WORK.TIME_BASED;
-  data: TimeBased;
-};
-export type typePieceWork = {
-  type: typeof TYPE_WORK.PIECE_WORK;
-  data: PieceWork[];
-};
 export type Event = {
   date: string;
-} & (typePieceWork | typeTimeBased);
-
-export type EventPayload = Event & {
-  date: string;
+  [TYPE_WORK.TIME_BASED]?: TimeBased;
+  [TYPE_WORK.PIECE_WORK]?: PieceWork[];
 };
 
 export type State = {

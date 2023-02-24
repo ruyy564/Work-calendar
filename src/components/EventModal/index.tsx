@@ -9,13 +9,17 @@ import {
   TYPE_WORK,
   RADIO_GROUP_TYPE_WORK,
 } from '../../entities/Event/constants';
-import { Props } from '../../containers/EventModalContainer';
 
 import css from './index.module.css';
 
+type Props = {
+  date: string;
+  type: TYPE_WORK;
+};
+
 const EventModal = ({ date, type }: Props) => {
-  const initState = type ? type : TYPE_WORK.TIME_BASED;
-  const [workType, setWorkType] = useState(initState);
+  const initState = type !== TYPE_WORK.NONE ? type : TYPE_WORK.TIME_BASED;
+  const [workType, setWorkType] = useState<string>(initState);
 
   useEffect(() => {
     setWorkType(initState);
@@ -36,7 +40,7 @@ const EventModal = ({ date, type }: Props) => {
           text="Повременная"
           checked={workType === TYPE_WORK.TIME_BASED}
           value={TYPE_WORK.TIME_BASED}
-          disabled={type && type !== TYPE_WORK.TIME_BASED}
+          disabled={type === TYPE_WORK.PIECE_WORK}
         />
         <Input
           name={RADIO_GROUP_TYPE_WORK}
@@ -45,7 +49,7 @@ const EventModal = ({ date, type }: Props) => {
           checked={workType === TYPE_WORK.PIECE_WORK}
           text="Сдельная"
           value={TYPE_WORK.PIECE_WORK}
-          disabled={type && type !== TYPE_WORK.PIECE_WORK}
+          disabled={type === TYPE_WORK.TIME_BASED}
         />
       </div>
       {workType === TYPE_WORK.TIME_BASED ? (

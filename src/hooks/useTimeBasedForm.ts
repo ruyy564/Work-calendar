@@ -2,7 +2,7 @@ import { useInput } from './useInput';
 import { TimeBased } from '../entities/Event';
 import validateInputNumber from '../helpers/validateInputNumber';
 
-export const useTimeBasedForm = (data: TimeBased) => {
+export const useTimeBasedForm = (data?: TimeBased) => {
   const costInHour = useInput(
     data ? data.costInHour : 0,
     validateInputNumber(0)

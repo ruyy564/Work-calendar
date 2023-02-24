@@ -1,13 +1,23 @@
 import { useState } from 'react';
-import AddItemModalContainer from '../../containers/AddItemModalContainer';
+
 import Button from '../Button';
 import { ButtonDelete, ButtonEdit } from '../ButtonIcon';
-import { Props } from '../../containers/FormPlaceworkContainer';
+import AddItemModalContainer from '../../containers/AddItemModalContainer';
+import { TYPE_WORK } from '../../entities/Event/constants';
+import { PieceWork } from '../../entities/Event';
+
 import css from './index.module.css';
 
+type Props = {
+  date: string;
+  piecesWork?: PieceWork[];
+  addEvent: (event: any) => void;
+  saveEvent?: () => void;
+  openModal: () => void;
+  deleteItem: (date: string, key: string) => void;
+};
 const FormPlacework = ({
-  data,
-  type,
+  piecesWork,
   date,
   addEvent,
   deleteItem,
@@ -18,25 +28,25 @@ const FormPlacework = ({
   return (
     <div className={css.root}>
       <div className={css.list}>
-        {!data ? (
+        {!piecesWork ? (
           <div style={{ textAlign: 'center' }}>Здесь ничего нет</div>
         ) : (
-          Array.isArray(data) &&
-          data.map((item, index) => {
+          Array.isArray(piecesWork) &&
+          piecesWork.map((item, index) => {
             return (
               <div className={css.listItems} key={`${item}-${index}`}>
-                <div>{item.name}</div>
+                <div>{item.name || 'Нет названия'}</div>
                 <div>x {item.count}</div>
                 <div>{item.cost}р.</div>
                 <ButtonEdit onClick={openModal} />
-                <ButtonDelete onClick={() => {}} />
+                <ButtonDelete onClick={() => deleteItem(date, item.key)} />
               </div>
             );
           })
         )}
       </div>
       <Button onClick={openModal} text="Добавить изделие" />
-      <AddItemModalContainer date={date} type={type} data={selectData} />
+      <AddItemModalContainer date={date} data={selectData} />
     </div>
   );
 };

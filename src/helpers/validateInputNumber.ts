@@ -1,5 +1,5 @@
 const validateInputNumber = (min: number, max?: number) => {
-  return function (current: number): string {
+  return function (current: number) {
     return String(
       max
         ? Math.max(min, Math.min(max, Number(current)))

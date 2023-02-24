@@ -1,25 +1,30 @@
 import Input from '../Input';
 import Button from '../Button';
+import { TYPE_WORK } from '../../entities/Event/constants';
 import ButtonGroup from '../ButtonGroup';
-
-import { Props } from '../../containers/AddItemModalContainer';
+import generateId from '../../helpers/generateId';
 import { useAddItem } from '../../hooks/useAddItem';
 import ModalContainer from '../../containers/ModalContainer';
-
 import { MODAL_FORMS } from '../../entities/Modal/constants';
 
 import css from './index.module.css';
 
-const AddItemModal = ({ date, data, type, addEvent, closeModal }: Props) => {
+type Props = {
+  date: string;
+  data: any;
+  addEvent: (event: any) => void;
+  saveEvent: () => void;
+  closeModal: () => void;
+};
+
+const AddItemModal = ({ date, data, addEvent, closeModal }: Props) => {
   const { cost, count, name } = useAddItem(data);
 
   const saveHandler = () => {
-    console.log('jjghj', data, cost.value, count.value, typeof name.value);
     addEvent({
       date,
-      type,
-      data: {
-        key: data?.key || String(Math.random() * 100) + name.value,
+      [TYPE_WORK.PIECE_WORK]: {
+        key: data?.key || generateId(),
         cost: Number(cost.value),
         count: Number(count.value),
         name: name.value,

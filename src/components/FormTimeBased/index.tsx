@@ -1,29 +1,37 @@
 import { useTimeBasedForm } from '../../hooks/useTimeBasedForm';
 
-import { Props } from '../../containers/FormTimeBasedContainer';
+import { TYPE_WORK } from '../../entities/Event/constants';
+import { TimeBased } from '../../entities/Event';
 import Input from '../Input';
 import Button from '../Button';
 import ButtonGroup from '../ButtonGroup';
 
 import css from './index.module.css';
 
+type Props = {
+  date: string;
+  timeBased?: TimeBased;
+  addEvent: (event: any) => void;
+  deleteEvent: (date: string) => void;
+  saveEvent: () => void;
+  closeModal: () => void;
+};
+
 const FormTimeBased = ({
   closeModal,
   saveEvent,
   addEvent,
-  data,
+  timeBased,
   date,
-  type,
   deleteEvent,
 }: Props) => {
   const { costInHour, firstTwoHourRatio, mainWorkTime, otherHours, overTime } =
-    useTimeBasedForm(data);
+    useTimeBasedForm(timeBased);
 
   const saveHandler = () => {
     addEvent({
       date,
-      type,
-      data: {
+      [TYPE_WORK.TIME_BASED]: {
         costInHour: Number(costInHour.value),
         firstTwoHourRatio: Number(firstTwoHourRatio.value),
         mainWorkTime: Number(mainWorkTime.value),
@@ -82,7 +90,7 @@ const FormTimeBased = ({
           </div>
         )}
       </div>
-      {data ? (
+      {timeBased ? (
         <ButtonGroup>
           <Button onClick={saveHandler} text="Сохранить изменения" />
           <Button onClick={deleteHandler} text="Удалить" />

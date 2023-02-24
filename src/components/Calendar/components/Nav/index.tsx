@@ -16,7 +16,7 @@ const Nav = ({ selectMonth, selectYear, nextMonth, prevMonth }: Props) => {
     <div className={css.root}>
       <div className={css.nav}>
         <ButtonArrowLeft onClick={prevMonth} />
-        <span className={css.month}>{getCurrentMonth(selectMonth)}</span>{' '}
+        <span className={css.month}>{getCurrentMonth(selectMonth)}</span>
         <span>{selectYear}</span>
         <ButtonArrowRight onClick={nextMonth} />
       </div>
