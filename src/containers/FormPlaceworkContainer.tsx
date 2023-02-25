@@ -8,7 +8,6 @@ import { deleteEvent } from '../store/featurs/eventSlice';
 import { MODAL_FORMS } from '../entities/Modal/constants';
 
 const mapState = (state: RootState, { date }: { date: string }) => ({
-  date,
   piecesWork: selectEventPiecesWork(state, date),
 });
 

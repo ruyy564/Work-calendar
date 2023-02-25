@@ -1,11 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { State, PieceWork, TimeBased } from '../../entities/Event';
+import generateId from '../../helpers/generateId';
+import { State, TimeBased } from '../../entities/Event';
 import { TYPE_WORK } from '../../entities/Event/constants';
 
-type ActionPayloadAddEvent = {
+export type ActionPayloadAddEvent = {
   date: string;
-  [TYPE_WORK.PIECE_WORK]?: PieceWork;
+  [TYPE_WORK.PIECE_WORK]?: {
+    key?: string;
+    name: string;
+    count: number;
+    cost: number;
+  };
   [TYPE_WORK.TIME_BASED]?: TimeBased;
 };
 
@@ -15,12 +21,7 @@ type ActionPayloadDeleteEvent = {
 };
 
 const initialState: State = {
-  events: [
-    {
-      date: '12-2-2023',
-      PieceWork: [{ cost: 500, key: '4531231', name: '45123453', count: 5 }],
-    },
-  ],
+  events: [],
 };
 
 export const eventSlice = createSlice({
@@ -39,11 +40,19 @@ export const eventSlice = createSlice({
         const event = state.events.find((item) => item.date === payload.date);
 
         if (event) {
-          event[TYPE_WORK.PIECE_WORK]?.push(payload[TYPE_WORK.PIECE_WORK]);
+          event[TYPE_WORK.PIECE_WORK]?.push({
+            ...payload[TYPE_WORK.PIECE_WORK],
+            key: generateId(),
+          });
         } else {
           state.events.push({
             date: payload.date,
-            [TYPE_WORK.PIECE_WORK]: [payload[TYPE_WORK.PIECE_WORK]],
+            [TYPE_WORK.PIECE_WORK]: [
+              {
+                ...payload[TYPE_WORK.PIECE_WORK],
+                key: generateId(),
+              },
+            ],
           });
         }
       }

@@ -1,5 +1,7 @@
-import { getCurrentMonth } from '../../../../entities/Calendar/helpers';
-import { ButtonArrowLeft, ButtonArrowRight } from '../../../ButtonIcon';
+import { memo } from 'react';
+
+import { getCurrentMonth } from '../../entities/Calendar/helpers';
+import { ButtonArrowLeft, ButtonArrowRight } from '../ButtonIcon';
 
 import css from './index.module.css';
 
@@ -24,4 +26,4 @@ const Nav = ({ selectMonth, selectYear, nextMonth, prevMonth }: Props) => {
   );
 };
 
-export default Nav;
+export default memo(Nav);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { Modal as ModalType } from '../../entities/Modal';
 import { ButtonClose } from '../ButtonIcon';
@@ -13,13 +13,13 @@ type Props = {
 };
 
 const Modal = ({ children, isOpen, closeModal, modal }: Props) => {
-  const stopPropagation = (event: React.MouseEvent) => {
+  const stopPropagation = useCallback((event: React.MouseEvent) => {
     event.stopPropagation();
-  };
+  }, []);
 
-  const closeModalHandler = () => {
+  const closeModalHandler = useCallback(() => {
     closeModal(modal);
-  };
+  }, [closeModal, modal]);
 
   return (
     <React.Fragment>

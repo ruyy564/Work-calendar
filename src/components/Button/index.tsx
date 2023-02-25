@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 import css from './index.module.css';
 
@@ -15,4 +15,4 @@ const Button = ({ text, onClick }: Props) => {
   );
 };
 
-export default Button;
+export default memo(Button);

@@ -1,19 +1,21 @@
-import { useTimeBasedForm } from '../../hooks/useTimeBasedForm';
+import { useCallback } from 'react';
 
+import { useTimeBasedForm } from '../../hooks/useTimeBasedForm';
 import { TYPE_WORK } from '../../entities/Event/constants';
 import { TimeBased } from '../../entities/Event';
 import Input from '../Input';
 import Button from '../Button';
 import ButtonGroup from '../ButtonGroup';
+import { ActionPayloadAddEvent } from '../../store/featurs/eventSlice';
 
 import css from './index.module.css';
 
 type Props = {
   date: string;
   timeBased?: TimeBased;
-  addEvent: (event: any) => void;
+  addEvent: (event: ActionPayloadAddEvent) => void;
   deleteEvent: (date: string) => void;
-  changeEvent: (event: any) => void;
+  changeEvent: (event: ActionPayloadAddEvent) => void;
   closeModal: () => void;
 };
 
@@ -47,10 +49,11 @@ const FormTimeBased = ({
     changeEvent(event);
     closeModal();
   };
-  const deleteHandler = () => {
+
+  const deleteHandler = useCallback(() => {
     deleteEvent(date);
     closeModal();
-  };
+  }, [closeModal, date, deleteEvent]);
 
   return (
     <div className={css.root}>

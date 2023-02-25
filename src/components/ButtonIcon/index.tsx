@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { AiFillDelete, AiFillEdit, AiFillCloseCircle } from 'react-icons/ai';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
@@ -8,42 +8,42 @@ type Props = {
   onClick: (event: React.MouseEvent) => void;
 };
 
-export const ButtonDelete = ({ onClick }: Props) => {
+export const ButtonDelete = memo(({ onClick }: Props) => {
   return (
     <button className={css.root} onClick={onClick}>
       <AiFillDelete />
     </button>
   );
-};
+});
 
-export const ButtonClose = ({ onClick }: Props) => {
+export const ButtonClose = memo(({ onClick }: Props) => {
   return (
     <button className={css.root} onClick={onClick}>
       <AiFillCloseCircle />
     </button>
   );
-};
+});
 
-export const ButtonEdit = ({ onClick }: Props) => {
+export const ButtonEdit = memo(({ onClick }: Props) => {
   return (
     <button className={css.root} onClick={onClick}>
       <AiFillEdit />
     </button>
   );
-};
+});
 
-export const ButtonArrowLeft = ({ onClick }: Props) => {
+export const ButtonArrowLeft = memo(({ onClick }: Props) => {
   return (
     <button className={css.root} onClick={onClick}>
       <FiChevronLeft />
     </button>
   );
-};
+});
 
-export const ButtonArrowRight = ({ onClick }: Props) => {
+export const ButtonArrowRight = memo(({ onClick }: Props) => {
   return (
     <button className={css.root} onClick={onClick}>
       <FiChevronRight />
     </button>
   );
-};
+});

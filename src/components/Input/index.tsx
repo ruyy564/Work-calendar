@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import css from './index.module.css';
 
@@ -52,4 +52,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default memo(Input);

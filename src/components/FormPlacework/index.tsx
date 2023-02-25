@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Button from '../Button';
 import { ButtonDelete, ButtonEdit } from '../ButtonIcon';
 import AddItemModalContainer from '../../containers/AddItemModalContainer';
-import { TYPE_WORK } from '../../entities/Event/constants';
 import { PieceWork } from '../../entities/Event';
 
 import css from './index.module.css';
@@ -17,6 +16,7 @@ type Props = {
 
 const FormPlacework = ({ piecesWork, date, deleteItem, openModal }: Props) => {
   const [selectData, setSelectData] = useState<null | PieceWork>(null);
+  
   return (
     <div className={css.root}>
       <div className={css.list}>

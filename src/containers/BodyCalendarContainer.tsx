@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import Calendar from '../components/Calendar';
+import BodyCalendar from '../components/BodyCalendar';
 import { RootState } from '../store';
 import {
   selectCalendarCurrentDay,
@@ -8,23 +8,20 @@ import {
   selectCalendarSelectMonth,
   selectCalendarSelectYear,
 } from '../entities/Calendar/selectors';
-import { Modal } from '../entities/Modal';
-import { nextMonth, prevMonth } from '../store/featurs/calendarSlice';
+import { MODAL_FORMS } from '../entities/Modal/constants';
 import { openModal } from '../store/featurs/modalSlice';
 
 const mapState = (state: RootState) => ({
   days: selectCalendarDays(state),
   currentDay: selectCalendarCurrentDay(state),
-  selectMonth: selectCalendarSelectMonth(state),
-  selectYear: selectCalendarSelectYear(state),
+  currentMonth: selectCalendarSelectMonth(state),
+  currentYear: selectCalendarSelectYear(state),
 });
 
 const mapDispatch = {
-  nextMonth: () => nextMonth(),
-  prevMonth: () => prevMonth(),
-  openModal: (modal: Modal) => openModal(modal),
+  openModal: () => openModal(MODAL_FORMS.ADD_EVENT_FORM),
 };
 
 const connector = connect(mapState, mapDispatch);
 
-export default connector(Calendar);
+export default connector(BodyCalendar);
