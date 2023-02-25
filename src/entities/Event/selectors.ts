@@ -2,6 +2,8 @@ import type { RootState } from '../../store';
 import { Event } from '.';
 import { getEventPiecesWork, getEventTimeBased } from './getters';
 
+export const selectEvents = (state: RootState) => state.eventsOfCalendar.events;
+
 export const selectEvent = (
   state: RootState,
   date: string

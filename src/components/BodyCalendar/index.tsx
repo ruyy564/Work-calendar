@@ -1,12 +1,14 @@
 import { memo, useState } from 'react';
 
 import EventModalContainer from '../../containers/EventModalContainer';
+import { KeyEvents } from '../../helpers/getKeysEvent';
 import { CalendarDays } from '../../entities/Calendar';
 
 import getClasses from '../../helpers/getClasses';
 import css from './index.module.css';
 
 type Props = {
+  keyEvents: KeyEvents;
   currentDay: string;
   currentMonth: number;
   currentYear: number;
@@ -16,6 +18,7 @@ type Props = {
 
 const Body = ({
   days,
+  keyEvents,
   openModal,
   currentMonth,
   currentYear,
@@ -23,7 +26,7 @@ const Body = ({
 }: Props) => {
   const { lastMonthDays, currentMonthDays, nextMonthDays } = days;
   const [selectDate, setSelectDate] = useState('');
-
+  console.log(keyEvents);
   const clickHandler = (date: number) => {
     setSelectDate(`${date}-${currentMonth + 1}-${currentYear}`);
     openModal();
@@ -41,6 +44,9 @@ const Body = ({
           className={getClasses(
             css.day,
             css.currentMonth,
+            keyEvents[`${date}-${currentMonth + 1}-${currentYear}`]
+              ? css.hasEvent
+              : '',
             currentDay === `${date}-${currentMonth}-${currentYear}`
               ? css.currentDay
               : ''
