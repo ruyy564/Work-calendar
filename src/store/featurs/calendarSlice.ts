@@ -19,6 +19,7 @@ const initialState: State = {
   selectYear,
   currentDay,
   days,
+  selectDate: currentDay,
 };
 
 export const calendarSlice = createSlice({
@@ -39,9 +40,21 @@ export const calendarSlice = createSlice({
       state.selectYear = year;
       state.days = calcDaysOfMonth(month, year);
     },
+    toCurrentMonth: (state) => {
+      const [, month, year] = state.currentDay.split('-');
+
+      state.selectMonth = Number(month);
+      state.selectYear = Number(year);
+
+      state.days = calcDaysOfMonth(Number(month), Number(year));
+    },
+    setSelectDate: (state, { payload }: { payload: string }) => {
+      state.selectDate = payload;
+    },
   },
 });
 
-export const { nextMonth, prevMonth } = calendarSlice.actions;
+export const { nextMonth, prevMonth, toCurrentMonth, setSelectDate } =
+  calendarSlice.actions;
 
 export default calendarSlice.reducer;

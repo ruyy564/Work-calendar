@@ -17,39 +17,43 @@ type InputProps = {
   onClick?: (event: React.FormEvent<HTMLInputElement>) => void;
 };
 
-const Input = ({
-  type,
-  min,
-  max,
-  name,
-  step,
-  required,
-  text,
-  value,
-  checked,
-  disabled,
-  onChange,
-  onClick,
-}: InputProps) => {
-  return (
-    <label className={disabled ? `${css.root} ${css.disable}` : `${css.root}`}>
-      <div className={css.text}>{text}</div>
-      <input
-        className={css.input}
-        type={type}
-        value={value}
-        onChange={onChange}
-        onClick={onClick}
-        min={min}
-        max={max}
-        name={name}
-        checked={checked}
-        step={step}
-        required={required}
-        disabled={disabled}
-      />
-    </label>
-  );
-};
+const Input = memo(
+  ({
+    type,
+    min,
+    max,
+    name,
+    step,
+    required,
+    text,
+    value,
+    checked,
+    disabled,
+    onChange,
+    onClick,
+  }: InputProps) => {
+    return (
+      <label
+        className={disabled ? `${css.root} ${css.disable}` : `${css.root}`}
+      >
+        <div className={css.text}>{text}</div>
+        <input
+          className={css.input}
+          type={type}
+          value={value}
+          onChange={onChange}
+          onClick={onClick}
+          min={min}
+          max={max}
+          name={name}
+          checked={checked}
+          step={step}
+          required={required}
+          disabled={disabled}
+        />
+      </label>
+    );
+  }
+);
 
-export default memo(Input);
+export default Input;

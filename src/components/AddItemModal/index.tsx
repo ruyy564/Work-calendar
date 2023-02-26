@@ -62,13 +62,13 @@ const AddItemModal = ({
         />
         <Input
           type="number"
-          text="Кол-во"
+          text="Кол-во (шт.)"
           value={count.value}
           onChange={count.changeHandler}
         />
         <Input
           type="number"
-          text="Стоимость"
+          text="Стоимость (руб.)"
           value={cost.value}
           onChange={cost.changeHandler}
         />

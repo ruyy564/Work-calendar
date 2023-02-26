@@ -2,6 +2,7 @@ export type State = {
   days: CalendarDays;
   selectMonth: number;
   selectYear: number;
+  selectDate: string;
   currentDay: string;
 };
 

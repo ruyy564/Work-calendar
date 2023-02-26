@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
+import Detail from '../Detail';
 import Button from '../Button';
-import { ButtonDelete, ButtonEdit } from '../ButtonIcon';
 import AddItemModalContainer from '../../containers/AddItemModalContainer';
 import { PieceWork } from '../../entities/Event';
 
@@ -15,40 +15,31 @@ type Props = {
 };
 
 const FormPlacework = ({ piecesWork, date, deleteItem, openModal }: Props) => {
-  const [selectData, setSelectData] = useState<null | PieceWork>(null);
-  
+  const [selectData, setSelectData] = useState<PieceWork | null>(null);
+  const clickHandler = useCallback(() => {
+    setSelectData(null);
+    openModal();
+  }, [openModal]);
+
   return (
     <div className={css.root}>
       <div className={css.list}>
         {!piecesWork ? (
           <div style={{ textAlign: 'center' }}>Здесь ничего нет</div>
         ) : (
-          Array.isArray(piecesWork) &&
-          piecesWork.map((item, index) => {
-            return (
-              <div className={css.listItems} key={`${item}-${index}`}>
-                <div>{item.name || 'Нет названия'}</div>
-                <div>x {item.count}</div>
-                <div>{item.cost}р.</div>
-                <ButtonEdit
-                  onClick={() => {
-                    setSelectData(item);
-                    openModal();
-                  }}
-                />
-                <ButtonDelete onClick={() => deleteItem(date, item.key)} />
-              </div>
-            );
-          })
+          piecesWork.map((item) => (
+            <Detail
+              date={date}
+              item={item}
+              key={item.key}
+              openModal={openModal}
+              deleteItem={deleteItem}
+              setSelectData={setSelectData}
+            />
+          ))
         )}
       </div>
-      <Button
-        onClick={() => {
-          setSelectData(null);
-          openModal();
-        }}
-        text="Добавить изделие"
-      />
+      <Button onClick={clickHandler} text="Добавить изделие" />
       <AddItemModalContainer date={date} pieceWork={selectData} />
     </div>
   );

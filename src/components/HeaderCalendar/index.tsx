@@ -4,7 +4,7 @@ import { DAYS_OF_WEEK } from '../../entities/Calendar/constants';
 
 import css from './index.module.css';
 
-const Header = () => {
+const Header = memo(() => {
   return (
     <div className={css.root}>
       {DAYS_OF_WEEK.map((dayOfWeek, index) => (
@@ -12,6 +12,6 @@ const Header = () => {
       ))}
     </div>
   );
-};
+});
 
-export default memo(Header);
+export default Header;

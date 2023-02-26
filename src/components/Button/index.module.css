@@ -8,5 +8,5 @@
 }
 
 .root:active {
-    background-color: var(--secondary-active);
+    background-color: var(--active);
 }

@@ -11,6 +11,18 @@
     cursor: pointer;
 }
 
+.today {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.today:active {
+    color: var(--active);
+}
+
 .month {
     font-size: 30px;
     text-transform: uppercase;

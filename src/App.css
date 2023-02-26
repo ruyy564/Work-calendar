@@ -8,9 +8,10 @@
 
     --primary: #1D252C;
     --primary-text: #FFF;
+    --primary-event: #c51adb;
     --secondary: #FFF;
     --secondary-text: #1D252C;
-    --secondary-active: #1d252c79;
+    --active: #777777;
     --block-color: #777777;
 }
 

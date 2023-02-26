@@ -1,0 +1,37 @@
+.day {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.hasEvent.day::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary-event);
+    top: 20%;
+    right: 30%;
+    /* box-shadow: 0px 0px 5px var(--primary-event); */
+}
+
+.blockDay {
+    color: var(--block-color);
+}
+
+.currentDay {
+    text-decoration: underline;
+    font-size: 40px;
+}
+
+.currentMonth {
+    cursor: pointer;
+}
+
+.currentMonth:active {
+    background: var(--secondary);
+    color: var(--secondary-text);
+}

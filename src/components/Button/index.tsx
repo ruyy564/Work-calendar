@@ -7,12 +7,12 @@ type Props = {
   onClick: () => void;
 };
 
-const Button = ({ text, onClick }: Props) => {
+const Button = memo(({ text, onClick }: Props) => {
   return (
     <button className={css.root} onClick={onClick}>
       {text}
     </button>
   );
-};
+});
 
-export default memo(Button);
+export default Button;

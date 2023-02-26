@@ -8,7 +8,11 @@ import {
   selectCalendarSelectMonth,
   selectCalendarSelectYear,
 } from '../entities/Calendar/selectors';
-import { nextMonth, prevMonth } from '../store/featurs/calendarSlice';
+import {
+  nextMonth,
+  prevMonth,
+  toCurrentMonth,
+} from '../store/featurs/calendarSlice';
 
 const mapState = (state: RootState) => ({
   days: selectCalendarDays(state),
@@ -20,6 +24,7 @@ const mapState = (state: RootState) => ({
 const mapDispatch = {
   nextMonth: () => nextMonth(),
   prevMonth: () => prevMonth(),
+  toCurrentMonth: () => toCurrentMonth(),
 };
 
 const connector = connect(mapState, mapDispatch);

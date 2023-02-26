@@ -1,70 +1,37 @@
-import { memo, useState } from 'react';
+import { memo, useMemo } from 'react';
 
+import getKeysEvent from '../../helpers/getKeysEvent';
+import { OtherDay } from '../Day';
+import DayContainer from '../../containers/DayContainer';
 import EventModalContainer from '../../containers/EventModalContainer';
-import { KeyEvents } from '../../helpers/getKeysEvent';
+import { Event } from '../../entities/Event';
 import { CalendarDays } from '../../entities/Calendar';
 
-import getClasses from '../../helpers/getClasses';
 import css from './index.module.css';
 
 type Props = {
-  keyEvents: KeyEvents;
-  currentDay: string;
-  currentMonth: number;
-  currentYear: number;
+  events: Event[];
   days: CalendarDays;
-  openModal: () => void;
 };
 
-const Body = ({
-  days,
-  keyEvents,
-  openModal,
-  currentMonth,
-  currentYear,
-  currentDay,
-}: Props) => {
+const Body = memo(({ days, events }: Props) => {
   const { lastMonthDays, currentMonthDays, nextMonthDays } = days;
-  const [selectDate, setSelectDate] = useState('');
-  console.log(keyEvents);
-  const clickHandler = (date: number) => {
-    setSelectDate(`${date}-${currentMonth + 1}-${currentYear}`);
-    openModal();
-  };
+  const KeysEvents = useMemo(() => getKeysEvent(events), [events]);
 
   return (
     <div className={css.root}>
-      {lastMonthDays.map((date, index) => (
-        <div className={getClasses(css.day, css.blockDay)} key={index}>
-          {date}
-        </div>
+      {lastMonthDays.map((day, index) => (
+        <OtherDay key={index} day={day} />
       ))}
-      {currentMonthDays.map((date, index) => (
-        <div
-          className={getClasses(
-            css.day,
-            css.currentMonth,
-            keyEvents[`${date}-${currentMonth + 1}-${currentYear}`]
-              ? css.hasEvent
-              : '',
-            currentDay === `${date}-${currentMonth}-${currentYear}`
-              ? css.currentDay
-              : ''
-          )}
-          key={index}
-          onClick={() => clickHandler(date)}
-        >
-          {date}
-        </div>
+      {currentMonthDays.map((day, index) => (
+        <DayContainer keyEvents={KeysEvents} day={day} key={index} />
       ))}
-      {nextMonthDays.map((date, index) => (
-        <div className={getClasses(css.day, css.blockDay)} key={index}>
-          {date}
-        </div>
+      {nextMonthDays.map((day, index) => (
+        <OtherDay key={index} day={day} />
       ))}
-      <EventModalContainer date={selectDate} />
+      <EventModalContainer />
     </div>
   );
-};
+});
 
 export default memo(Body);

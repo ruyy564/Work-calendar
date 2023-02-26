@@ -9,3 +9,5 @@ export const selectCalendarSelectMonth = (state: RootState): number =>
   state.calendar.selectMonth;
 export const selectCalendarSelectYear = (state: RootState): number =>
   state.calendar.selectYear;
+export const selectCalendarSelectDate = (state: RootState): string =>
+  state.calendar.selectDate;

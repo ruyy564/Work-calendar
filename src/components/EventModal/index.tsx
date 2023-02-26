@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 
 import Input from '../Input';
 import FormPlaceworkContainer from '../../containers/FormPlaceworkContainer';
@@ -17,7 +17,7 @@ type Props = {
   type: TYPE_WORK;
 };
 
-const EventModal = ({ date, type }: Props) => {
+const EventModal = memo(({ date, type }: Props) => {
   const initState = type !== TYPE_WORK.NONE ? type : TYPE_WORK.TIME_BASED;
   const [workType, setWorkType] = useState<string>(initState);
 
@@ -59,6 +59,6 @@ const EventModal = ({ date, type }: Props) => {
       )}
     </ModalContainer>
   );
-};
+});
 
 export default EventModal;
