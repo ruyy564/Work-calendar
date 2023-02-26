@@ -25,8 +25,8 @@ html, body, #root, .App {
 }
 
 *::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 10px;
+    height: 10px;
 }
 
 *::-webkit-scrollbar-track {
@@ -35,6 +35,6 @@ html, body, #root, .App {
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.603);
+    background-color: var(--block-color);
     border-radius: 20px;
 }
