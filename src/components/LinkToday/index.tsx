@@ -13,7 +13,7 @@ type Props = {
 const LinkToday = memo(({ day, month, year, toCurrentMonth }: Props) => {
   return (
     <div className={css.today} onClick={toCurrentMonth}>
-      <BiCalendar />
+      <BiCalendar style={{ width: '30px', height: '30px' }} />
       <span>
         {day}-{Number(month) + 1}-{year}
       </span>

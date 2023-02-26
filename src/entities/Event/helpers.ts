@@ -1,4 +1,4 @@
-import { TimeBased } from '.';
+import { TimeBased, PieceWork } from '.';
 
 export const getCostTimeBasedWork = (timeBasedWork: TimeBased): number => {
   const { costInHour, firstTwoHourRatio, mainWorkTime, otherHours, overTime } =
@@ -12,3 +12,8 @@ export const getCostTimeBasedWork = (timeBasedWork: TimeBased): number => {
 
   return mainCost + secondCost;
 };
+
+export const getCostPlacework = (pieceworks: PieceWork[]): number =>
+  pieceworks.reduce((acc, piecework) => {
+    return acc + piecework.cost * piecework.count;
+  }, 0);

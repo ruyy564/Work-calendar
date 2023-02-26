@@ -8,3 +8,7 @@ export const getEventTimeBased = (event: Event) => {
 export const getEventPiecesWork = (event: Event) => {
   return event[TYPE_WORK.PIECE_WORK];
 };
+
+export const getEventDate = (event: Event) => {
+  return event.date;
+};

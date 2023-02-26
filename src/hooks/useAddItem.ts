@@ -6,7 +6,7 @@ const validateInput = validateInputNumber(0);
 
 export const useAddItem = (data: PieceWork | null) => {
   const cost = useInput(data ? data.cost : 0, validateInput);
-  const count = useInput(data ? data.count : 0, validateInput);
+  const count = useInput(data ? data.count : 1, validateInput);
   const name = useInput(data ? data.name : '');
 
   const clear = () => {

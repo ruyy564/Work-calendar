@@ -23,7 +23,7 @@
 }
 
 .currentDay {
-    text-decoration: underline;
+    text-decoration: line-through;
     font-size: 40px;
 }
 

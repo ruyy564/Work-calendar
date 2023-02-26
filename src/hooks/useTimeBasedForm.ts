@@ -4,8 +4,8 @@ import validateInputNumber from '../helpers/validateInputNumber';
 
 const validateCostInHour = validateInputNumber(0);
 const validateTime = validateInputNumber(0, 24);
-const validateRatioFirst = validateInputNumber(1.5);
-const validateRatioSecond = validateInputNumber(2);
+const validateRatioFirst = validateInputNumber(0);
+const validateRatioSecond = validateInputNumber(0);
 
 export const useTimeBasedForm = (data?: TimeBased) => {
   const costInHour = useInput(data ? data.costInHour : 0, validateCostInHour);
