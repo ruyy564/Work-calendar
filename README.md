@@ -1,46 +1,17 @@
-# Getting Started with Create React App
+# Приложение-календарь
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Предназначено для расчета/учета ежемесячного дохода в режиме работы повременная/сделка
 
-## Available Scripts
+### Как пользоваться?
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1) выбираем нужный день;
+[главная](https://user-images.githubusercontent.com/87094243/221431306-da8dc0b6-4d02-4af2-9264-cd6423ab0eed.png)
+2) выбираем тип работы (повременная/сдельная);
+![повременная](https://user-images.githubusercontent.com/87094243/221431643-0aeb4dd0-51d7-4d96-a501-b1cad6ec69d5.png)
+![сдельная](https://user-images.githubusercontent.com/87094243/221431650-bfd544dc-9786-4834-a682-39a9408f2dd4.png)
+3) заполняем форму для первого варианта (повременная) или же добавляем в список проделанную работу за день (сдельная);
+![повременная заполненная](https://user-images.githubusercontent.com/87094243/221431677-280eba55-7285-4c9f-9d06-4f5aa50e9f1d.png)
+![сдельная заполненная](https://user-images.githubusercontent.com/87094243/221431695-3fb571f9-4b07-4489-85ca-0232394c3f55.png)
+![сдельная список](https://user-images.githubusercontent.com/87094243/221431718-c1556dc1-c366-4a30-8d11-88da8253f000.png)
+4) сохранено;
+[сохранено](https://user-images.githubusercontent.com/87094243/221431730-5547d2bd-ea47-4a52-a3a2-599df30d6daa.png)
