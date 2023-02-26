@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Work-calendar/static/css/main.0348d497.css",
+    "main.js": "/Work-calendar/static/js/main.3c7c2db0.js",
+    "index.html": "/Work-calendar/index.html",
+    "main.0348d497.css.map": "/Work-calendar/static/css/main.0348d497.css.map",
+    "main.3c7c2db0.js.map": "/Work-calendar/static/js/main.3c7c2db0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0348d497.css",
+    "static/js/main.3c7c2db0.js"
+  ]
+}
