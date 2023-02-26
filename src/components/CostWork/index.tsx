@@ -1,6 +1,4 @@
 import { memo } from 'react';
-import { GiMoneyStack } from 'react-icons/gi';
-import { FaRubleSign } from 'react-icons/fa';
 
 import css from './index.module.css';
 

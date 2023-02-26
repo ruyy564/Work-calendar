@@ -13,19 +13,20 @@
     --secondary-text: #1D252C;
     --active: #777777;
     --block-color: #777777;
+
+    overflow-x: hidden;
 }
 
-html, body, #root {
+html, body, #root, .App {
     height: 100vh;
     width: 100vw;
     background-color: var(--primary);
     color: var(--primary-text);
 }
 
-
 *::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+    width: 5px;
+    height: 5px;
 }
 
 *::-webkit-scrollbar-track {
@@ -34,6 +35,6 @@ html, body, #root {
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: var(--primary);
+    background-color: rgba(0, 0, 0, 0.603);
     border-radius: 20px;
 }

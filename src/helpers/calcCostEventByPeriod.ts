@@ -16,13 +16,13 @@ const calcCostEventByPeriod = (events: Event[], start: string, end: string) =>
     const startDate = spliteDate(start);
     const endDate = spliteDate(end);
     const isMoreStart =
-      startDate.day <= date.day &&
-      startDate.month <= date.month &&
-      startDate.year <= date.year;
+      Number(startDate.day) <= Number(date.day) &&
+      Number(startDate.month) <= Number(date.month) &&
+      Number(startDate.year) <= Number(date.year);
     const isLessEnd =
-      endDate.day >= date.day &&
-      endDate.month >= date.month &&
-      endDate.year >= date.year;
+      Number(endDate.day) >= Number(date.day) &&
+      Number(endDate.month) >= Number(date.month) &&
+      Number(endDate.year) >= Number(date.year);
 
     if (isMoreStart && isLessEnd) {
       const pieceWork = getEventPiecesWork(event);
