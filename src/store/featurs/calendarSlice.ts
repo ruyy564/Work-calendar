@@ -6,6 +6,7 @@ import {
   getNextMonth,
   getPrevMonth,
 } from '../../entities/Calendar/helpers';
+import spilteDate from '../../helpers/spliteDate';
 
 const date = new Date();
 const selectMonth = date.getMonth();
@@ -41,7 +42,7 @@ export const calendarSlice = createSlice({
       state.days = calcDaysOfMonth(month, year);
     },
     toCurrentMonth: (state) => {
-      const [, month, year] = state.currentDay.split('-');
+      const { month, year } = spilteDate(state.currentDay);
 
       state.selectMonth = Number(month);
       state.selectYear = Number(year);
