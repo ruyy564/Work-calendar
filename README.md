@@ -8,7 +8,7 @@
 
 1) Выбираем нужный день
 
-![главная](https://user-images.githubusercontent.com/87094243/221431306-da8dc0b6-4d02-4af2-9264-cd6423ab0eed.png)
+![главная](https://user-images.githubusercontent.com/87094243/221485251-fb3202fd-282e-45db-a84f-9c099bae5076.png)
 
 2) Выбираем тип работы (повременная/сдельная)
 
@@ -23,4 +23,4 @@
 
 4) Сохранено
 
-![сохранено](https://user-images.githubusercontent.com/87094243/221431730-5547d2bd-ea47-4a52-a3a2-599df30d6daa.png)
+![сохранено](https://user-images.githubusercontent.com/87094243/221485307-bb433d77-ce0c-473c-abc0-4051a8c397cf.png)
