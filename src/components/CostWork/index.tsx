@@ -9,7 +9,7 @@ type Props = {
 const CostWork = memo(({ cost }: Props) => {
   return (
     <div className={css.root}>
-      <div>Текущий месяц: {cost} руб.</div>
+      <div>Итог за месяц: {cost} руб.</div>
     </div>
   );
 });

@@ -13,15 +13,14 @@
     --secondary-text: #1D252C;
     --active: #777777;
     --block-color: #777777;
-
-    overflow-x: hidden;
 }
 
-html, body, #root, .App {
+html, body, #root {
     height: 100vh;
     width: 100vw;
     background-color: var(--primary);
     color: var(--primary-text);
+    overflow-x: hidden;
 }
 
 *::-webkit-scrollbar {
