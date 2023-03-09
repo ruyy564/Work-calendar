@@ -15,7 +15,7 @@
     --block-color: #777777;
 }
 
-html, body, #root {
+html, body, #root, .App {
     height: 100vh;
     width: 100vw;
     background-color: var(--primary);
