@@ -1,32 +1,35 @@
-const { Op } = require('sequelize');
-
 const { Piecework } = require('../models');
+const PieceworkDto = require('../dtos/PieceworkDto');
 
 class PieceworkService {
+  async getPieceworks(eventId) {
+    const findPieceworks = await Piecework.findAll({
+      where: { EventId: eventId },
+    });
+    const pieceworks = findPieceworks.map((item) => new PieceworkDto(item));
+
+    return pieceworks;
+  }
+
   async create(eventId, data) {
-    const piecework = await Piecework.create({
+    const newPiecework = await Piecework.create({
       ...data,
       EventId: eventId,
     });
 
-    return piecework;
+    return new PieceworkDto(newPiecework);
   }
 
   async update(data) {
-    const piecework = await Piecework.upsert(
-      { ...data },
-      { where: { PieceworkId: data.id } }
-    );
+    const piecework = await Piecework.upsert({ ...data });
 
-    return piecework[0].dataValues;
+    return new PieceworkDto(piecework[0]);
   }
 
   async delete(pieceworkId) {
-    const piecework = await Piecework.destroy({
-      where: { PieceworkId: pieceworkId },
+    return await Piecework.destroy({
+      where: { id: pieceworkId },
     });
-
-    return pieceworkId;
   }
 }
 

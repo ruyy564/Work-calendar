@@ -2,8 +2,6 @@ const { validationResult } = require('express-validator');
 const EventService = require('../service/EventService');
 const TimebasedService = require('../service/TimebasedService');
 const PieceworkService = require('../service/PieceworkService');
-const ApiError = require('../error/ApiError');
-const { Event } = require('../models');
 
 class EventController {
   async getEvents(req, res, next) {
@@ -20,7 +18,7 @@ class EventController {
   async createEvent(req, res, next) {
     try {
       const { userId, date, timebased, piecework } = req.body;
-      const event = await EventService.createEvent(
+      const event = await EventService.create(
         userId,
         date,
         timebased,
@@ -35,16 +33,11 @@ class EventController {
 
   async updateTimebased(req, res, next) {
     try {
-      const { userId, date, timebased } = req.body;
-      const { dataValues } = await Event.findOne({
-        where: { UserId: userId, date },
-      });
-      const newTimebased = await TimebasedService.update(
-        dataValues.id,
-        timebased
-      );
+      const { eventId, timebased } = req.body;
+      const event = await EventService.getEvent(eventId);
+      const newTimebased = await TimebasedService.update(timebased);
 
-      return res.json({ ...dataValues, timebased: newTimebased });
+      return res.json({ ...event, timebased: newTimebased });
     } catch (e) {
       next(e);
     }
@@ -52,13 +45,11 @@ class EventController {
 
   async updatePiecework(req, res, next) {
     try {
-      const { userId, date, piecework } = req.body;
-      const { dataValues } = await Event.findOne({
-        where: { UserId: userId, date },
-      });
+      const { eventId, piecework } = req.body;
+      const event = await EventService.getEvent(eventId);
       const newPiecework = await PieceworkService.update(piecework);
 
-      return res.json({ ...dataValues, piecework: newPiecework });
+      return res.json({ ...event, piecework: newPiecework });
     } catch (e) {
       next(e);
     }
@@ -66,16 +57,42 @@ class EventController {
 
   async addPiecework(req, res, next) {
     try {
-      const { userId, date, piecework } = req.body;
-      const { dataValues } = await Event.findOne({
-        where: { UserId: userId, date },
-      });
-      const newPiecework = await PieceworkService.create(
-        dataValues.id,
-        piecework
-      );
+      const { eventId, piecework } = req.body;
+      const event = await EventService.getEvent(eventId);
+      const newPiecework = await PieceworkService.create(eventId, piecework);
 
-      return res.json({ ...dataValues, piecework: newPiecework });
+      return res.json({ ...event, piecework: newPiecework });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async deletePiecework(req, res, next) {
+    try {
+      const { eventId, pieceworkId } = req.body;
+
+      const isDelete = await PieceworkService.delete(pieceworkId);
+      const pieceworks = await PieceworkService.getPieceworks(eventId);
+
+      if (pieceworks.length) {
+        return res.json({ pieceworkId });
+      }
+      await EventService.delete(eventId);
+
+      return res.json({ eventId, pieceworkId });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async deleteTimebased(req, res, next) {
+    try {
+      const { eventId } = req.body;
+
+      await TimebasedService.delete(eventId);
+      await EventService.delete(eventId);
+
+      return res.json({ eventId });
     } catch (e) {
       next(e);
     }

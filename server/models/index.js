@@ -13,7 +13,7 @@ const Event = sequelize.define('Event', {
 });
 
 const Timebased = sequelize.define('Timebased', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  EventId: { type: DataTypes.INTEGER, primaryKey: true },
   costInHour: { type: DataTypes.INTEGER },
   mainWorkTime: { type: DataTypes.INTEGER },
   overTime: { type: DataTypes.INTEGER },
@@ -28,13 +28,13 @@ const Piecework = sequelize.define('Piecework', {
   name: { type: DataTypes.STRING },
 });
 
-User.hasMany(Event);
+User.hasMany(Event, { onDelete: 'CASCADE' });
 Event.belongsTo(User);
 
-Event.hasOne(Timebased);
+Event.hasOne(Timebased, { onDelete: 'CASCADE' });
 Timebased.belongsTo(Event);
 
-Event.hasMany(Piecework);
+Event.hasMany(Piecework, { onDelete: 'CASCADE' });
 Piecework.belongsTo(Event);
 
 module.exports = {

@@ -1,22 +1,28 @@
 const { Timebased } = require('../models');
+const TimebasedDto = require('../dtos/TimebasedDto');
 
 class TimebasedService {
+  async getTimebased(eventId) {
+    const findTimebased = await Timebased.findOne({
+      where: { EventId: eventId },
+    });
+
+    return findTimebased ? new TimebasedDto(findTimebased) : null;
+  }
+
   async create(eventId, data) {
-    const timebased = await Timebased.create({
+    const newTimebased = await Timebased.create({
       ...data,
       EventId: eventId,
     });
 
-    return timebased;
+    return new TimebasedDto(newTimebased);
   }
 
-  async update(eventId, data) {
-    const timebased = await Timebased.upsert(
-      { ...data },
-      { where: { EventId: eventId } }
-    );
+  async update(data) {
+    const timebased = await Timebased.upsert({ ...data });
 
-    return timebased[0].dataValues;
+    return new TimebasedDto(timebased[0]);
   }
 
   async delete(eventId) {

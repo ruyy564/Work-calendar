@@ -1,31 +1,29 @@
 const TimebasedService = require('./TimebasedService');
 const PieceworkService = require('./PieceworkService');
-const { Event, Timebased, Piecework } = require('../models');
+const { Event } = require('../models');
+const EventDto = require('../dtos/EventDto');
 
 class EventService {
+  async getEvent(eventId) {
+    const findEvent = await Event.findOne({
+      where: { id: eventId },
+    });
+
+    return findEvent ? new EventDto(findEvent) : null;
+  }
   async getEvents(userId) {
-    const eventsData = await Event.findAll({
+    const findEvents = await Event.findAll({
       where: { UserId: userId },
     });
     const events = await Promise.all(
-      eventsData.map(async (event) => {
-        const timebased = await Timebased.findOne({
-          where: { EventId: event.id },
-        });
-
-        if (!timebased) {
-          const pieceworks = await Piecework.findAll({
-            where: { EventId: event.id },
-          });
-
-          return {
-            ...event.dataValues,
-            pieceworks,
-          };
-        }
+      findEvents.map(async (item) => {
+        const event = new EventDto(item);
+        const timebased = await TimebasedService.getTimebased(event.id);
+        const pieceworks = await PieceworkService.getPieceworks(event.id);
 
         return {
-          ...event.dataValues,
+          ...event,
+          pieceworks,
           timebased,
         };
       })
@@ -34,40 +32,29 @@ class EventService {
     return [...events];
   }
 
-  async createEvent(userId, date, timebased, piecework) {
-    const event = await Event.create({ date, UserId: userId });
+  async create(userId, date, timebased, piecework) {
+    const newEvent = await Event.create({ date, UserId: userId });
+    const event = new EventDto(newEvent);
+    let newTimebased = null;
+    let newPiecework = null;
 
     if (timebased) {
-      const newTimebased = await TimebasedService.create(event.id, timebased);
-
-      return {
-        ...event.dataValues,
-        timebased: newTimebased,
-      };
+      newTimebased = await TimebasedService.create(event.id, timebased);
     }
 
     if (piecework) {
-      const newPiecework = await PieceworkService.create(event.id, piecework);
-
-      return {
-        ...event.dataValues,
-        pieceworks: [newPiecework],
-      };
+      newPiecework = await PieceworkService.create(event.id, piecework);
     }
+
+    return {
+      ...event,
+      timebased: newTimebased,
+      piecework: newPiecework,
+    };
   }
 
-  async deleteEvent(eventId, pieceworkId) {
-    if (pieceworkId) {
-      await PieceworkService.delete(pieceworkId);
-    }
-    const hasEvent = await Event.findOne({
-      where: { EventId: eventId },
-    });
-
-    if (hasEvent) {
-      await Event.destroy({ where: { EventId: eventId } });
-    }
-    return { eventId, pieceworkId };
+  async delete(eventId) {
+    return await Event.destroy({ where: { id: eventId } });
   }
 }
 
