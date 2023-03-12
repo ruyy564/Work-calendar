@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { State, Event, AddPieceWorkToEvent } from '../../../entities/Event';
+import { State, Event, AddPieceWorkToEvent } from '../../entities/Event';
 import {
   fetchEvents,
   createEvent,
@@ -9,7 +9,7 @@ import {
   updatePieceworkEvent,
   deletePiecework,
   deleteTimebased,
-} from './actions';
+} from '../../services/event';
 
 const initialState: State = {
   events: [],

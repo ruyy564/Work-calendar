@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { Modal as ModalType } from '../../entities/Modal';
+import { Modal as ModalType } from '../../../entities/Modal';
 import { ButtonClose } from '../ButtonIcon';
 
 import css from './index.module.css';

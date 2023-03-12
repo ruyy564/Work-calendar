@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
-import NavCalendarContainer from '../../containers/NavCalendarContainer';
-import CalendarHeader from '../HeaderCalendar';
-import BodyCalendarContainer from '../../containers/BodyCalendarContainer';
+import NavCalendarContainer from '../../containers/Calendar/NavCalendarContainer';
+import CalendarHeader from './components/HeaderCalendar';
+import BodyCalendarContainer from '../../containers/Calendar/BodyCalendarContainer';
 
 import css from './index.module.css';
 

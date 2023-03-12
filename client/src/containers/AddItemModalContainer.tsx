@@ -8,7 +8,7 @@ import {
   createEvent,
   addPieceWorkToEvent,
   updatePieceworkEvent,
-} from '../store/featurs/Event/actions';
+} from '../services/event';
 import { MODAL_FORMS } from '../entities/Modal/constants';
 import { selectEvent } from '../entities/Event/selectors';
 

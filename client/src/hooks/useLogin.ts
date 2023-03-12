@@ -1,7 +1,4 @@
 import { useInput } from './useInput';
-import validateInputNumber from '../helpers/validateInputNumber';
-
-const validateInput = validateInputNumber(0);
 
 export const useLogin = () => {
   const email = useInput('');

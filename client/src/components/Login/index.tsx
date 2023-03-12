@@ -1,7 +1,7 @@
 import { useLogin } from '../../hooks/useLogin';
-import Input from '../Input';
-import Button from '../Button';
-import ButtonGroup from '../ButtonGroup';
+import Input from '../ui/Input';
+import Button from '../ui/Button';
+import ButtonGroup from '../ui/ButtonGroup';
 
 import css from './index.module.css';
 

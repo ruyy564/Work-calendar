@@ -1,6 +1,6 @@
 import { useState, useEffect, memo } from 'react';
 
-import Input from '../Input';
+import Input from '../ui/Input';
 import FormPlaceworkContainer from '../../containers/FormPlaceworkContainer';
 import FormTimeBasedContainer from '../../containers/FormTimeBasedContainer';
 import ModalContainer from '../../containers/ModalContainer';

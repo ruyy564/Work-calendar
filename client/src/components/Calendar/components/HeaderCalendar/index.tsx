@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { DAYS_OF_WEEK } from '../../entities/Calendar/constants';
+import { DAYS_OF_WEEK } from '../../../../entities/Calendar/constants';
 
 import css from './index.module.css';
 

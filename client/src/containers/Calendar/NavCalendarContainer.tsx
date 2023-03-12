@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 
-import NavCalendar from '../components/NavCalendar';
-import { RootState } from '../store';
+import NavCalendar from '../../components/Calendar/components/NavCalendar';
+import { RootState } from '../../store';
 import {
   selectCalendarDays,
   selectCalendarSelectMonth,
   selectCalendarSelectYear,
-} from '../entities/Calendar/selectors';
-import { nextMonth, prevMonth } from '../store/featurs/calendarSlice';
+} from '../../entities/Calendar/selectors';
+import { nextMonth, prevMonth } from '../../store/featurs/calendarSlice';
 
 const mapState = (state: RootState) => ({
   days: selectCalendarDays(state),

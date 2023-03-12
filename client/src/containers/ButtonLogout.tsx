@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import { ButtonLogout } from '../components/ButtonIcon';
-import { logout } from '../store/featurs/User/userSlice';
+import { ButtonLogout } from '../components/ui/ButtonIcon';
+import { logout } from '../services/user';
 
 const mapDispatch = {
   onClick: () => logout(),

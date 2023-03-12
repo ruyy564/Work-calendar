@@ -1,6 +1,6 @@
-import Input from '../Input';
-import Button from '../Button';
-import ButtonGroup from '../ButtonGroup';
+import Input from '../ui/Input';
+import Button from '../ui/Button';
+import ButtonGroup from '../ui/ButtonGroup';
 import { useAddItem } from '../../hooks/useAddItem';
 import ModalContainer from '../../containers/ModalContainer';
 import { MODAL_FORMS } from '../../entities/Modal/constants';

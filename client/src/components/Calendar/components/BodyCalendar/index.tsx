@@ -1,11 +1,11 @@
 import { memo, useMemo, useEffect } from 'react';
 
-import getKeysEvent from '../../helpers/getKeysEvent';
+import getKeysEvent from '../../../../helpers/getKeysEvent';
 import { OtherDay } from '../Day';
-import DayContainer from '../../containers/DayContainer';
-import EventModalContainer from '../../containers/EventModalContainer';
-import { Event } from '../../entities/Event';
-import { CalendarDays } from '../../entities/Calendar';
+import DayContainer from '../../../../containers/Calendar/DayContainer';
+import EventModalContainer from '../../../../containers/EventModalContainer';
+import { Event } from '../../../../entities/Event';
+import { CalendarDays } from '../../../../entities/Calendar';
 
 import css from './index.module.css';
 

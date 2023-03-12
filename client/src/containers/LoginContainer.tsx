@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Login from '../components/Login';
-import { login } from '../store/featurs/User/userSlice';
+import { login } from '../services/user';
 
 const mapDispatch = {
   login: (email: string, password: string) => login({ email, password }),

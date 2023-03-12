@@ -8,9 +8,9 @@ import {
   createEvent,
   updateTamebasedEvent,
   deleteTimebased,
-} from '../store/featurs/Event/actions';
+} from '../services/event';
 import { MODAL_FORMS } from '../entities/Modal/constants';
-import { Event, CreateEvent } from '../entities/Event';
+import { CreateEvent } from '../entities/Event';
 
 const mapState = (state: RootState, { date }: { date: string }) => ({
   timebased: selectEventTimebased(state, date),

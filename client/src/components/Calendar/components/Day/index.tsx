@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
-import { KeyEvents } from '../../helpers/getKeysEvent';
+import { KeyEvents } from '../../../../helpers/getKeysEvent';
 
-import getClasses from '../../helpers/getClasses';
+import getClasses from '../../../../helpers/getClasses';
 import css from './index.module.css';
 
 type Props = {

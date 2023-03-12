@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
-import LinkTodayContainer from '../../containers/LinkTodayContainer';
-import { getCurrentMonth } from '../../entities/Calendar/helpers';
-import { ButtonArrowLeft, ButtonArrowRight } from '../ButtonIcon';
+import LinkTodayContainer from '../../../../containers/LinkTodayContainer';
+import { getCurrentMonth } from '../../../../entities/Calendar/helpers';
+import { ButtonArrowLeft, ButtonArrowRight } from '../../../ui/ButtonIcon';
 
 import css from './index.module.css';
 

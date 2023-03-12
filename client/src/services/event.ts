@@ -1,12 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import {
-  Event,
-  AddPieceWorkToEvent,
-  CreateEvent,
-} from '../../../entities/Event';
-import $api from '../../../http';
-import getUserId from '../../../helpers/getUserId';
+import { Event, AddPieceWorkToEvent, CreateEvent } from '../entities/Event';
+import $api from '../http';
+import getUserId from '../helpers/getUserId';
 
 export const fetchEvents = createAsyncThunk<
   Event[],

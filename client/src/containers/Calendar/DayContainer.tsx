@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
 
-import Day from '../components/Day';
-import { RootState } from '../store';
+import Day from '../../components/Calendar/components/Day';
+import { RootState } from '../../store';
 import {
   selectCalendarCurrentDay,
   selectCalendarSelectMonth,
   selectCalendarSelectYear,
-} from '../entities/Calendar/selectors';
-import { setSelectDate } from '../store/featurs/calendarSlice';
-import { MODAL_FORMS } from '../entities/Modal/constants';
-import { openModal } from '../store/featurs/modalSlice';
+} from '../../entities/Calendar/selectors';
+import { setSelectDate } from '../../store/featurs/calendarSlice';
+import { MODAL_FORMS } from '../../entities/Modal/constants';
+import { openModal } from '../../store/featurs/modalSlice';
 
 const mapState = (state: RootState) => ({
   currentDay: selectCalendarCurrentDay(state),
