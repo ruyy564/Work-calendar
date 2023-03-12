@@ -1,5 +1,3 @@
-const { Op } = require('sequelize');
-
 const { Timebased } = require('../models');
 
 class TimebasedService {
@@ -13,12 +11,18 @@ class TimebasedService {
   }
 
   async update(eventId, data) {
-    const timebased = await Timebased.update(
+    const timebased = await Timebased.upsert(
       { ...data },
       { where: { EventId: eventId } }
     );
 
-    return timebased;
+    return timebased[0].dataValues;
+  }
+
+  async delete(eventId) {
+    const timebased = await Timebased.destroy({ where: { EventId: eventId } });
+
+    return eventId;
   }
 }
 

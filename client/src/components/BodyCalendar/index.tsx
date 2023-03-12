@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useEffect } from 'react';
 
 import getKeysEvent from '../../helpers/getKeysEvent';
 import { OtherDay } from '../Day';
@@ -12,11 +12,16 @@ import css from './index.module.css';
 type Props = {
   events: Event[];
   days: CalendarDays;
+  fetchEvents: () => void;
 };
 
-const Body = memo(({ days, events }: Props) => {
+const Body = memo(({ days, events, fetchEvents }: Props) => {
   const { lastMonthDays, currentMonthDays, nextMonthDays } = days;
   const KeysEvents = useMemo(() => getKeysEvent(events), [events]);
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
 
   return (
     <div className={css.root}>

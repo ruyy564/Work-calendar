@@ -14,11 +14,11 @@ import css from './index.module.css';
 
 type Props = {
   date: string;
-  type: TYPE_WORK;
+  type: string;
 };
 
 const EventModal = memo(({ date, type }: Props) => {
-  const initState = type !== TYPE_WORK.NONE ? type : TYPE_WORK.TIME_BASED;
+  const initState = type !== 'none' ? type : 'timebased';
   const [workType, setWorkType] = useState<string>(initState);
 
   useEffect(() => {
@@ -38,21 +38,21 @@ const EventModal = memo(({ date, type }: Props) => {
           onChange={changeHandler}
           type="radio"
           text="Повременная"
-          checked={workType === TYPE_WORK.TIME_BASED}
-          value={TYPE_WORK.TIME_BASED}
-          disabled={type === TYPE_WORK.PIECE_WORK}
+          checked={workType === 'timebased'}
+          value={'timebased'}
+          disabled={type === 'pieceworks'}
         />
         <Input
           name={RADIO_GROUP_TYPE_WORK}
           onChange={changeHandler}
           type="radio"
-          checked={workType === TYPE_WORK.PIECE_WORK}
+          checked={workType === 'pieceworks'}
           text="Сдельная"
-          value={TYPE_WORK.PIECE_WORK}
-          disabled={type === TYPE_WORK.TIME_BASED}
+          value={'pieceworks'}
+          disabled={type === 'timebased'}
         />
       </div>
-      {workType === TYPE_WORK.TIME_BASED ? (
+      {workType === 'timebased' ? (
         <FormTimeBasedContainer date={date} />
       ) : (
         <FormPlaceworkContainer date={date} />

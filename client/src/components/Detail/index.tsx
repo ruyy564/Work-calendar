@@ -1,16 +1,16 @@
 import { memo, useCallback } from 'react';
 
 import { ButtonDelete, ButtonEdit } from '../ButtonIcon';
-import { PieceWork } from '../../entities/Event';
+import { Piecework } from '../../entities/Event';
 
 import css from './index.module.css';
 
 type Props = {
   date: string;
-  item: PieceWork;
+  item: Piecework;
   openModal: () => void;
   deleteItem: (date: string, key: string) => void;
-  setSelectData: (item: PieceWork) => void;
+  setSelectData: (item: Piecework) => void;
 };
 
 const Detail = memo(
@@ -26,7 +26,7 @@ const Detail = memo(
         <div>x {item.count}</div>
         <div>{item.cost}р.</div>
         <ButtonEdit onClick={clickHandler} />
-        <ButtonDelete onClick={() => deleteItem(date, item.key)} />
+        <ButtonDelete onClick={() => deleteItem(date, item.id)} />
       </div>
     );
   }

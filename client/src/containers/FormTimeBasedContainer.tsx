@@ -2,25 +2,24 @@ import { connect } from 'react-redux';
 
 import { RootState } from '../store';
 import FormTimeBased from '../components/FormTimeBased';
-import { selectEventTimeBased } from '../entities/Event/selectors';
+import { selectEventTimebased } from '../entities/Event/selectors';
 import { closeModal } from '../store/featurs/modalSlice';
 import {
-  changeEvent,
-  addEvent,
-  deleteEvent,
-} from '../store/featurs/eventSlice';
+  createEvent,
+  updateTamebasedEvent,
+} from '../store/featurs/Event/actions';
 import { MODAL_FORMS } from '../entities/Modal/constants';
-import { ActionPayloadAddEvent } from '../store/featurs/eventSlice';
+import { Event, CreateEvent } from '../entities/Event';
 
 const mapState = (state: RootState, { date }: { date: string }) => ({
-  timeBased: selectEventTimeBased(state, date),
+  timebased: selectEventTimebased(state, date),
 });
 
 const mapDispatch = {
-  addEvent: (event: ActionPayloadAddEvent) => addEvent(event),
-  changeEvent: (event: ActionPayloadAddEvent) => changeEvent(event),
+  createEvent: (event: CreateEvent) => createEvent({ event }),
+  changeEvent: (event: CreateEvent) => updateTamebasedEvent({ event }),
   closeModal: () => closeModal(MODAL_FORMS.ADD_EVENT_FORM),
-  deleteEvent: (date: string) => deleteEvent({ date }),
+  deleteEvent: (date: string) => {},
 };
 
 const connector = connect(mapState, mapDispatch);

@@ -1,5 +1,10 @@
 import React, { memo } from 'react';
-import { AiFillDelete, AiFillEdit, AiFillCloseCircle } from 'react-icons/ai';
+import {
+  AiFillDelete,
+  AiFillEdit,
+  AiFillCloseCircle,
+  AiOutlineLogout,
+} from 'react-icons/ai';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import css from './index.module.css';
@@ -44,6 +49,14 @@ export const ButtonArrowRight = memo(({ onClick }: Props) => {
   return (
     <button className={css.root} onClick={onClick}>
       <FiChevronRight />
+    </button>
+  );
+});
+
+export const ButtonLogout = memo(({ onClick }: Props) => {
+  return (
+    <button className={`${css.root} ${css.btnLogout}`} onClick={onClick}>
+      <AiOutlineLogout />
     </button>
   );
 });

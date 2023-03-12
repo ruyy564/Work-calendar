@@ -3,23 +3,15 @@ const EventService = require('../service/EventService');
 const TimebasedService = require('../service/TimebasedService');
 const PieceworkService = require('../service/PieceworkService');
 const ApiError = require('../error/ApiError');
+const { Event } = require('../models');
 
 class EventController {
-  async getEventByUserAndPeriod(req, res, next) {
+  async getEvents(req, res, next) {
     try {
-      const errors = validationResult(req);
+      const { userId } = req.body;
+      const events = await EventService.getEvents(userId);
 
-      if (!errors.isEmpty()) {
-        return next(ApiError.badRequest('Некорректные данные'));
-      }
-      const { userId, startDate, endDate } = req.body;
-      const eventData = await EventService.getEventByUserAndPeriod(
-        userId,
-        startDate,
-        endDate
-      );
-
-      return res.json(eventData);
+      return res.json(events);
     } catch (e) {
       next(e);
     }
@@ -28,14 +20,14 @@ class EventController {
   async createEvent(req, res, next) {
     try {
       const { userId, date, timebased, piecework } = req.body;
-      const eventData = await EventService.createEvent(
+      const event = await EventService.createEvent(
         userId,
         date,
         timebased,
         piecework
       );
 
-      return res.json(eventData);
+      return res.json(event);
     } catch (e) {
       next(e);
     }
@@ -43,12 +35,16 @@ class EventController {
 
   async updateTimebased(req, res, next) {
     try {
-      const { eventId, timebased } = req.body;
-      const newTimebased = await TimebasedService.update(eventId, timebased);
-
-      return res.json({
-        timebased: newTimebased,
+      const { userId, date, timebased } = req.body;
+      const { dataValues } = await Event.findOne({
+        where: { UserId: userId, date },
       });
+      const newTimebased = await TimebasedService.update(
+        dataValues.id,
+        timebased
+      );
+
+      return res.json({ ...dataValues, timebased: newTimebased });
     } catch (e) {
       next(e);
     }
@@ -56,15 +52,13 @@ class EventController {
 
   async updatePiecework(req, res, next) {
     try {
-      const { pieceworkId, piecework } = req.body;
-      const newPiecework = await PieceworkService.update(
-        pieceworkId,
-        piecework
-      );
-
-      return res.json({
-        piecework: newPiecework,
+      const { userId, date, piecework } = req.body;
+      const { dataValues } = await Event.findOne({
+        where: { UserId: userId, date },
       });
+      const newPiecework = await PieceworkService.update(piecework);
+
+      return res.json({ ...dataValues, piecework: newPiecework });
     } catch (e) {
       next(e);
     }
@@ -72,10 +66,16 @@ class EventController {
 
   async addPiecework(req, res, next) {
     try {
-      const { eventId, piecework } = req.body;
-      const newPiecework = await TimebasedService.create(eventId, piecework);
+      const { userId, date, piecework } = req.body;
+      const { dataValues } = await Event.findOne({
+        where: { UserId: userId, date },
+      });
+      const newPiecework = await PieceworkService.create(
+        dataValues.id,
+        piecework
+      );
 
-      return res.json({ piecework: newPiecework });
+      return res.json({ ...dataValues, piecework: newPiecework });
     } catch (e) {
       next(e);
     }

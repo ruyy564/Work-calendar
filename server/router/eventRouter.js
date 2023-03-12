@@ -4,7 +4,7 @@ const authMiddleware = require('../middleware/AuthMiddleware');
 
 const router = new Router();
 
-router.post('/geteventbyuserperiod', EventController.getEventByUserAndPeriod);
+router.post('/getevents', EventController.getEvents);
 router.post('/create', authMiddleware, EventController.createEvent);
 router.post('/addpiecework', authMiddleware, EventController.addPiecework);
 router.post(

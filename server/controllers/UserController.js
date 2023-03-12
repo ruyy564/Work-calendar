@@ -26,17 +26,11 @@ class UserController {
       if (!errors.isEmpty()) {
         return next(ApiError.badRequest('Некорректные данные'));
       }
+
       const { email, password } = req.body;
       const userData = await UserService.login(email, password);
 
       return res.json(userData);
-    } catch (e) {
-      next(e);
-    }
-  }
-
-  async logout(req, res, next) {
-    try {
     } catch (e) {
       next(e);
     }

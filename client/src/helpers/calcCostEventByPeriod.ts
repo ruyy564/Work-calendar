@@ -1,7 +1,7 @@
 import { Event } from '../entities/Event';
 import {
-  getEventPiecesWork,
-  getEventTimeBased,
+  getEventPieceworks,
+  getEventTimebased,
   getEventDate,
 } from '../entities/Event/getters';
 import {
@@ -25,8 +25,8 @@ const calcCostEventByPeriod = (events: Event[], start: string, end: string) =>
       Number(endDate.year) >= Number(date.year);
 
     if (isMoreStart && isLessEnd) {
-      const pieceWork = getEventPiecesWork(event);
-      const timebased = getEventTimeBased(event);
+      const pieceWork = getEventPieceworks(event);
+      const timebased = getEventTimebased(event);
 
       if (pieceWork) {
         return acc + getCostPlacework(pieceWork);

@@ -1,5 +1,12 @@
 import { useInput } from './useInput';
-import { TimeBased } from '../entities/Event';
+import { Timebased } from '../entities/Event';
+import {
+  getTimebasedOverTime,
+  getTimebasedCostInHour,
+  getTimebasedFirstTwoHourRatio,
+  getTimebasedMainWorkTime,
+  getTimebasedOtherHoursRatio,
+} from '../entities/Event/getters';
 import validateInputNumber from '../helpers/validateInputNumber';
 
 const validateCostInHour = validateInputNumber(0);
@@ -7,21 +14,33 @@ const validateTime = validateInputNumber(0, 24);
 const validateRatioFirst = validateInputNumber(0);
 const validateRatioSecond = validateInputNumber(0);
 
-export const useTimeBasedForm = (data?: TimeBased) => {
-  const costInHour = useInput(data ? data.costInHour : 0, validateCostInHour);
-  const mainWorkTime = useInput(data ? data.mainWorkTime : 0, validateTime);
-  const overTime = useInput(data ? data.overTime : 0, validateTime);
+export const useTimeBasedForm = (timebased?: Timebased) => {
+  const costInHour = useInput(
+    timebased ? getTimebasedCostInHour(timebased) : 0,
+    validateCostInHour
+  );
+  const mainWorkTime = useInput(
+    timebased ? getTimebasedMainWorkTime(timebased) : 0,
+    validateTime
+  );
+  const overTime = useInput(
+    timebased ? getTimebasedOverTime(timebased) : 0,
+    validateTime
+  );
   const firstTwoHourRatio = useInput(
-    data ? data.firstTwoHourRatio : 1.5,
+    timebased ? getTimebasedFirstTwoHourRatio(timebased) : 1.5,
     validateRatioFirst
   );
-  const otherHours = useInput(data ? data.otherHours : 2, validateRatioSecond);
+  const otherHoursRatio = useInput(
+    timebased ? getTimebasedOtherHoursRatio(timebased) : 2,
+    validateRatioSecond
+  );
 
   return {
     costInHour,
     mainWorkTime,
     overTime,
     firstTwoHourRatio,
-    otherHours,
+    otherHoursRatio,
   };
 };

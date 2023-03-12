@@ -14,11 +14,10 @@ const Event = sequelize.define('Event', {
 
 const Timebased = sequelize.define('Timebased', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  cost: { type: DataTypes.INTEGER },
-  count: { type: DataTypes.INTEGER },
-  mainTime: { type: DataTypes.INTEGER },
-  secondTime: { type: DataTypes.INTEGER },
-  firtsTwoHoursRatio: { type: DataTypes.FLOAT },
+  costInHour: { type: DataTypes.INTEGER },
+  mainWorkTime: { type: DataTypes.INTEGER },
+  overTime: { type: DataTypes.INTEGER },
+  firstTwoHourRatio: { type: DataTypes.FLOAT },
   otherHoursRatio: { type: DataTypes.FLOAT },
 });
 

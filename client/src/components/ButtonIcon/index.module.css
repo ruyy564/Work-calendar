@@ -19,3 +19,9 @@
 .root:active {
     background-color: var(--active);
 }
+
+.btnLogout {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

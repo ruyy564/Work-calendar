@@ -7,7 +7,7 @@ import css from './index.module.css';
 
 type Props = {};
 
-const Login = ({}: Props) => {
+const Login = ({ login }: any) => {
   const { email, pass } = useLogin();
 
   return (
@@ -28,7 +28,7 @@ const Login = ({}: Props) => {
         />
       </div>
       <ButtonGroup>
-        <Button onClick={() => {}} text="Войти" />
+        <Button onClick={() => login(email.value, pass.value)} text="Войти" />
         <Button onClick={() => {}} text="Регистрация" />
       </ButtonGroup>
     </div>

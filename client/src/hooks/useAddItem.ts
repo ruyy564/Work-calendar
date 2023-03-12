@@ -1,10 +1,10 @@
 import { useInput } from './useInput';
-import { PieceWork } from '../entities/Event';
+import { Piecework } from '../entities/Event';
 import validateInputNumber from '../helpers/validateInputNumber';
 
 const validateInput = validateInputNumber(0);
 
-export const useAddItem = (data: PieceWork | null) => {
+export const useAddItem = (data: Piecework | null) => {
   const cost = useInput(data ? data.cost : 0, validateInput);
   const count = useInput(data ? data.count : 1, validateInput);
   const name = useInput(data ? data.name : '');

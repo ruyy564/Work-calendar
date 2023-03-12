@@ -1,6 +1,6 @@
 import type { RootState } from '../../store';
 import { Event } from '.';
-import { getEventPiecesWork, getEventTimeBased } from './getters';
+import { getEventPieceworks, getEventTimebased } from './getters';
 
 export const selectEvents = (state: RootState) => state.eventsOfCalendar.events;
 
@@ -10,14 +10,14 @@ export const selectEvent = (
 ): Event | undefined =>
   state.eventsOfCalendar.events.find((item) => item.date === date);
 
-export const selectEventPiecesWork = (state: RootState, date: string) => {
+export const selectEventPiecesworks = (state: RootState, date: string) => {
   const event = selectEvent(state, date);
 
-  return event ? getEventPiecesWork(event) : undefined;
+  return event ? getEventPieceworks(event) : undefined;
 };
 
-export const selectEventTimeBased = (state: RootState, date: string) => {
+export const selectEventTimebased = (state: RootState, date: string) => {
   const event = selectEvent(state, date);
-
-  return event ? getEventTimeBased(event) : undefined;
+  console.log(event, event?.timebased);
+  return event ? getEventTimebased(event) : undefined;
 };

@@ -1,21 +1,37 @@
-const { Op } = require('sequelize');
 const TimebasedService = require('./TimebasedService');
 const PieceworkService = require('./PieceworkService');
 const { Event, Timebased, Piecework } = require('../models');
 
 class EventService {
-  async getEventByUserAndPeriod(userId, startDate, endDate) {
-    const event = await Event.findOne({
-      where: { UserId: userId, date: { [Op.between]: [startDate, endDate] } },
+  async getEvents(userId) {
+    const eventsData = await Event.findAll({
+      where: { UserId: userId },
     });
-    const timebased = await Timebased.findOne({ where: { EventId: event.id } });
-    const piecework = await Piecework.findAll({ where: { EventId: event.id } });
+    const events = await Promise.all(
+      eventsData.map(async (event) => {
+        const timebased = await Timebased.findOne({
+          where: { EventId: event.id },
+        });
 
-    return {
-      event,
-      timebased,
-      piecework,
-    };
+        if (!timebased) {
+          const pieceworks = await Piecework.findAll({
+            where: { EventId: event.id },
+          });
+
+          return {
+            ...event.dataValues,
+            pieceworks,
+          };
+        }
+
+        return {
+          ...event.dataValues,
+          timebased,
+        };
+      })
+    );
+
+    return [...events];
   }
 
   async createEvent(userId, date, timebased, piecework) {
@@ -25,7 +41,7 @@ class EventService {
       const newTimebased = await TimebasedService.create(event.id, timebased);
 
       return {
-        event,
+        ...event.dataValues,
         timebased: newTimebased,
       };
     }
@@ -34,10 +50,24 @@ class EventService {
       const newPiecework = await PieceworkService.create(event.id, piecework);
 
       return {
-        event,
-        piecework: newPiecework,
+        ...event.dataValues,
+        pieceworks: [newPiecework],
       };
     }
+  }
+
+  async deleteEvent(eventId, pieceworkId) {
+    if (pieceworkId) {
+      await PieceworkService.delete(pieceworkId);
+    }
+    const hasEvent = await Event.findOne({
+      where: { EventId: eventId },
+    });
+
+    if (hasEvent) {
+      await Event.destroy({ where: { EventId: eventId } });
+    }
+    return { eventId, pieceworkId };
   }
 }
 

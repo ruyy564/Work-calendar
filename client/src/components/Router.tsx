@@ -2,8 +2,11 @@ import { RouterProvider } from 'react-router-dom';
 
 import { publicRouter, privateRouter } from '../routes';
 
-const Router = () => {
-  const auth = false;
+type Props = {
+  auth: boolean;
+};
+
+const Router = ({ auth }: Props) => {
   const router = auth ? privateRouter : publicRouter;
 
   return <RouterProvider router={router} />;

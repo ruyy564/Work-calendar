@@ -3,19 +3,19 @@ import { useState, useCallback } from 'react';
 import Detail from '../Detail';
 import Button from '../Button';
 import AddItemModalContainer from '../../containers/AddItemModalContainer';
-import { PieceWork } from '../../entities/Event';
+import { Piecework } from '../../entities/Event';
 
 import css from './index.module.css';
 
 type Props = {
   date: string;
-  piecesWork?: PieceWork[];
+  pieceworks?: Piecework[];
   openModal: () => void;
   deleteItem: (date: string, key: string) => void;
 };
 
-const FormPlacework = ({ piecesWork, date, deleteItem, openModal }: Props) => {
-  const [selectData, setSelectData] = useState<PieceWork | null>(null);
+const FormPlacework = ({ pieceworks, date, deleteItem, openModal }: Props) => {
+  const [selectData, setSelectData] = useState<Piecework | null>(null);
   const clickHandler = useCallback(() => {
     setSelectData(null);
     openModal();
@@ -24,14 +24,14 @@ const FormPlacework = ({ piecesWork, date, deleteItem, openModal }: Props) => {
   return (
     <div className={css.root}>
       <div className={css.list}>
-        {!piecesWork ? (
+        {!pieceworks ? (
           <div style={{ textAlign: 'center' }}>Здесь ничего нет</div>
         ) : (
-          piecesWork.map((item) => (
+          pieceworks.map((item) => (
             <Detail
               date={date}
               item={item}
-              key={item.key}
+              key={item.id}
               openModal={openModal}
               deleteItem={deleteItem}
               setSelectData={setSelectData}
@@ -40,7 +40,11 @@ const FormPlacework = ({ piecesWork, date, deleteItem, openModal }: Props) => {
         )}
       </div>
       <Button onClick={clickHandler} text="Добавить изделие" />
-      <AddItemModalContainer date={date} pieceWork={selectData} />
+      <AddItemModalContainer
+        date={date}
+        piecework={selectData}
+        hasEvent={Boolean(pieceworks)}
+      />
     </div>
   );
 };

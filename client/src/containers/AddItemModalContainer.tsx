@@ -2,13 +2,18 @@ import { connect } from 'react-redux';
 
 import AddItemModal from '../components/AddItemModal';
 import { closeModal } from '../store/featurs/modalSlice';
-import { changeEvent, addEvent } from '../store/featurs/eventSlice';
+import { CreateEvent } from '../entities/Event';
+import {
+  createEvent,
+  addPieceWorkToEvent,
+  updatePieceworkEvent,
+} from '../store/featurs/Event/actions';
 import { MODAL_FORMS } from '../entities/Modal/constants';
-import { ActionPayloadAddEvent } from '../store/featurs/eventSlice';
 
 const mapDispatch = {
-  addEvent: (event: ActionPayloadAddEvent) => addEvent(event),
-  changeEvent: (event: ActionPayloadAddEvent) => changeEvent(event),
+  createEvent: (event: CreateEvent) => createEvent({ event }),
+  addEvent: (event: CreateEvent) => addPieceWorkToEvent({ event }),
+  changeEvent: (event: CreateEvent) => updatePieceworkEvent({ event }),
   closeModal: () => closeModal(MODAL_FORMS.ADD_ITEM_FORM),
 };
 

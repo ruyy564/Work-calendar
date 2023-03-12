@@ -12,13 +12,21 @@ class PieceworkService {
     return piecework;
   }
 
-  async update(pieceworkId, data) {
-    const piecework = await Piecework.update(
+  async update(data) {
+    const piecework = await Piecework.upsert(
       { ...data },
-      { where: { id: pieceworkId } }
+      { where: { PieceworkId: data.id } }
     );
 
-    return piecework;
+    return piecework[0].dataValues;
+  }
+
+  async delete(pieceworkId) {
+    const piecework = await Piecework.destroy({
+      where: { PieceworkId: pieceworkId },
+    });
+
+    return pieceworkId;
   }
 }
 
