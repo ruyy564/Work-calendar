@@ -7,6 +7,8 @@ import {
   addPieceWorkToEvent,
   updateTamebasedEvent,
   updatePieceworkEvent,
+  deletePiecework,
+  deleteTimebased,
 } from './actions';
 
 const initialState: State = {
@@ -70,6 +72,30 @@ export const eventSlice = createSlice({
               piecework.name = action.payload.piecework.name;
             }
           }
+        }
+      )
+      .addCase(
+        deletePiecework.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          const eventId = action.payload.eventId;
+          const pieceworkId = action.payload.pieceworkId;
+          const event = state.events.find((item) => item.id === eventId);
+
+          if (event && event?.pieceworks && event.pieceworks.length > 1) {
+            event.pieceworks = event.pieceworks.filter(
+              (item) => item.id !== pieceworkId
+            );
+          } else {
+            state.events = state.events.filter((item) => item.id !== eventId);
+          }
+        }
+      )
+      .addCase(
+        deleteTimebased.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          const eventId = action.payload.eventId;
+
+          state.events = state.events.filter((item) => item.id !== eventId);
         }
       );
   },

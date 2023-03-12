@@ -43,13 +43,13 @@ class EventService {
     }
 
     if (piecework) {
-      newPiecework = await PieceworkService.create(event.id, piecework);
+      newPiecework = [await PieceworkService.create(event.id, piecework)];
     }
 
     return {
       ...event,
       timebased: newTimebased,
-      piecework: newPiecework,
+      pieceworks: newPiecework,
     };
   }
 

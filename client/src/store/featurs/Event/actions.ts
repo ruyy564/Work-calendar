@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import {
-  Piecework,
   Event,
   AddPieceWorkToEvent,
   CreateEvent,
@@ -35,15 +34,13 @@ export const addPieceWorkToEvent = createAsyncThunk<
   }
 >('eventsOfCalendar/addPieceWorkToEvent', async ({ event }, thunkAPI) => {
   try {
-    const { date, piecework } = event;
-    const { data } = await $api.post<AddPieceWorkToEvent>(
-      '/event/addPiecework',
-      {
-        userId: getUserId(),
-        date,
-        piecework,
-      }
-    );
+    const { piecework } = event;
+    console.log(piecework);
+    const { data } = await $api.post<AddPieceWorkToEvent>('/event/piecework', {
+      userId: getUserId(),
+      eventId: piecework?.EventId,
+      piecework,
+    });
 
     return data;
   } catch (e) {
@@ -60,7 +57,7 @@ export const createEvent = createAsyncThunk<
 >('eventsOfCalendar/createEvent', async ({ event }, thunkAPI) => {
   try {
     const { date, piecework, timebased } = event;
-    const { data } = await $api.post<Event>('/event/create', {
+    const { data } = await $api.post<Event>('/event/event', {
       userId: getUserId(),
       date,
       piecework,
@@ -81,10 +78,10 @@ export const updateTamebasedEvent = createAsyncThunk<
   }
 >('eventsOfCalendar/updateTamebasedEvent', async ({ event }, thunkAPI) => {
   try {
-    const { date, timebased } = event;
-    const { data } = await $api.post<Event>('/event/updatetimebased', {
+    const { timebased } = event;
+    const { data } = await $api.put<Event>('/event/timebased', {
       userId: getUserId(),
-      date,
+      eventId: timebased?.EventId,
       timebased,
     });
 
@@ -103,13 +100,29 @@ export const updatePieceworkEvent = createAsyncThunk<
 >('eventsOfCalendar/updatePieceworkEvent', async ({ event }, thunkAPI) => {
   try {
     const { date, piecework } = event;
-    const { data } = await $api.post<AddPieceWorkToEvent>(
-      '/event/updatepiecework',
-      {
-        userId: getUserId(),
-        date,
-        piecework,
-      }
+    const { data } = await $api.put<AddPieceWorkToEvent>('/event/piecework', {
+      userId: getUserId(),
+      date,
+      piecework,
+    });
+
+    return data;
+  } catch (e) {
+    return thunkAPI.rejectWithValue('Пользователь не авторизован');
+  }
+});
+
+export const deleteTimebased = createAsyncThunk<
+  { eventId: string },
+  { eventId: string },
+  {
+    rejectValue: any;
+  }
+>('eventsOfCalendar/deleteTimebased', async ({ eventId }, thunkAPI) => {
+  try {
+    const { data } = await $api.delete<{ eventId: string }>(
+      '/event/timebased',
+      { data: { eventId } }
     );
 
     return data;
@@ -117,3 +130,25 @@ export const updatePieceworkEvent = createAsyncThunk<
     return thunkAPI.rejectWithValue('Пользователь не авторизован');
   }
 });
+
+export const deletePiecework = createAsyncThunk<
+  { eventId: string; pieceworkId: string },
+  { eventId: string; pieceworkId: string },
+  {
+    rejectValue: any;
+  }
+>(
+  'eventsOfCalendar/deletePiecework',
+  async ({ eventId, pieceworkId }, thunkAPI) => {
+    try {
+      const { data } = await $api.delete<{
+        eventId: string;
+        pieceworkId: string;
+      }>('/event/piecework', { data: { eventId, pieceworkId } });
+
+      return data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue('Пользователь не авторизован');
+    }
+  }
+);

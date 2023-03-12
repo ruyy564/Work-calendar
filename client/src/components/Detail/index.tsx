@@ -26,7 +26,7 @@ const Detail = memo(
         <div>x {item.count}</div>
         <div>{item.cost}р.</div>
         <ButtonEdit onClick={clickHandler} />
-        <ButtonDelete onClick={() => deleteItem(date, item.id)} />
+        <ButtonDelete onClick={() => deleteItem(item.EventId, item.id)} />
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { RootState } from '../store';
 import AddItemModal from '../components/AddItemModal';
 import { closeModal } from '../store/featurs/modalSlice';
 import { CreateEvent } from '../entities/Event';
@@ -9,6 +10,11 @@ import {
   updatePieceworkEvent,
 } from '../store/featurs/Event/actions';
 import { MODAL_FORMS } from '../entities/Modal/constants';
+import { selectEvent } from '../entities/Event/selectors';
+
+const mapState = (state: RootState, { date }: { date: string }) => ({
+  EventId: selectEvent(state, date)?.id,
+});
 
 const mapDispatch = {
   createEvent: (event: CreateEvent) => createEvent({ event }),
@@ -17,6 +23,6 @@ const mapDispatch = {
   closeModal: () => closeModal(MODAL_FORMS.ADD_ITEM_FORM),
 };
 
-const connector = connect(null, mapDispatch);
+const connector = connect(mapState, mapDispatch);
 
 export default connector(AddItemModal);

@@ -7,6 +7,7 @@ import { closeModal } from '../store/featurs/modalSlice';
 import {
   createEvent,
   updateTamebasedEvent,
+  deleteTimebased,
 } from '../store/featurs/Event/actions';
 import { MODAL_FORMS } from '../entities/Modal/constants';
 import { Event, CreateEvent } from '../entities/Event';
@@ -19,7 +20,7 @@ const mapDispatch = {
   createEvent: (event: CreateEvent) => createEvent({ event }),
   changeEvent: (event: CreateEvent) => updateTamebasedEvent({ event }),
   closeModal: () => closeModal(MODAL_FORMS.ADD_EVENT_FORM),
-  deleteEvent: (date: string) => {},
+  deleteEvent: (eventId: string) => deleteTimebased({ eventId }),
 };
 
 const connector = connect(mapState, mapDispatch);

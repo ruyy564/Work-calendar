@@ -11,7 +11,7 @@ const mapState = (state: RootState) => {
   if (date) {
     const event = selectEvent(state, date);
 
-    if (event?.pieceworks) {
+    if (event?.pieceworks?.length) {
       return { date, type: 'pieceworks' };
     }
 

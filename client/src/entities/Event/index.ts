@@ -3,9 +3,11 @@ export type Piecework = {
   name: string;
   count: number;
   cost: number;
+  EventId: string;
 };
 
 export type Timebased = {
+  EventId: string;
   costInHour: number;
   mainWorkTime: number;
   overTime: number;
@@ -22,7 +24,7 @@ export type Event = {
 
 export type CreateEvent = {
   date: string;
-  piecework?: { name: string; count: number; cost: number };
+  piecework?: { name: string; count: number; cost: number; EventId: string };
   timebased?: Timebased;
 };
 

@@ -4,6 +4,7 @@ class PieceworkDto {
     this.cost = models.cost;
     this.name = models.name;
     this.count = models.count;
+    this.EventId = models.EventId;
   }
 }
 

@@ -35,6 +35,7 @@ const FormTimeBased = ({
   const event = {
     date,
     timebased: {
+      EventId: timebased?.EventId || '',
       costInHour: Number(costInHour.value),
       firstTwoHourRatio: Number(firstTwoHourRatio.value),
       mainWorkTime: Number(mainWorkTime.value),
@@ -54,9 +55,9 @@ const FormTimeBased = ({
   };
 
   const deleteHandler = useCallback(() => {
-    deleteEvent(date);
+    deleteEvent(timebased?.EventId);
     closeModal();
-  }, [closeModal, date, deleteEvent]);
+  }, [closeModal, deleteEvent, timebased?.EventId]);
 
   return (
     <div className={css.root}>

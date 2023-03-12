@@ -26,9 +26,7 @@ class TimebasedService {
   }
 
   async delete(eventId) {
-    const timebased = await Timebased.destroy({ where: { EventId: eventId } });
-
-    return eventId;
+    return await Timebased.destroy({ where: { EventId: eventId } });
   }
 }
 

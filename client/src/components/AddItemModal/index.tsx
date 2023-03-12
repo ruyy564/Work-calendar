@@ -11,8 +11,9 @@ import css from './index.module.css';
 type Props = {
   date: string;
   piecework: Piecework | null;
+  EventId?: string;
   hasEvent: boolean;
-  createEvent: (event: CreateEvent) => void;
+  createEvent: any;
   addEvent: any;
   changeEvent: any;
   closeModal: () => void;
@@ -22,12 +23,14 @@ const AddItemModal = ({
   date,
   piecework,
   hasEvent,
+  EventId,
   createEvent,
   addEvent,
   closeModal,
   changeEvent,
 }: Props) => {
   const { cost, count, name, clear } = useAddItem(piecework);
+  console.log('EventId', EventId);
   const event = {
     date,
     piecework: {
@@ -35,6 +38,7 @@ const AddItemModal = ({
       cost: Number(cost.value),
       count: Number(count.value),
       name: String(name.value),
+      EventId: piecework?.EventId || EventId,
     },
   };
 
@@ -55,6 +59,7 @@ const AddItemModal = ({
         cost: Number(cost.value),
         count: Number(count.value),
         name: String(name.value),
+        EventId: piecework?.EventId || EventId,
       },
     };
 

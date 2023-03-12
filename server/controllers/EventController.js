@@ -33,8 +33,8 @@ class EventController {
 
   async updateTimebased(req, res, next) {
     try {
-      const { eventId, timebased } = req.body;
-      const event = await EventService.getEvent(eventId);
+      const { timebased } = req.body;
+      const event = await EventService.getEvent(timebased.EventId);
       const newTimebased = await TimebasedService.update(timebased);
 
       return res.json({ ...event, timebased: newTimebased });
@@ -45,8 +45,8 @@ class EventController {
 
   async updatePiecework(req, res, next) {
     try {
-      const { eventId, piecework } = req.body;
-      const event = await EventService.getEvent(eventId);
+      const { piecework } = req.body;
+      const event = await EventService.getEvent(piecework.EventId);
       const newPiecework = await PieceworkService.update(piecework);
 
       return res.json({ ...event, piecework: newPiecework });
@@ -67,17 +67,17 @@ class EventController {
     }
   }
 
+  // возвращает id удаленных элементов
   async deletePiecework(req, res, next) {
     try {
       const { eventId, pieceworkId } = req.body;
 
-      const isDelete = await PieceworkService.delete(pieceworkId);
+      await PieceworkService.delete(pieceworkId);
       const pieceworks = await PieceworkService.getPieceworks(eventId);
 
-      if (pieceworks.length) {
-        return res.json({ pieceworkId });
+      if (!pieceworks.length) {
+        await EventService.delete(eventId);
       }
-      await EventService.delete(eventId);
 
       return res.json({ eventId, pieceworkId });
     } catch (e) {

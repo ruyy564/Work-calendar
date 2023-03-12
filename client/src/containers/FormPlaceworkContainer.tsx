@@ -5,6 +5,7 @@ import FormPlacework from '../components/FormPlacework';
 import { selectEventPiecesworks } from '../entities/Event/selectors';
 import { openModal } from '../store/featurs/modalSlice';
 import { MODAL_FORMS } from '../entities/Modal/constants';
+import { deletePiecework } from '../store/featurs/Event/actions';
 
 const mapState = (state: RootState, { date }: { date: string }) => ({
   pieceworks: selectEventPiecesworks(state, date),
@@ -12,7 +13,8 @@ const mapState = (state: RootState, { date }: { date: string }) => ({
 
 const mapDispatch = {
   openModal: () => openModal(MODAL_FORMS.ADD_ITEM_FORM),
-  deleteItem: (date: string, id: string) => {},
+  deleteItem: (eventId: string, pieceworkId: string) =>
+    deletePiecework({ eventId, pieceworkId }),
 };
 
 const connector = connect(mapState, mapDispatch);
