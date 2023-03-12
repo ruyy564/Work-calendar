@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
 
-import { RootState } from '../store';
-import FormTimeBased from '../components/FormTimeBased';
-import { selectEventTimebased } from '../entities/Event/selectors';
-import { closeModal } from '../store/featurs/modalSlice';
+import { RootState } from '../../store';
+import FormTimeBased from '../../components/Event/FormTimeBased';
+import { selectEventTimebased } from '../../entities/Event/selectors';
+import { closeModal } from '../../store/featurs/modalSlice';
 import {
   createEvent,
   updateTamebasedEvent,
   deleteTimebased,
-} from '../services/event';
-import { MODAL_FORMS } from '../entities/Modal/constants';
-import { CreateEvent } from '../entities/Event';
+} from '../../services/event';
+import { MODAL_FORMS } from '../../entities/Modal/constants';
+import { CreateEvent } from '../../entities/Event';
 
 const mapState = (state: RootState, { date }: { date: string }) => ({
   timebased: selectEventTimebased(state, date),

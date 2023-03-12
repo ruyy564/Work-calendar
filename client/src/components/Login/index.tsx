@@ -5,9 +5,11 @@ import ButtonGroup from '../ui/ButtonGroup';
 
 import css from './index.module.css';
 
-type Props = {};
+type Props = {
+  login: (email: string, password: string) => void;
+};
 
-const Login = ({ login }: any) => {
+const Login = ({ login }: Props) => {
   const { email, pass } = useLogin();
 
   return (
@@ -28,7 +30,10 @@ const Login = ({ login }: any) => {
         />
       </div>
       <ButtonGroup>
-        <Button onClick={() => login(email.value, pass.value)} text="Войти" />
+        <Button
+          onClick={() => login(String(email.value), String(pass.value))}
+          text="Войти"
+        />
         <Button onClick={() => {}} text="Регистрация" />
       </ButtonGroup>
     </div>

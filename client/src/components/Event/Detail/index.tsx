@@ -1,7 +1,7 @@
 import { memo, useCallback } from 'react';
 
-import { ButtonDelete, ButtonEdit } from '../ui/ButtonIcon';
-import { Piecework } from '../../entities/Event';
+import { ButtonDelete, ButtonEdit } from '../../ui/ButtonIcon';
+import { Piecework } from '../../../entities/Event';
 
 import css from './index.module.css';
 

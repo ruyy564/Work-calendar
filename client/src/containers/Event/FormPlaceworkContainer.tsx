@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
-import { RootState } from '../store';
-import FormPlacework from '../components/FormPlacework';
-import { selectEventPiecesworks } from '../entities/Event/selectors';
-import { openModal } from '../store/featurs/modalSlice';
-import { MODAL_FORMS } from '../entities/Modal/constants';
-import { deletePiecework } from '../services/event';
+import { RootState } from '../../store';
+import FormPlacework from '../../components/Event/FormPlacework';
+import { selectEventPiecesworks } from '../../entities/Event/selectors';
+import { openModal } from '../../store/featurs/modalSlice';
+import { MODAL_FORMS } from '../../entities/Modal/constants';
+import { deletePiecework } from '../../services/event';
 
 const mapState = (state: RootState, { date }: { date: string }) => ({
   pieceworks: selectEventPiecesworks(state, date),

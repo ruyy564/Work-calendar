@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
-import { RootState } from '../store';
-import EventModal from '../components/EventModal';
-import { selectEvent } from '../entities/Event/selectors';
-import { selectCalendarSelectDate } from '../entities/Calendar/selectors';
+import { RootState } from '../../store';
+import EventModal from '../../components/Event/EventModal';
+import { selectEvent } from '../../entities/Event/selectors';
+import { selectCalendarSelectDate } from '../../entities/Calendar/selectors';
 
 const mapState = (state: RootState) => {
   const date = selectCalendarSelectDate(state);

@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 
-import { useTimeBasedForm } from '../../hooks/useTimeBasedForm';
-import { Timebased, CreateEvent } from '../../entities/Event';
-import Input from '../ui/Input';
-import Button from '../ui/Button';
-import ButtonGroup from '../ui/ButtonGroup';
+import { useTimeBasedForm } from '../../../hooks/useTimeBasedForm';
+import { Timebased, CreateEvent } from '../../../entities/Event';
+import Input from '../../ui/Input';
+import Button from '../../ui/Button';
+import ButtonGroup from '../../ui/ButtonGroup';
 
 import css from './index.module.css';
 

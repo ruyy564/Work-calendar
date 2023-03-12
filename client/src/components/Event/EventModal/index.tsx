@@ -1,14 +1,14 @@
 import { useState, useEffect, memo } from 'react';
 
-import Input from '../ui/Input';
-import FormPlaceworkContainer from '../../containers/FormPlaceworkContainer';
-import FormTimeBasedContainer from '../../containers/FormTimeBasedContainer';
-import ModalContainer from '../../containers/ModalContainer';
-import { MODAL_FORMS } from '../../entities/Modal/constants';
+import Input from '../../ui/Input';
+import FormPlaceworkContainer from '../../../containers/Event/FormPlaceworkContainer';
+import FormTimeBasedContainer from '../../../containers/Event/FormTimeBasedContainer';
+import ModalContainer from '../../../containers/ModalContainer';
+import { MODAL_FORMS } from '../../../entities/Modal/constants';
 import {
   TYPE_WORK,
   RADIO_GROUP_TYPE_WORK,
-} from '../../entities/Event/constants';
+} from '../../../entities/Event/constants';
 
 import css from './index.module.css';
 

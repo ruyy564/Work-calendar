@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react';
 
 import Detail from '../Detail';
-import Button from '../ui/Button';
-import AddItemModalContainer from '../../containers/AddItemModalContainer';
-import { Piecework } from '../../entities/Event';
+import Button from '../../ui/Button';
+import AddItemModalContainer from '../../../containers/Event/AddItemModalContainer';
+import { Piecework } from '../../../entities/Event';
 
 import css from './index.module.css';
 

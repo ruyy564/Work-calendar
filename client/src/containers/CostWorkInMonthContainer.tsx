@@ -7,7 +7,7 @@ import {
   selectCalendarSelectYear,
 } from '../entities/Calendar/selectors';
 import { selectEvents } from '../entities/Event/selectors';
-import calcCostEventByPeriod from '../helpers/calcCostEventByPeriod';
+import calcCostEventByPeriod from '../entities/Event/helpers';
 
 const mapState = (state: RootState) => {
   const selectMonth = selectCalendarSelectMonth(state);

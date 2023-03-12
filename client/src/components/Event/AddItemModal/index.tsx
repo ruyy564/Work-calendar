@@ -1,10 +1,10 @@
-import Input from '../ui/Input';
-import Button from '../ui/Button';
-import ButtonGroup from '../ui/ButtonGroup';
-import { useAddItem } from '../../hooks/useAddItem';
-import ModalContainer from '../../containers/ModalContainer';
-import { MODAL_FORMS } from '../../entities/Modal/constants';
-import { Piecework, CreateEvent } from '../../entities/Event';
+import Input from '../../ui/Input';
+import Button from '../../ui/Button';
+import ButtonGroup from '../../ui/ButtonGroup';
+import { useAddItem } from '../../../hooks/useAddItem';
+import ModalContainer from '../../../containers/ModalContainer';
+import { MODAL_FORMS } from '../../../entities/Modal/constants';
+import { Piecework, CreateEvent } from '../../../entities/Event';
 
 import css from './index.module.css';
 
