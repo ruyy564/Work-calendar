@@ -1,15 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { AxiosError } from 'axios';
+
+import { User, UserData } from '../entities/User';
 import $api from '../http';
-
-type User = {
-  id: number;
-  email: string;
-};
-
-type UserData = {
-  user: User;
-  accessToken: string;
-};
 
 export const login = createAsyncThunk<
   User,
@@ -29,7 +22,28 @@ export const login = createAsyncThunk<
 
     return data.user;
   } catch (e) {
-    return thunkAPI.rejectWithValue('Неверные данные');
+    const error = e as AxiosError<{ message: string }>;
+
+    return thunkAPI.rejectWithValue(error.response?.data.message);
+  }
+});
+
+export const registration = createAsyncThunk<
+  void,
+  { email: string; password: string },
+  {
+    rejectValue: any;
+  }
+>('user/registration', async ({ email, password }, thunkAPI) => {
+  try {
+    await $api.post<UserData>('/auth/registration', {
+      email,
+      password,
+    });
+  } catch (e) {
+    const error = e as AxiosError<{ message: string }>;
+
+    return thunkAPI.rejectWithValue(error.response?.data.message);
   }
 });
 

@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Event, AddPieceWorkToEvent, CreateEvent } from '../entities/Event';
 import $api from '../http';
 import getUserId from '../helpers/getUserId';
+import { AxiosError } from 'axios';
 
 export const fetchEvents = createAsyncThunk<
   Event[],
@@ -18,7 +19,9 @@ export const fetchEvents = createAsyncThunk<
 
     return data;
   } catch (e) {
-    return thunkAPI.rejectWithValue('Пользователь не авторизован');
+    const error = e as AxiosError<{ message: string }>;
+
+    return thunkAPI.rejectWithValue(error.response?.data.message);
   }
 });
 
@@ -40,7 +43,9 @@ export const addPieceWorkToEvent = createAsyncThunk<
 
     return data;
   } catch (e) {
-    return thunkAPI.rejectWithValue('Пользователь не авторизован');
+    const error = e as AxiosError<{ message: string }>;
+
+    return thunkAPI.rejectWithValue(error.response?.data.message);
   }
 });
 
@@ -62,7 +67,9 @@ export const createEvent = createAsyncThunk<
 
     return data;
   } catch (e) {
-    return thunkAPI.rejectWithValue('Пользователь не авторизован');
+    const error = e as AxiosError<{ message: string }>;
+
+    return thunkAPI.rejectWithValue(error.response?.data.message);
   }
 });
 
@@ -83,7 +90,9 @@ export const updateTamebasedEvent = createAsyncThunk<
 
     return data;
   } catch (e) {
-    return thunkAPI.rejectWithValue('Пользователь не авторизован');
+    const error = e as AxiosError<{ message: string }>;
+
+    return thunkAPI.rejectWithValue(error.response?.data.message);
   }
 });
 
@@ -104,7 +113,9 @@ export const updatePieceworkEvent = createAsyncThunk<
 
     return data;
   } catch (e) {
-    return thunkAPI.rejectWithValue('Пользователь не авторизован');
+    const error = e as AxiosError<{ message: string }>;
+
+    return thunkAPI.rejectWithValue(error.response?.data.message);
   }
 });
 
@@ -123,7 +134,9 @@ export const deleteTimebased = createAsyncThunk<
 
     return data;
   } catch (e) {
-    return thunkAPI.rejectWithValue('Пользователь не авторизован');
+    const error = e as AxiosError<{ message: string }>;
+
+    return thunkAPI.rejectWithValue(error.response?.data.message);
   }
 });
 
@@ -144,7 +157,9 @@ export const deletePiecework = createAsyncThunk<
 
       return data;
     } catch (e) {
-      return thunkAPI.rejectWithValue('Пользователь не авторизован');
+      const error = e as AxiosError<{ message: string }>;
+
+      return thunkAPI.rejectWithValue(error.response?.data.message);
     }
   }
 );
