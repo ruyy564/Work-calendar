@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { State, Event, AddPieceWorkToEvent } from '../../entities/Event';
+import { State, Event, ChangePiecework } from '../../entities/Event';
 import {
   fetchEvents,
   createEvent,
@@ -23,62 +23,62 @@ export const eventSlice = createSlice({
     builder
       .addCase(
         fetchEvents.fulfilled,
-        (state, action: PayloadAction<Event[]>) => {
-          state.events = action.payload;
+        (state, { payload }: PayloadAction<Event[]>) => {
+          state.events = payload;
         }
       )
-      .addCase(createEvent.fulfilled, (state, action: PayloadAction<Event>) => {
-        state.events.push(action.payload);
-      })
+      .addCase(
+        createEvent.fulfilled,
+        (state, { payload }: PayloadAction<Event>) => {
+          state.events.push(payload);
+        }
+      )
       .addCase(
         addPieceWorkToEvent.fulfilled,
-        (state, action: PayloadAction<AddPieceWorkToEvent>) => {
-          const event = state.events.find(
-            (item) => item.id === action.payload.id
-          );
+        (state, { payload }: PayloadAction<ChangePiecework>) => {
+          const event = state.events.find((item) => item.id === payload.id);
 
           if (event) {
-            event.pieceworks?.push(action.payload.piecework);
+            event.pieceworks?.push(payload.piecework);
           }
         }
       )
       .addCase(
         updateTamebasedEvent.fulfilled,
-        (state, action: PayloadAction<Event>) => {
-          const event = state.events.find(
-            (item) => item.id === action.payload.id
-          );
+        (state, { payload }: PayloadAction<Event>) => {
+          const event = state.events.find((item) => item.id === payload.id);
 
           if (event) {
-            event.timebased = action.payload.timebased;
+            event.timebased = payload.timebased;
           }
         }
       )
       .addCase(
         updatePieceworkEvent.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          const event = state.events.find(
-            (item) => item.id === action.payload.id
-          );
+        (state, { payload }: PayloadAction<ChangePiecework>) => {
+          const event = state.events.find((item) => item.id === payload.id);
 
           if (event) {
             const piecework = event.pieceworks?.find(
-              (item) => item.id === action.payload.piecework.id
+              (item) => item.id === payload.piecework.id
             );
 
             if (piecework) {
-              piecework.cost = action.payload.piecework.cost;
-              piecework.count = action.payload.piecework.count;
-              piecework.name = action.payload.piecework.name;
+              piecework.cost = payload.piecework.cost;
+              piecework.count = payload.piecework.count;
+              piecework.name = payload.piecework.name;
             }
           }
         }
       )
       .addCase(
         deletePiecework.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          const eventId = action.payload.eventId;
-          const pieceworkId = action.payload.pieceworkId;
+        (
+          state,
+          { payload }: PayloadAction<{ eventId: string; pieceworkId: string }>
+        ) => {
+          const eventId = payload.eventId;
+          const pieceworkId = payload.pieceworkId;
           const event = state.events.find((item) => item.id === eventId);
 
           if (event && event?.pieceworks && event.pieceworks.length > 1) {
@@ -92,8 +92,8 @@ export const eventSlice = createSlice({
       )
       .addCase(
         deleteTimebased.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          const eventId = action.payload.eventId;
+        (state, { payload }: PayloadAction<{ eventId: string }>) => {
+          const eventId = payload.eventId;
 
           state.events = state.events.filter((item) => item.id !== eventId);
         }

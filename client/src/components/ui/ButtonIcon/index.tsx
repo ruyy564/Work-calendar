@@ -1,11 +1,8 @@
 import React, { memo } from 'react';
-import {
-  AiFillDelete,
-  AiFillEdit,
-  AiFillCloseCircle,
-  AiOutlineLogout,
-} from 'react-icons/ai';
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { AiFillDelete, AiFillEdit, AiFillCloseCircle } from 'react-icons/ai';
+import { FiChevronLeft, FiChevronRight, FiLogOut } from 'react-icons/fi';
+
+import getClasses from '../../../helpers/getClasses';
 
 import css from './index.module.css';
 
@@ -55,8 +52,8 @@ export const ButtonArrowRight = memo(({ onClick }: Props) => {
 
 export const ButtonLogout = memo(({ onClick }: Props) => {
   return (
-    <button className={`${css.root} ${css.btnLogout}`} onClick={onClick}>
-      <AiOutlineLogout />
+    <button className={getClasses(css.root, css.btnLogout)} onClick={onClick}>
+      <FiLogOut />
     </button>
   );
 });

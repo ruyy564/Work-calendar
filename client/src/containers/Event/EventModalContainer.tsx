@@ -4,6 +4,11 @@ import { RootState } from '../../store';
 import EventModal from '../../components/Event/EventModal';
 import { selectEvent } from '../../entities/Event/selectors';
 import { selectCalendarSelectDate } from '../../entities/Calendar/selectors';
+import {
+  getEventPieceworks,
+  getEventTimebased,
+} from '../../entities/Event/getters';
+import { TYPE_WORK } from '../../entities/Event/constants';
 
 const mapState = (state: RootState) => {
   const date = selectCalendarSelectDate(state);
@@ -11,16 +16,16 @@ const mapState = (state: RootState) => {
   if (date) {
     const event = selectEvent(state, date);
 
-    if (event?.pieceworks?.length) {
-      return { date, type: 'pieceworks' };
+    if (event && getEventPieceworks(event)?.length) {
+      return { date, type: TYPE_WORK.PIECE_WORKS };
     }
 
-    if (event?.timebased) {
-      return { date, type: 'timebased' };
+    if (event && getEventTimebased(event)) {
+      return { date, type: TYPE_WORK.TIME_BASED };
     }
   }
 
-  return { date, type: 'none' };
+  return { date, type: TYPE_WORK.NONE };
 };
 
 const connector = connect(mapState);

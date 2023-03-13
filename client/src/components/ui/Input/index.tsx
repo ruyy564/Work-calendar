@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 
+import getClasses from '../../../helpers/getClasses';
+
 import css from './index.module.css';
 
 type InputProps = {
@@ -34,7 +36,7 @@ const Input = memo(
   }: InputProps) => {
     return (
       <label
-        className={disabled ? `${css.root} ${css.disable}` : `${css.root}`}
+        className={disabled ? getClasses(css.root, css.disable) : css.root}
       >
         <div className={css.text}>{text}</div>
         <input

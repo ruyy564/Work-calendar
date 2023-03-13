@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { State } from '../../entities/Calendar';
 import {
@@ -49,7 +49,7 @@ export const calendarSlice = createSlice({
 
       state.days = calcDaysOfMonth(Number(month), Number(year));
     },
-    setSelectDate: (state, { payload }: { payload: string }) => {
+    setSelectDate: (state, { payload }: PayloadAction<string>) => {
       state.selectDate = payload;
     },
   },

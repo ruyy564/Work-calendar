@@ -4,7 +4,13 @@ import ButtonGroup from '../../UI/ButtonGroup';
 import { useAddItem } from '../../../hooks/useAddItem';
 import ModalContainer from '../../../containers/ModalContainer';
 import { MODAL_FORMS } from '../../../entities/Modal/constants';
-import { Piecework, CreateEvent } from '../../../entities/Event';
+import {
+  Piecework,
+  CreateEvent,
+  EventWrapper,
+  PieceworkWrapper,
+} from '../../../entities/Event';
+import { getPieceworkEventId } from '../../../entities/Event/getters';
 
 import css from './index.module.css';
 
@@ -12,17 +18,15 @@ type Props = {
   date: string;
   piecework: Piecework | null;
   EventId?: string;
-  hasEvent: boolean;
-  createEvent: any;
-  addEvent: any;
-  changeEvent: any;
+  createEvent: (event: CreateEvent) => void;
+  addEvent: (event: CreateEvent) => void;
+  changeEvent: (event: CreateEvent) => void;
   closeModal: () => void;
 };
 
 const AddItemModal = ({
   date,
   piecework,
-  hasEvent,
   EventId,
   createEvent,
   addEvent,
@@ -30,17 +34,15 @@ const AddItemModal = ({
   changeEvent,
 }: Props) => {
   const { cost, count, name, clear } = useAddItem(piecework);
-  console.log('EventId', EventId);
-  const event = {
-    date,
-    piecework: {
-      id: piecework?.id || '',
-      cost: Number(cost.value),
-      count: Number(count.value),
-      name: String(name.value),
-      EventId: piecework?.EventId || EventId,
-    },
-  };
+  const newPiecework = new PieceworkWrapper(
+    String(name.value),
+    Number(count.value),
+    Number(cost.value),
+    EventId,
+    piecework ? getPieceworkEventId(piecework) : undefined
+  );
+  const event = new EventWrapper(date);
+  event.setPiework(newPiecework);
 
   const clickHandler = () => {
     clear();
@@ -53,17 +55,7 @@ const AddItemModal = ({
   };
 
   const addHandler = () => {
-    const event = {
-      date,
-      piecework: {
-        cost: Number(cost.value),
-        count: Number(count.value),
-        name: String(name.value),
-        EventId: piecework?.EventId || EventId,
-      },
-    };
-
-    if (hasEvent) {
+    if (EventId) {
       addEvent(event);
     } else {
       createEvent(event);

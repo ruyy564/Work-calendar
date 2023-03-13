@@ -4,6 +4,7 @@ import Detail from '../Detail';
 import Button from '../../UI/Button';
 import AddItemModalContainer from '../../../containers/Event/AddItemModalContainer';
 import { Piecework } from '../../../entities/Event';
+import { getPieceworkId } from '../../../entities/Event/getters';
 
 import css from './index.module.css';
 
@@ -29,9 +30,8 @@ const FormPlacework = ({ pieceworks, date, deleteItem, openModal }: Props) => {
         ) : (
           pieceworks.map((item) => (
             <Detail
-              date={date}
               item={item}
-              key={item.id}
+              key={getPieceworkId(item)}
               openModal={openModal}
               deleteItem={deleteItem}
               setSelectData={setSelectData}
@@ -40,11 +40,7 @@ const FormPlacework = ({ pieceworks, date, deleteItem, openModal }: Props) => {
         )}
       </div>
       <Button onClick={clickHandler} text="Добавить изделие" />
-      <AddItemModalContainer
-        date={date}
-        piecework={selectData}
-        hasEvent={Boolean(pieceworks)}
-      />
+      <AddItemModalContainer date={date} piecework={selectData} />
     </div>
   );
 };

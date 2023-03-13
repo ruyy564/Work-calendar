@@ -1,11 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Modal, State } from '../../entities/Modal';
 import { MODAL_FORMS } from '../../entities/Modal/constants';
-
-type ActionType = {
-  payload: Modal;
-};
 
 const initialState: State = {
   [MODAL_FORMS.ADD_EVENT_FORM]: false,
@@ -17,10 +13,10 @@ export const modalSlice = createSlice({
   name: 'modalsWindowVisible',
   initialState,
   reducers: {
-    openModal: (state, { payload }: ActionType) => {
+    openModal: (state, { payload }: PayloadAction<Modal>) => {
       state[payload] = true;
     },
-    closeModal: (state, { payload }: ActionType) => {
+    closeModal: (state, { payload }: PayloadAction<Modal>) => {
       state[payload] = false;
     },
   },

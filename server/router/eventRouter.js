@@ -4,12 +4,12 @@ const authMiddleware = require('../middleware/AuthMiddleware');
 
 const router = new Router();
 
-router.post('/getevents', EventController.getEvents);
-router.post('/event', EventController.createEvent);
-router.post('/piecework', EventController.addPiecework);
-router.put('/piecework', EventController.updatePiecework);
-router.put('/timebased', EventController.updateTimebased);
-router.delete('/piecework', EventController.deletePiecework);
-router.delete('/timebased', EventController.deleteTimebased);
+router.post('/getevents', authMiddleware, EventController.getEvents);
+router.post('/event', authMiddleware, EventController.createEvent);
+router.post('/piecework', authMiddleware, EventController.addPiecework);
+router.put('/piecework', authMiddleware, EventController.updatePiecework);
+router.put('/timebased', authMiddleware, EventController.updateTimebased);
+router.delete('/piecework', authMiddleware, EventController.deletePiecework);
+router.delete('/timebased', authMiddleware, EventController.deleteTimebased);
 
 module.exports = router;

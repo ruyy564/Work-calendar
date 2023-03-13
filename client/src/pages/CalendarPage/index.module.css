@@ -1,1 +1,5 @@
 .root {}
+
+.header {
+    display: grid;
+}

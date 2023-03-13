@@ -5,6 +5,8 @@ import { Timebased, CreateEvent } from '../../../entities/Event';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
 import ButtonGroup from '../../UI/ButtonGroup';
+import { EventWrapper, TimeBasedWrapper } from '../../../entities/Event';
+import { getTimebasedEventId } from '../../../entities/Event/getters';
 
 import css from './index.module.css';
 
@@ -12,7 +14,7 @@ type Props = {
   date: string;
   timebased?: Timebased;
   createEvent: (event: CreateEvent) => void;
-  deleteEvent: any;
+  deleteEvent: (eventId: string) => void;
   changeEvent: (event: CreateEvent) => void;
   closeModal: () => void;
 };
@@ -32,17 +34,16 @@ const FormTimeBased = ({
     otherHoursRatio,
     overTime,
   } = useTimeBasedForm(timebased);
-  const event = {
-    date,
-    timebased: {
-      EventId: timebased?.EventId || '',
-      costInHour: Number(costInHour.value),
-      firstTwoHourRatio: Number(firstTwoHourRatio.value),
-      mainWorkTime: Number(mainWorkTime.value),
-      otherHoursRatio: Number(otherHoursRatio.value),
-      overTime: Number(overTime.value),
-    },
-  };
+  const newTimebased = new TimeBasedWrapper(
+    Number(costInHour.value),
+    Number(mainWorkTime.value),
+    Number(overTime.value),
+    Number(firstTwoHourRatio.value),
+    Number(otherHoursRatio.value),
+    timebased ? getTimebasedEventId(timebased) : undefined
+  );
+  const event = new EventWrapper(date);
+  event.setTimebased(newTimebased);
 
   const createHandler = () => {
     createEvent(event);
@@ -55,9 +56,11 @@ const FormTimeBased = ({
   };
 
   const deleteHandler = useCallback(() => {
-    deleteEvent(timebased?.EventId);
-    closeModal();
-  }, [closeModal, deleteEvent, timebased?.EventId]);
+    if (timebased && getTimebasedEventId(timebased)) {
+      deleteEvent(getTimebasedEventId(timebased));
+      closeModal();
+    }
+  }, [closeModal, deleteEvent, timebased]);
 
   return (
     <div className={css.root}>

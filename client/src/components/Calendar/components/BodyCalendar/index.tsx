@@ -21,7 +21,7 @@ const Body = memo(({ days, events, fetchEvents }: Props) => {
 
   useEffect(() => {
     fetchEvents();
-  }, []);
+  }, [fetchEvents]);
 
   return (
     <div className={css.root}>

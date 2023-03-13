@@ -5,9 +5,14 @@ export type User = {
   email: string;
 };
 
-export type UserData = {
+export type UserDataResponse = {
   user: User;
   accessToken: string;
+};
+
+export type UserDataRequest = {
+  email: string;
+  password: string;
 };
 
 export type State = {

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { Event, AddPieceWorkToEvent, CreateEvent } from '../entities/Event';
+import { Event, ChangePiecework, CreateEvent } from '../entities/Event';
 import $api from '../http';
 import getUserId from '../helpers/getUserId';
 import { AxiosError } from 'axios';
@@ -26,7 +26,7 @@ export const fetchEvents = createAsyncThunk<
 });
 
 export const addPieceWorkToEvent = createAsyncThunk<
-  AddPieceWorkToEvent,
+  ChangePiecework,
   { event: CreateEvent },
   {
     rejectValue: any;
@@ -34,8 +34,7 @@ export const addPieceWorkToEvent = createAsyncThunk<
 >('eventsOfCalendar/addPieceWorkToEvent', async ({ event }, thunkAPI) => {
   try {
     const { piecework } = event;
-    console.log(piecework);
-    const { data } = await $api.post<AddPieceWorkToEvent>('/event/piecework', {
+    const { data } = await $api.post<ChangePiecework>('/event/piecework', {
       userId: getUserId(),
       eventId: piecework?.EventId,
       piecework,
@@ -97,7 +96,7 @@ export const updateTamebasedEvent = createAsyncThunk<
 });
 
 export const updatePieceworkEvent = createAsyncThunk<
-  Event,
+  ChangePiecework,
   { event: CreateEvent },
   {
     rejectValue: any;
@@ -105,7 +104,7 @@ export const updatePieceworkEvent = createAsyncThunk<
 >('eventsOfCalendar/updatePieceworkEvent', async ({ event }, thunkAPI) => {
   try {
     const { date, piecework } = event;
-    const { data } = await $api.put<AddPieceWorkToEvent>('/event/piecework', {
+    const { data } = await $api.put<ChangePiecework>('/event/piecework', {
       userId: getUserId(),
       date,
       piecework,

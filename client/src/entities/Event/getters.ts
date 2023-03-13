@@ -1,4 +1,4 @@
-import { Event, Timebased } from '.';
+import { Event, Piecework, Timebased } from '.';
 
 export const getEventTimebased = (event: Event) => {
   return event.timebased;
@@ -14,6 +14,10 @@ export const getEventDate = (event: Event) => {
 
 export const getEventId = (event: Event) => {
   return event.id;
+};
+
+export const getTimebasedEventId = (timebased: Timebased) => {
+  return timebased.EventId;
 };
 
 export const getTimebasedCostInHour = (timebased: Timebased) => {
@@ -34,4 +38,24 @@ export const getTimebasedOtherHoursRatio = (timebased: Timebased) => {
 
 export const getTimebasedOverTime = (timebased: Timebased) => {
   return timebased.overTime;
+};
+
+export const getPieceworkId = (piecework: Piecework) => {
+  return piecework.id;
+};
+
+export const getPieceworkCost = (piecework: Piecework) => {
+  return piecework.cost;
+};
+
+export const getPieceworkEventId = (piecework: Piecework) => {
+  return piecework.EventId;
+};
+
+export const getPieceworkCount = (piecework: Piecework) => {
+  return piecework.count;
+};
+
+export const getPieceworkName = (piecework: Piecework) => {
+  return piecework.name;
 };

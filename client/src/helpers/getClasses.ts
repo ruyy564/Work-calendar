@@ -1,4 +1,3 @@
-const getClasses = (...args: string[]): string =>
-  args.reduce((acc, className) => `${acc} ${className}`);
+const getClasses = (...args: string[]): string => args.join(' ');
 
 export default getClasses;

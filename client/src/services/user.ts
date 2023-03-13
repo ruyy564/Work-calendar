@@ -1,24 +1,28 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
-import { User, UserData } from '../entities/User';
+import { User, UserDataRequest, UserDataResponse } from '../entities/User';
+import {
+  LOCAL_STORAGE_USER,
+  LOCAL_STORAGE_TOKEN,
+} from '../entities/User/constants';
 import $api from '../http';
 
 export const login = createAsyncThunk<
   User,
-  { email: string; password: string },
+  UserDataRequest,
   {
     rejectValue: any;
   }
 >('user/login', async ({ email, password }, thunkAPI) => {
   try {
-    const { data } = await $api.post<UserData>('/auth/login', {
+    const { data } = await $api.post<UserDataResponse>('/auth/login', {
       email,
       password,
     });
 
-    localStorage.setItem('token', data.accessToken);
-    localStorage.setItem('user', JSON.stringify(data.user));
+    localStorage.setItem(LOCAL_STORAGE_TOKEN, data.accessToken);
+    localStorage.setItem(LOCAL_STORAGE_USER, JSON.stringify(data.user));
 
     return data.user;
   } catch (e) {
@@ -30,13 +34,13 @@ export const login = createAsyncThunk<
 
 export const registration = createAsyncThunk<
   void,
-  { email: string; password: string },
+  UserDataRequest,
   {
     rejectValue: any;
   }
 >('user/registration', async ({ email, password }, thunkAPI) => {
   try {
-    await $api.post<UserData>('/auth/registration', {
+    await $api.post<UserDataResponse>('/auth/registration', {
       email,
       password,
     });
@@ -48,6 +52,6 @@ export const registration = createAsyncThunk<
 });
 
 export const logout = createAsyncThunk('user/logout', async () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('user');
+  localStorage.removeItem(LOCAL_STORAGE_TOKEN);
+  localStorage.removeItem(LOCAL_STORAGE_USER);
 });

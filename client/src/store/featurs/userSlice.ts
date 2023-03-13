@@ -3,8 +3,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { login, logout, registration } from '../../services/user';
 import { User, State } from '../../entities/User';
 import { STATUS } from '../../entities/User/constants';
+import { LOCAL_STORAGE_USER } from '../../entities/User/constants';
 
-const user = localStorage.getItem('user');
+const user = localStorage.getItem(LOCAL_STORAGE_USER);
 
 const initialState: State = {
   user: user ? JSON.parse(user) : null,
@@ -19,15 +20,15 @@ export const modalSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
+      .addCase(login.fulfilled, (state, { payload }: PayloadAction<User>) => {
         state.status = null;
         state.errorMessage = null;
-        state.user = action.payload;
+        state.user = payload;
         state.auth = true;
       })
-      .addCase(login.rejected, (state, action: PayloadAction<string>) => {
+      .addCase(login.rejected, (state, { payload }: PayloadAction<string>) => {
         state.status = STATUS.error;
-        state.errorMessage = action.payload;
+        state.errorMessage = payload;
       })
       .addCase(registration.fulfilled, (state) => {
         state.status = STATUS.success;
@@ -35,9 +36,9 @@ export const modalSlice = createSlice({
       })
       .addCase(
         registration.rejected,
-        (state, action: PayloadAction<string>) => {
+        (state, { payload }: PayloadAction<string>) => {
           state.status = STATUS.error;
-          state.errorMessage = action.payload;
+          state.errorMessage = payload;
         }
       )
       .addCase(logout.fulfilled, (state) => {

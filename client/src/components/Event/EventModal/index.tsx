@@ -18,7 +18,7 @@ type Props = {
 };
 
 const EventModal = memo(({ date, type }: Props) => {
-  const initState = type !== 'none' ? type : 'timebased';
+  const initState = type !== TYPE_WORK.NONE ? type : TYPE_WORK.TIME_BASED;
   const [workType, setWorkType] = useState<string>(initState);
 
   useEffect(() => {
@@ -38,21 +38,21 @@ const EventModal = memo(({ date, type }: Props) => {
           onChange={changeHandler}
           type="radio"
           text="Повременная"
-          checked={workType === 'timebased'}
-          value={'timebased'}
-          disabled={type === 'pieceworks'}
+          checked={workType === TYPE_WORK.TIME_BASED}
+          value={TYPE_WORK.TIME_BASED}
+          disabled={type === TYPE_WORK.PIECE_WORKS}
         />
         <Input
           name={RADIO_GROUP_TYPE_WORK}
           onChange={changeHandler}
           type="radio"
-          checked={workType === 'pieceworks'}
+          checked={workType === TYPE_WORK.PIECE_WORKS}
           text="Сдельная"
-          value={'pieceworks'}
-          disabled={type === 'timebased'}
+          value={TYPE_WORK.PIECE_WORKS}
+          disabled={type === TYPE_WORK.TIME_BASED}
         />
       </div>
-      {workType === 'timebased' ? (
+      {workType === TYPE_WORK.TIME_BASED ? (
         <FormTimeBasedContainer date={date} />
       ) : (
         <FormPlaceworkContainer date={date} />

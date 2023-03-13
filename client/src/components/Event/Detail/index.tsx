@@ -2,34 +2,42 @@ import { memo, useCallback } from 'react';
 
 import { ButtonDelete, ButtonEdit } from '../../UI/ButtonIcon';
 import { Piecework } from '../../../entities/Event';
+import {
+  getPieceworkCost,
+  getPieceworkCount,
+  getPieceworkEventId,
+  getPieceworkName,
+  getPieceworkId,
+} from '../../../entities/Event/getters';
 
 import css from './index.module.css';
 
 type Props = {
-  date: string;
   item: Piecework;
   openModal: () => void;
   deleteItem: (date: string, key: string) => void;
   setSelectData: (item: Piecework) => void;
 };
 
-const Detail = memo(
-  ({ date, item, openModal, deleteItem, setSelectData }: Props) => {
-    const clickHandler = useCallback(() => {
-      setSelectData(item);
-      openModal();
-    }, [item, openModal, setSelectData]);
+const Detail = memo(({ item, openModal, deleteItem, setSelectData }: Props) => {
+  const clickHandler = useCallback(() => {
+    setSelectData(item);
+    openModal();
+  }, [item, openModal, setSelectData]);
 
-    return (
-      <div className={css.listItems}>
-        <div>{item.name || 'Нет названия'}</div>
-        <div>x {item.count}</div>
-        <div>{item.cost}р.</div>
-        <ButtonEdit onClick={clickHandler} />
-        <ButtonDelete onClick={() => deleteItem(item.EventId, item.id)} />
-      </div>
-    );
-  }
-);
+  return (
+    <div className={css.listItems}>
+      <div>{getPieceworkName(item) || 'Нет названия'}</div>
+      <div>x {getPieceworkCount(item)}</div>
+      <div>{getPieceworkCost(item)}р.</div>
+      <ButtonEdit onClick={clickHandler} />
+      <ButtonDelete
+        onClick={() =>
+          deleteItem(getPieceworkEventId(item), getPieceworkId(item))
+        }
+      />
+    </div>
+  );
+});
 
 export default Detail;

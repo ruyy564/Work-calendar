@@ -1,5 +1,11 @@
 import { Timebased, Piecework, Event } from '.';
-import { getEventPieceworks, getEventTimebased, getEventDate } from './getters';
+import {
+  getEventPieceworks,
+  getEventTimebased,
+  getEventDate,
+  getPieceworkCost,
+  getPieceworkCount,
+} from './getters';
 import spliteDate from '../../helpers/spliteDate';
 
 const getCostTimeBasedWork = (timebased: Timebased): number => {
@@ -22,7 +28,7 @@ const getCostTimeBasedWork = (timebased: Timebased): number => {
 
 const getCostPlacework = (pieceworks: Piecework[]): number =>
   pieceworks.reduce((acc, piecework) => {
-    return acc + piecework.cost * piecework.count;
+    return acc + getPieceworkCost(piecework) * getPieceworkCount(piecework);
   }, 0);
 
 const calcCostEventByPeriod = (events: Event[], start: string, end: string) =>
