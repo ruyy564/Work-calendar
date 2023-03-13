@@ -1,27 +1,37 @@
 import { NavLink } from 'react-router-dom';
 
-import { ROUTE_TO_REGISTRATION } from '../../routes/constants';
+import { ROUTE_TO_LOGIN } from '../../routes/constants';
 import { useLogin } from '../../hooks/useLogin';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import ButtonGroup from '../UI/ButtonGroup';
+import { STATUS } from '../../entities/User/constants';
 
 import css from './index.module.css';
 
 type Props = {
   errorMessage: string | null;
-  login: (email: string, password: string) => void;
+  status:
+    | typeof STATUS.loading
+    | typeof STATUS.error
+    | typeof STATUS.success
+    | null;
+  registration: (email: string, password: string) => void;
 };
 
-const Login = ({ errorMessage, login }: Props) => {
+const Registration = ({ errorMessage, status, registration }: Props) => {
   const { email, pass } = useLogin();
 
-  const loginHandler = () => login(String(email.value), String(pass.value));
+  const registrationHandler = () =>
+    registration(String(email.value), String(pass.value));
 
   return (
     <div className={css.root}>
-      <div>Авторизация</div>
+      <div>Регистрация</div>
       {errorMessage && <div>{errorMessage}</div>}
+      {status === STATUS.success ? (
+        <div>Пользователь зарегистрирован</div>
+      ) : null}
       <div className={css.body}>
         <Input
           type="email"
@@ -30,21 +40,20 @@ const Login = ({ errorMessage, login }: Props) => {
           text="Email"
         />
         <Input
-          type={'password'}
+          type={'text'}
           onChange={pass.changeHandler}
           value={pass.value}
           text="Пароль"
         />
       </div>
       <ButtonGroup>
-        <Button onClick={loginHandler} text="Войти" />
+        <Button onClick={registrationHandler} text="Регистрация" />
         <div>
-          Нет аккаунта?{' '}
-          <NavLink to={ROUTE_TO_REGISTRATION}>Регистрация</NavLink>
+          Есть аккаунт? <NavLink to={ROUTE_TO_LOGIN}>Войти</NavLink>
         </div>
       </ButtonGroup>
     </div>
   );
 };
 
-export default Login;
+export default Registration;

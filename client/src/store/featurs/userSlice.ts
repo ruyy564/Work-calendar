@@ -29,14 +29,17 @@ export const modalSlice = createSlice({
       .addCase(login.rejected, (state, { payload }: PayloadAction<string>) => {
         state.status = STATUS.error;
         state.errorMessage = payload;
+        console.log('fsfaf');
       })
       .addCase(registration.fulfilled, (state) => {
         state.status = STATUS.success;
         state.errorMessage = null;
+        console.log('fsfaf');
       })
       .addCase(
         registration.rejected,
         (state, { payload }: PayloadAction<string>) => {
+          console.log('fsfaf');
           state.status = STATUS.error;
           state.errorMessage = payload;
         }
