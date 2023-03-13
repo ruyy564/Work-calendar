@@ -44,12 +44,8 @@ export const registration = createAsyncThunk<
       email,
       password,
     });
-
-    console.log(email, password);
-  } catch (e) {
-    const error = e as AxiosError<{ message: string }>;
-
-    return thunkAPI.rejectWithValue(error.response?.data.message);
+  } catch (e: any) {
+    return thunkAPI.rejectWithValue(e.response?.data.message);
   }
 });
 

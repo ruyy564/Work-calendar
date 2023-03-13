@@ -28,6 +28,8 @@ export const interceptor = ({ dispatch }: typeof store) => {
       if (error.response.status === UNAUTH_ERROR) {
         dispatch(logout());
       }
+
+      return Promise.reject(error);
     }
   );
 };
