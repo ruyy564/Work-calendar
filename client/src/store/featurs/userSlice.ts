@@ -21,7 +21,7 @@ export const modalSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, { payload }: PayloadAction<User>) => {
-        state.status = STATUS.success;
+        state.status = null;
         state.errorMessage = null;
         state.user = payload;
         state.auth = true;

@@ -1,4 +1,3 @@
-import Loader from '../../ui/Loader';
 import Input from '../../ui/Input';
 import Button from '../../ui/Button';
 import ButtonGroup from '../../ui/ButtonGroup';
