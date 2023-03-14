@@ -10,10 +10,7 @@ import {
   EventWrapper,
   PieceworkWrapper,
 } from '../../../entities/Event';
-import {
-  getPieceworkEventId,
-  getPieceworkId,
-} from '../../../entities/Event/getters';
+import { getPieceworkId } from '../../../entities/Event/getters';
 
 import css from './index.module.css';
 
