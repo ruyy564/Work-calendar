@@ -36,7 +36,7 @@ class EventService {
     const newEvent = await Event.create({ date, UserId: userId });
     const event = new EventDto(newEvent);
     let newTimebased = null;
-    let newPiecework = null;
+    let newPiecework = [];
 
     if (timebased) {
       newTimebased = await TimebasedService.create(event.id, timebased);

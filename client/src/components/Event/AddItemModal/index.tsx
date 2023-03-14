@@ -10,7 +10,10 @@ import {
   EventWrapper,
   PieceworkWrapper,
 } from '../../../entities/Event';
-import { getPieceworkEventId } from '../../../entities/Event/getters';
+import {
+  getPieceworkEventId,
+  getPieceworkId,
+} from '../../../entities/Event/getters';
 
 import css from './index.module.css';
 
@@ -39,7 +42,7 @@ const AddItemModal = ({
     Number(count.value),
     Number(cost.value),
     EventId,
-    piecework ? getPieceworkEventId(piecework) : undefined
+    piecework ? getPieceworkId(piecework) : undefined
   );
   const event = new EventWrapper(date);
   event.setPiework(newPiecework);

@@ -1,4 +1,6 @@
-.root {}
+.root {
+    position: relative;
+}
 
 .header {
     display: grid;

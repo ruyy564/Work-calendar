@@ -49,7 +49,7 @@ const calcCostEventByPeriod = (events: Event[], start: string, end: string) =>
       const pieceWork = getEventPieceworks(event);
       const timebased = getEventTimebased(event);
 
-      if (pieceWork) {
+      if (pieceWork?.length) {
         return acc + getCostPlacework(pieceWork);
       }
 

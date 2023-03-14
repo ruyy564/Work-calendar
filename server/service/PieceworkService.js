@@ -22,7 +22,7 @@ class PieceworkService {
 
   async update(data) {
     const piecework = await Piecework.upsert({ ...data });
-
+    
     return new PieceworkDto(piecework[0]);
   }
 

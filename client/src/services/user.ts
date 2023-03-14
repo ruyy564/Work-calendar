@@ -27,7 +27,7 @@ export const login = createAsyncThunk<
     return data.user;
   } catch (e) {
     const error = e as AxiosError<{ message: string }>;
-    console.log(error);
+
     return thunkAPI.rejectWithValue(error.response?.data.message);
   }
 });
@@ -44,8 +44,10 @@ export const registration = createAsyncThunk<
       email,
       password,
     });
-  } catch (e: any) {
-    return thunkAPI.rejectWithValue(e.response?.data.message);
+  } catch (e) {
+    const error = e as AxiosError<{ message: string }>;
+
+    return thunkAPI.rejectWithValue(error.response?.data.message);
   }
 });
 
