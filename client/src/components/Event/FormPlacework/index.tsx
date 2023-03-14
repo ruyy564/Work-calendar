@@ -5,17 +5,30 @@ import Button from '../../ui/Button';
 import AddItemModalContainer from '../../../containers/Event/AddItemModalContainer';
 import { Piecework } from '../../../entities/Event';
 import { getPieceworkId } from '../../../entities/Event/getters';
+import { STATUS } from '../../../constants';
+import Loader from '../../ui/Loader';
 
 import css from './index.module.css';
 
 type Props = {
   date: string;
   pieceworks?: Piecework[];
+  status:
+    | typeof STATUS.loading
+    | typeof STATUS.error
+    | typeof STATUS.success
+    | null;
   openModal: () => void;
   deleteItem: (date: string, key: string) => void;
 };
 
-const FormPlacework = ({ pieceworks, date, deleteItem, openModal }: Props) => {
+const FormPlacework = ({
+  status,
+  pieceworks,
+  date,
+  deleteItem,
+  openModal,
+}: Props) => {
   const [selectData, setSelectData] = useState<Piecework | null>(null);
   const clickHandler = useCallback(() => {
     setSelectData(null);
@@ -25,6 +38,7 @@ const FormPlacework = ({ pieceworks, date, deleteItem, openModal }: Props) => {
   return (
     <div className={css.root}>
       <div className={css.list}>
+        {status === STATUS.loading && <Loader isPrimary={true} />}
         {!pieceworks ? (
           <div style={{ textAlign: 'center' }}>Здесь ничего нет</div>
         ) : (

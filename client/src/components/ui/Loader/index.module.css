@@ -1,0 +1,38 @@
+.root {
+    display: inline-block;
+    position: absolute;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+    width: 80px;
+    height: 80px;
+}
+
+.root:after {
+    content: " ";
+    display: block;
+    width: 34px;
+    height: 34px;
+    margin: 8px;
+    border-radius: 50%;
+    animation: loader 1.2s linear infinite;
+}
+
+.root.white:after {
+    border: 6px solid var(--secondary);
+    border-color: var(--secondary) transparent var(--secondary) transparent;
+}
+
+.root.dark:after {
+    border: 6px solid var(--primary);
+    border-color: var(--primary) transparent var(--primary) transparent;
+}
+
+@keyframes loader {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

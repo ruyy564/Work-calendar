@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import BodyCalendar from '../../components/Calendar/components/BodyCalendar';
 import { RootState } from '../../store';
 import { selectCalendarDays } from '../../entities/Calendar/selectors';
-import { selectEvents } from '../../entities/Event/selectors';
+import { selectEvents, selectStatus } from '../../entities/Event/selectors';
 import { fetchEvents } from '../../services/event';
 
 const mapState = (state: RootState) => ({
+  status: selectStatus(state),
   days: selectCalendarDays(state),
   events: selectEvents(state),
 });

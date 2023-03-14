@@ -56,6 +56,7 @@ export const createEvent = createAsyncThunk<
   }
 >('eventsOfCalendar/createEvent', async ({ event }, thunkAPI) => {
   try {
+    setTimeout(() => {}, 5000);
     const { date, piecework, timebased } = event;
     const { data } = await $api.post<Event>('/event/event', {
       userId: getUserId(),

@@ -6,3 +6,8 @@
     align-items: center;
     font-size: 30px;
 }
+
+.count {
+    position: relative;
+
+}

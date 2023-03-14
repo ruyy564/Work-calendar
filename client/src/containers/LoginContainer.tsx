@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import { RootState } from '../store';
 import Login from '../components/Login';
 import { login } from '../services/user';
-import { selectUserErrorMessage } from '../entities/User/selectors';
+import {
+  selectUserErrorMessage,
+  selectUserStatus,
+} from '../entities/User/selectors';
 
 const mapState = (state: RootState) => ({
   errorMessage: selectUserErrorMessage(state),
+  status: selectUserStatus(state),
 });
 
 const mapDispatch = {

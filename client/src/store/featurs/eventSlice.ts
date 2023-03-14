@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { STATUS } from '../../constants';
 import { State, Event, ChangePiecework } from '../../entities/Event';
 import {
   fetchEvents,
@@ -13,6 +14,7 @@ import {
 
 const initialState: State = {
   events: [],
+  status: null,
 };
 
 export const eventSlice = createSlice({
@@ -25,14 +27,22 @@ export const eventSlice = createSlice({
         fetchEvents.fulfilled,
         (state, { payload }: PayloadAction<Event[]>) => {
           state.events = payload;
+          state.status = STATUS.success;
         }
       )
+      .addCase(fetchEvents.pending, (state) => {
+        state.status = STATUS.loading;
+      })
       .addCase(
         createEvent.fulfilled,
         (state, { payload }: PayloadAction<Event>) => {
           state.events.push(payload);
+          state.status = STATUS.success;
         }
       )
+      .addCase(createEvent.pending, (state) => {
+        state.status = STATUS.loading;
+      })
       .addCase(
         addPieceWorkToEvent.fulfilled,
         (state, { payload }: PayloadAction<ChangePiecework>) => {
@@ -41,8 +51,12 @@ export const eventSlice = createSlice({
           if (event) {
             event.pieceworks?.push(payload.piecework);
           }
+          state.status = STATUS.success;
         }
       )
+      .addCase(addPieceWorkToEvent.pending, (state) => {
+        state.status = STATUS.loading;
+      })
       .addCase(
         updateTamebasedEvent.fulfilled,
         (state, { payload }: PayloadAction<Event>) => {
@@ -51,8 +65,12 @@ export const eventSlice = createSlice({
           if (event) {
             event.timebased = payload.timebased;
           }
+          state.status = STATUS.success;
         }
       )
+      .addCase(updateTamebasedEvent.pending, (state) => {
+        state.status = STATUS.loading;
+      })
       .addCase(
         updatePieceworkEvent.fulfilled,
         (state, { payload }: PayloadAction<ChangePiecework>) => {
@@ -69,8 +87,12 @@ export const eventSlice = createSlice({
               piecework.name = payload.piecework.name;
             }
           }
+          state.status = STATUS.success;
         }
       )
+      .addCase(updatePieceworkEvent.pending, (state) => {
+        state.status = STATUS.loading;
+      })
       .addCase(
         deletePiecework.fulfilled,
         (
@@ -88,16 +110,24 @@ export const eventSlice = createSlice({
           } else {
             state.events = state.events.filter((item) => item.id !== eventId);
           }
+          state.status = STATUS.success;
         }
       )
+      .addCase(deletePiecework.pending, (state) => {
+        state.status = STATUS.loading;
+      })
       .addCase(
         deleteTimebased.fulfilled,
         (state, { payload }: PayloadAction<{ eventId: string }>) => {
           const eventId = payload.eventId;
 
           state.events = state.events.filter((item) => item.id !== eventId);
+          state.status = STATUS.success;
         }
-      );
+      )
+      .addCase(deleteTimebased.pending, (state) => {
+        state.status = STATUS.loading;
+      });
   },
 });
 

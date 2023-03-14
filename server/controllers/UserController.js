@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const UserService = require('../service/UserService');
 const ApiError = require('../error/ApiError');
+const getErrorMessage = require('../helpers/getErrorsMessage');
 
 class UserController {
   async registration(req, res, next) {
@@ -8,7 +9,7 @@ class UserController {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        return next(ApiError.badRequest('Некорректные данные'));
+        return next(ApiError.badRequest(getErrorMessage(errors)));
       }
       const { email, password } = req.body;
       const userData = await UserService.registrarion(email, password);
@@ -24,7 +25,7 @@ class UserController {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        return next(ApiError.badRequest('Некорректные данные'));
+        return next(ApiError.badRequest(getErrorMessage(errors)));
       }
       const { email, password } = req.body;
       const userData = await UserService.login(email, password);

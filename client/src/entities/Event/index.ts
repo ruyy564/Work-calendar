@@ -1,3 +1,5 @@
+import { STATUS } from '../../constants';
+
 export type Piecework = {
   id: string;
   name: string;
@@ -36,6 +38,11 @@ export type ChangePiecework = {
 
 export type State = {
   events: Event[];
+  status:
+    | typeof STATUS.loading
+    | typeof STATUS.error
+    | typeof STATUS.success
+    | null;
 };
 
 export type NewTimebased = {

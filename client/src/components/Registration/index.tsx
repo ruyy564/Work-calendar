@@ -5,7 +5,8 @@ import { useLogin } from '../../hooks/useLogin';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
 import ButtonGroup from '../ui/ButtonGroup';
-import { STATUS } from '../../entities/User/constants';
+import { STATUS } from '../../constants';
+import Loader from '../ui/Loader';
 
 import css from './index.module.css';
 
@@ -28,10 +29,9 @@ const Registration = ({ errorMessage, status, registration }: Props) => {
   return (
     <div className={css.root}>
       <div>Регистрация</div>
-      {errorMessage && <div>{errorMessage}</div>}
-      {status === STATUS.success ? (
-        <div>Пользователь зарегистрирован</div>
-      ) : null}
+      {errorMessage && <div className={css.error}>{errorMessage}</div>}
+      {status === STATUS.success && <div>Пользователь зарегистрирован</div>}
+      {status === STATUS.loading && <Loader isPrimary />}
       <div className={css.body}>
         <Input
           type="email"

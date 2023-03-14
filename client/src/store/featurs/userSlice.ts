@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { login, logout, registration } from '../../services/user';
 import { User, State } from '../../entities/User';
-import { STATUS } from '../../entities/User/constants';
+import { STATUS } from '../../constants';
 import { LOCAL_STORAGE_USER } from '../../entities/User/constants';
 
 const user = localStorage.getItem(LOCAL_STORAGE_USER);
@@ -21,10 +21,14 @@ export const modalSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, { payload }: PayloadAction<User>) => {
-        state.status = null;
+        state.status = STATUS.success;
         state.errorMessage = null;
         state.user = payload;
         state.auth = true;
+      })
+      .addCase(login.pending, (state) => {
+        state.status = STATUS.loading;
+        state.errorMessage = null;
       })
       .addCase(login.rejected, (state, { payload }: PayloadAction<string>) => {
         state.status = STATUS.error;
@@ -32,6 +36,10 @@ export const modalSlice = createSlice({
       })
       .addCase(registration.fulfilled, (state) => {
         state.status = STATUS.success;
+        state.errorMessage = null;
+      })
+      .addCase(registration.pending, (state) => {
+        state.status = STATUS.loading;
         state.errorMessage = null;
       })
       .addCase(
