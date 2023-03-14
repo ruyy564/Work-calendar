@@ -2,9 +2,9 @@ import { useCallback } from 'react';
 
 import { useTimeBasedForm } from '../../../hooks/useTimeBasedForm';
 import { Timebased, CreateEvent } from '../../../entities/Event';
-import Input from '../../UI/Input';
-import Button from '../../UI/Button';
-import ButtonGroup from '../../UI/ButtonGroup';
+import Input from '../../ui/Input';
+import Button from '../../ui/Button';
+import ButtonGroup from '../../ui/ButtonGroup';
 import { EventWrapper, TimeBasedWrapper } from '../../../entities/Event';
 import { getTimebasedEventId } from '../../../entities/Event/getters';
 

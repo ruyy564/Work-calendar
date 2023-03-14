@@ -1,6 +1,6 @@
 import { memo, useCallback } from 'react';
 
-import { ButtonDelete, ButtonEdit } from '../../UI/ButtonIcon';
+import { ButtonDelete, ButtonEdit } from '../../ui/ButtonIcon';
 import { Piecework } from '../../../entities/Event';
 import {
   getPieceworkCost,

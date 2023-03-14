@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import Modal from '../components/UI/Modal';
+import Modal from '../components/ui/Modal';
 import { selectModalVisible } from '../entities/Modal/selectors';
 import { Modal as ModalType } from '../entities/Modal';
 import { RootState } from '../store';

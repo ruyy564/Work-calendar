@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 
 import Detail from '../Detail';
-import Button from '../../UI/Button';
+import Button from '../../ui/Button';
 import AddItemModalContainer from '../../../containers/Event/AddItemModalContainer';
 import { Piecework } from '../../../entities/Event';
 import { getPieceworkId } from '../../../entities/Event/getters';

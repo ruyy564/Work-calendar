@@ -2,9 +2,9 @@ import { NavLink } from 'react-router-dom';
 
 import { ROUTE_TO_REGISTRATION } from '../../routes/constants';
 import { useLogin } from '../../hooks/useLogin';
-import Input from '../UI/Input';
-import Button from '../UI/Button';
-import ButtonGroup from '../UI/ButtonGroup';
+import Input from '../ui/Input';
+import Button from '../ui/Button';
+import ButtonGroup from '../ui/ButtonGroup';
 
 import css from './index.module.css';
 
