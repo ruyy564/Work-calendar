@@ -29,8 +29,8 @@ const Login = ({ status, errorMessage, login }: Props) => {
     <div className={css.root}>
       <div>Авторизация</div>
       {errorMessage && <div className={css.error}>{errorMessage}</div>}
-      {status === STATUS.loading && <Loader isPrimary />}
       <div className={css.body}>
+        <Loader isPrimary status={status} />
         <Input
           type="email"
           onChange={email.changeHandler}

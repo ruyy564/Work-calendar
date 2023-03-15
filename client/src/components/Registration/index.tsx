@@ -31,8 +31,8 @@ const Registration = ({ errorMessage, status, registration }: Props) => {
       <div>Регистрация</div>
       {errorMessage && <div className={css.error}>{errorMessage}</div>}
       {status === STATUS.success && <div>Пользователь зарегистрирован</div>}
-      {status === STATUS.loading && <Loader isPrimary />}
       <div className={css.body}>
+        <Loader isPrimary status={status} />
         <Input
           type="email"
           onChange={email.changeHandler}

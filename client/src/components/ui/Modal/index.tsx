@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 
 import { Modal as ModalType } from '../../../entities/Modal';
 import { ButtonClose } from '../ButtonIcon';
+import getClasses from '../../../helpers/getClasses';
 
 import css from './index.module.css';
 
@@ -23,16 +24,17 @@ const Modal = ({ children, isOpen, closeModal, modal }: Props) => {
 
   return (
     <React.Fragment>
-      {isOpen && (
-        <div className={css.root} onClick={closeModalHandler}>
-          <div className={css.form} onClick={stopPropagation}>
-            <div className={css.buttonClose}>
-              <ButtonClose onClick={closeModalHandler} />
-            </div>
-            {children}
+      <div
+        className={isOpen ? getClasses(css.root, css.active) : css.root}
+        onClick={closeModalHandler}
+      >
+        <div className={css.form} onClick={stopPropagation}>
+          <div className={css.buttonClose}>
+            <ButtonClose onClick={closeModalHandler} />
           </div>
+          {children}
         </div>
-      )}
+      </div>
     </React.Fragment>
   );
 };

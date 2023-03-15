@@ -38,7 +38,7 @@ const FormPlacework = ({
   return (
     <div className={css.root}>
       <div className={css.list}>
-        {status === STATUS.loading && <Loader isPrimary={true} />}
+        <Loader isPrimary={true} status={status} />
         {!pieceworks ? (
           <div style={{ textAlign: 'center' }}>Здесь ничего нет</div>
         ) : (

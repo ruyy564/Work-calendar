@@ -8,6 +8,15 @@
     bottom: 0;
     left: 0;
     backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: 0.4s;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.root.active {
+    opacity: 1;
+    pointer-events: all;
 }
 
 .form {

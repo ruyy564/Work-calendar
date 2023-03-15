@@ -18,8 +18,8 @@ const CostWork = memo(({ cost, status }: Props) => {
   return (
     <div className={css.root}>
       <div className={css.count}>
-        Итог за месяц:{' '}
-        {status === STATUS.loading && <Loader isPrimary={false} />} {cost} руб.
+        <Loader isPrimary={false} status={status} />
+        Итог за месяц: {cost} руб.
       </div>
     </div>
   );

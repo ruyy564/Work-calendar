@@ -32,7 +32,7 @@ const Body = memo(({ status, days, events, fetchEvents }: Props) => {
 
   return (
     <div className={css.root}>
-      {status === STATUS.loading && <Loader isPrimary={false} />}
+      <Loader isPrimary={false} status={status} />
       {lastMonthDays.map((day, index) => (
         <OtherDay key={index} day={day} />
       ))}

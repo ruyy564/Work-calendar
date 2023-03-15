@@ -16,12 +16,8 @@
 }
 
 html, body, #root, .App {
-    height: 100vh;
-    width: 100vw;
     background-color: var(--primary);
     color: var(--primary-text);
-    overflow-x: hidden;
-    overflow-y: visible;
 }
 
 *::-webkit-scrollbar {
@@ -44,4 +40,13 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
     -webkit-text-fill-color: var(--secondary-text);
     -webkit-box-shadow: 0 0 0px 40rem var(--secondary) inset;
+}
+
+input,
+textarea,
+button,
+select,
+div, span,
+a {
+    -webkit-tap-highlight-color: transparent;
 }
