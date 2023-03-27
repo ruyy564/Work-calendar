@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { AiFillDelete, AiFillEdit, AiFillCloseCircle } from 'react-icons/ai';
-import { FiChevronLeft, FiChevronRight, FiLogOut } from 'react-icons/fi';
+import { FiLogOut } from 'react-icons/fi';
+import { ImCircleLeft, ImCircleRight } from 'react-icons/im';
 
 import getClasses from '../../../helpers/getClasses';
 
@@ -36,16 +37,16 @@ export const ButtonEdit = memo(({ onClick }: Props) => {
 
 export const ButtonArrowLeft = memo(({ onClick }: Props) => {
   return (
-    <button className={css.root} onClick={onClick}>
-      <FiChevronLeft />
+    <button className={getClasses(css.root, css.btnArrow)} onClick={onClick}>
+      <ImCircleLeft />
     </button>
   );
 });
 
 export const ButtonArrowRight = memo(({ onClick }: Props) => {
   return (
-    <button className={css.root} onClick={onClick}>
-      <FiChevronRight />
+    <button className={getClasses(css.root, css.btnArrow)} onClick={onClick}>
+      <ImCircleRight />
     </button>
   );
 });

@@ -18,6 +18,8 @@
 html, body, #root, .App {
     background-color: var(--primary);
     color: var(--primary-text);
+    min-width: 330px;
+    height: 100vh;
 }
 
 *::-webkit-scrollbar {
@@ -49,4 +51,12 @@ select,
 div, span,
 a {
     -webkit-tap-highlight-color: transparent;
+}
+
+a {
+    color: var(--primary-event)
+}
+
+a:active {
+    color: var(--active)
 }

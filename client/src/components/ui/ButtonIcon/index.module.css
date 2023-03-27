@@ -8,7 +8,12 @@
     width: 25px;
     height: 25px;
     text-align: center;
-    background-color: var(--secondary);
+    background: var(--secondary);
+}
+
+.btnArrow {
+    background: var(--primary);
+    color: var(--secondary);
 }
 
 .root svg {
@@ -17,7 +22,7 @@
 }
 
 .root:active {
-    background-color: var(--active);
+    color: var(--active);
 }
 
 .btnLogout {
