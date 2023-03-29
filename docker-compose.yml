@@ -7,7 +7,7 @@ services:
     env_file:
       - ./client/.production.env
     ports:
-      - 3000:3000
+      - 80:3000
     command: npm run start
     restart: always
     networks:
@@ -15,7 +15,7 @@ services:
   node-api:
     image: node-api
     ports:
-      - 5000:5000
+      - 7000:7000
     env_file:
       - ./server/.production.env
     depends_on:
@@ -32,7 +32,7 @@ services:
     environment:
       PG_DATA: /var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - 5433:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
     restart: always
