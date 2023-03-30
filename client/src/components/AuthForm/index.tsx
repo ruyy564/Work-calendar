@@ -60,7 +60,7 @@ const AuthForm = ({
       {isLogin ? <div>Авторизация</div> : <div>Регистрация</div>}
       {isEmailConfirmed && <div>Ваш email успешно подтвержден</div>}
       {status === STATUS.success && (
-        <div>
+        <div className={css.alert}>
           На вашу почту {email.value} отправлено письмо для подтверждения email{' '}
         </div>
       )}

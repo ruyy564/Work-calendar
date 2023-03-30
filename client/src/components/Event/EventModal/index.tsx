@@ -37,7 +37,9 @@ const EventModal = memo(({ auth, date, type, resetStateModal }: Props) => {
     return (
       <ModalContainer modal={MODAL_FORMS.ADD_EVENT_FORM}>
         <div>Уведомление:</div>
-        <div>Для работы с событиями необходимо авторизоваться</div>
+        <div className={css.alert}>
+          Для работы с событиями необходимо авторизоваться
+        </div>
         <NavLink to={ROUTE_TO_LOGIN} onClick={resetStateModal}>
           Авторизоваться
         </NavLink>
