@@ -1,7 +1,8 @@
 class UserDto {
-  constructor(models) {
-    this.id = models.id;
-    this.email = models.email;
+  constructor(model) {
+    this.id = model.id;
+    this.email = model.email;
+    this.isActive = model.isActive;
   }
 }
 

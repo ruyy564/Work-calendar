@@ -11,6 +11,14 @@
     background: var(--secondary);
 }
 
+.root:hover {
+    color: var(--primary-hover);
+}
+
+.btnDark:hover {
+    color: var(--secondary-hover);
+}
+
 .btnArrow {
     background: var(--primary);
     color: var(--secondary);
@@ -33,4 +41,12 @@
     height: 30px;
     background: var(--primary);
     color: var(--primary-text);
+}
+
+@media (hover: none) {
+
+    .root,
+    .btnDark:hover {
+        color: inherit;
+    }
 }

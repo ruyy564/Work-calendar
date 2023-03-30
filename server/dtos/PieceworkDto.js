@@ -1,10 +1,10 @@
 class PieceworkDto {
-  constructor(models) {
-    this.id = models.id;
-    this.cost = models.cost;
-    this.name = models.name;
-    this.count = models.count;
-    this.EventId = models.EventId;
+  constructor(model) {
+    this.id = model.id;
+    this.cost = model.cost;
+    this.name = model.name;
+    this.count = model.count;
+    this.EventId = model.EventId;
   }
 }
 

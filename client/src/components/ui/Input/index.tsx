@@ -5,7 +5,9 @@ import getClasses from '../../../helpers/getClasses';
 import css from './index.module.css';
 
 type InputProps = {
-  type: string;
+  type?: string;
+  error?: boolean;
+  errorMessage?: string | null;
   text: string;
   name?: string;
   value?: string | number;
@@ -22,6 +24,8 @@ type InputProps = {
 const Input = memo(
   ({
     type,
+    error,
+    errorMessage,
     min,
     max,
     name,
@@ -35,22 +39,50 @@ const Input = memo(
     onClick,
   }: InputProps) => {
     return (
+      <div className={css.root}>
+        {error && <div className={css.errorText}>* {errorMessage}</div>}
+        <div
+          className={
+            disabled ? getClasses(css.wrapper, css.disable) : css.wrapper
+          }
+        >
+          <div className={css.text}>{text}</div>
+          <input
+            className={error ? css.error : ''}
+            type={type}
+            value={value}
+            onChange={onChange}
+            onClick={onClick}
+            min={min}
+            max={max}
+            name={name}
+            checked={checked}
+            step={step}
+            required={required}
+            disabled={disabled}
+          />
+        </div>
+      </div>
+    );
+  }
+);
+
+export const InputRadio = memo(
+  ({ name, text, value, checked, disabled, onChange, onClick }: InputProps) => {
+    return (
       <label
-        className={disabled ? getClasses(css.root, css.disable) : css.root}
+        className={
+          disabled ? getClasses(css.wrapper, css.disable) : css.wrapper
+        }
       >
         <div className={css.text}>{text}</div>
         <input
-          className={css.input}
-          type={type}
+          type="radio"
           value={value}
           onChange={onChange}
           onClick={onClick}
-          min={min}
-          max={max}
           name={name}
           checked={checked}
-          step={step}
-          required={required}
           disabled={disabled}
         />
       </label>

@@ -13,7 +13,7 @@ type Props = {
 
 export const ButtonDelete = memo(({ onClick }: Props) => {
   return (
-    <button className={css.root} onClick={onClick}>
+    <button className={getClasses(css.root, css.btnDark)} onClick={onClick}>
       <AiFillDelete />
     </button>
   );
@@ -21,7 +21,7 @@ export const ButtonDelete = memo(({ onClick }: Props) => {
 
 export const ButtonClose = memo(({ onClick }: Props) => {
   return (
-    <button className={css.root} onClick={onClick}>
+    <button className={getClasses(css.root, css.btnDark)} onClick={onClick}>
       <AiFillCloseCircle />
     </button>
   );
@@ -29,7 +29,7 @@ export const ButtonClose = memo(({ onClick }: Props) => {
 
 export const ButtonEdit = memo(({ onClick }: Props) => {
   return (
-    <button className={css.root} onClick={onClick}>
+    <button className={getClasses(css.root, css.btnDark)} onClick={onClick}>
       <AiFillEdit />
     </button>
   );

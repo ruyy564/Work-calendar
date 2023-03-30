@@ -1,6 +1,6 @@
 import { useState, useEffect, memo } from 'react';
 
-import Input from '../../ui/Input';
+import Input, { InputRadio } from '../../ui/Input';
 import FormPlaceworkContainer from '../../../containers/Event/FormPlaceworkContainer';
 import FormTimeBasedContainer from '../../../containers/Event/FormTimeBasedContainer';
 import ModalContainer from '../../../containers/ModalContainer';
@@ -33,19 +33,17 @@ const EventModal = memo(({ date, type }: Props) => {
     <ModalContainer modal={MODAL_FORMS.ADD_EVENT_FORM}>
       <div>Дата: {date}</div>
       <div className={css.groupRadio}>
-        <Input
+        <InputRadio
           name={RADIO_GROUP_TYPE_WORK}
           onChange={changeHandler}
-          type="radio"
           text="Повременная"
           checked={workType === TYPE_WORK.TIME_BASED}
           value={TYPE_WORK.TIME_BASED}
           disabled={type === TYPE_WORK.PIECE_WORKS}
         />
-        <Input
+        <InputRadio
           name={RADIO_GROUP_TYPE_WORK}
           onChange={changeHandler}
-          type="radio"
           checked={workType === TYPE_WORK.PIECE_WORKS}
           text="Сдельная"
           value={TYPE_WORK.PIECE_WORKS}

@@ -1,15 +1,12 @@
-const getErrorMessage = (errors) => {
-  const message = errors.errors.map((error) => {
+const getErrorMessage = (errors) =>
+  errors.reduce((acc, error) => {
     if (error.param === 'email') {
-      return 'Некорректный email';
+      acc['email'] = 'Некорректный email';
+    } else {
+      acc[error.param] = 'Заполните поле';
     }
 
-    if (error.param === 'password') {
-      return 'Некорректный пароль';
-    }
-  });
-
-  return message.join('/');
-};
+    return acc;
+  }, {});
 
 module.exports = getErrorMessage;

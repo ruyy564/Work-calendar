@@ -1,11 +1,11 @@
 class TimebasedDto {
-  constructor(models) {
-    this.EventId = models.EventId;
-    this.costInHour = models.costInHour;
-    this.mainWorkTime = models.mainWorkTime;
-    this.overTime = models.overTime;
-    this.firstTwoHourRatio = models.firstTwoHourRatio;
-    this.otherHoursRatio = models.otherHoursRatio;
+  constructor(model) {
+    this.EventId = model.EventId;
+    this.costInHour = model.costInHour;
+    this.mainWorkTime = model.mainWorkTime;
+    this.overTime = model.overTime;
+    this.firstTwoHourRatio = model.firstTwoHourRatio;
+    this.otherHoursRatio = model.otherHoursRatio;
   }
 }
 

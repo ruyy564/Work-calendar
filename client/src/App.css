@@ -13,7 +13,11 @@
     --secondary-text: #1D252C;
     --active: #777777;
     --block-color: #777777;
+    --primary-hover: #bebebe;
+    --secondary-hover: #4b4b4b;
+    --error: rgb(196, 44, 44);
 }
+
 
 html, body, #root, .App {
     background-color: var(--primary);
@@ -43,6 +47,16 @@ input:-webkit-autofill:focus {
     -webkit-text-fill-color: var(--secondary-text);
     -webkit-box-shadow: 0 0 0px 40rem var(--secondary) inset;
 }
+
+input[type="radio"] {
+    outline: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+}
+
 
 input,
 textarea,

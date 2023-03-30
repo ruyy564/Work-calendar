@@ -88,7 +88,7 @@ const AddItemModal = ({
           <Button onClick={addHandler} text="Добавить" />
         ) : (
           <ButtonGroup>
-            <Button onClick={changeHandler} text="Сохранить изменения" />
+            <Button onClick={changeHandler} text="Сохранить" />
             <Button onClick={closeModal} text="Отменить" />
           </ButtonGroup>
         )}

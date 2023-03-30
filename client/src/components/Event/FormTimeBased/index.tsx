@@ -107,7 +107,7 @@ const FormTimeBased = ({
       </div>
       {timebased ? (
         <ButtonGroup>
-          <Button onClick={changeHandler} text="Сохранить изменения" />
+          <Button onClick={changeHandler} text="Сохранить" />
           <Button onClick={deleteHandler} text="Удалить" />
         </ButtonGroup>
       ) : (

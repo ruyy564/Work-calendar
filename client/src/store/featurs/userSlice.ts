@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { login, logout, registration } from '../../services/user';
-import { User, State } from '../../entities/User';
+import { User, State, ResponseError } from '../../entities/User';
 import { STATUS } from '../../constants';
 import { LOCAL_STORAGE_USER } from '../../entities/User/constants';
 
@@ -11,49 +11,66 @@ const initialState: State = {
   user: user ? JSON.parse(user) : null,
   auth: Boolean(user),
   status: null,
-  errorMessage: null,
+  errors: null,
+  message: null,
 };
 
-export const modalSlice = createSlice({
+export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    resetStatus: (state) => {
+      state.status = null;
+      state.errors = null;
+      state.message = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, { payload }: PayloadAction<User>) => {
-        state.status = null;
-        state.errorMessage = null;
+        state.status = STATUS.success;
         state.user = payload;
         state.auth = true;
       })
       .addCase(login.pending, (state) => {
         state.status = STATUS.loading;
-        state.errorMessage = null;
+        state.errors = null;
+        state.message = null;
       })
-      .addCase(login.rejected, (state, { payload }: PayloadAction<string>) => {
-        state.status = STATUS.error;
-        state.errorMessage = payload;
-      })
+      .addCase(
+        login.rejected,
+        (state, { payload }: PayloadAction<ResponseError>) => {
+          state.status = STATUS.error;
+          state.errors = payload.errors;
+          state.message = payload.message;
+        }
+      )
       .addCase(registration.fulfilled, (state) => {
         state.status = STATUS.success;
-        state.errorMessage = null;
       })
       .addCase(registration.pending, (state) => {
         state.status = STATUS.loading;
-        state.errorMessage = null;
+        state.errors = null;
+        state.message = null;
       })
       .addCase(
         registration.rejected,
-        (state, { payload }: PayloadAction<string>) => {
+        (state, { payload }: PayloadAction<ResponseError>) => {
           state.status = STATUS.error;
-          state.errorMessage = payload;
+          state.errors = payload.errors;
+          state.message = payload.message;
         }
       )
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
         state.auth = false;
+        state.status = null;
+        state.errors = null;
+        state.message = null;
       });
   },
 });
 
-export default modalSlice.reducer;
+export const { resetStatus } = userSlice.actions;
+
+export default userSlice.reducer;

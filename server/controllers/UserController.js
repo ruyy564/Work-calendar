@@ -9,7 +9,7 @@ class UserController {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        return next(ApiError.badRequest(getErrorMessage(errors)));
+        return next(ApiError.incorrectFormData(getErrorMessage(errors.errors)));
       }
       const { email, password } = req.body;
       const userData = await UserService.registrarion(email, password);
@@ -25,7 +25,7 @@ class UserController {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        return next(ApiError.badRequest(getErrorMessage(errors)));
+        return next(ApiError.incorrectFormData(getErrorMessage(errors.errors)));
       }
       const { email, password } = req.body;
       const userData = await UserService.login(email, password);
@@ -33,6 +33,29 @@ class UserController {
       return res.json(userData);
     } catch (e) {
       next(e);
+    }
+  }
+  async activate(req, res, next) {
+    try {
+      const { link } = req.params;
+
+      await UserService.activate(link);
+
+      return res.redirect(`${process.env.WEB_URL}/email-confirm`);
+    } catch (e) {
+      return res.redirect(`${process.env.WEB_URL}/error`);
+    }
+  }
+
+  async sendActivationEmail(req, res, next) {
+    try {
+      const { link } = req.params;
+
+      await UserService.sendActivationEmail(link);
+
+      return res.redirect(`${process.env.WEB_URL}/email-send`);
+    } catch (e) {
+      return res.redirect(`${process.env.WEB_URL}/error`);
     }
   }
 }

@@ -1,4 +1,3 @@
-const { validationResult } = require('express-validator');
 const EventService = require('../service/EventService');
 const TimebasedService = require('../service/TimebasedService');
 const PieceworkService = require('../service/PieceworkService');

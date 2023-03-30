@@ -7,6 +7,7 @@ import {
   LOCAL_STORAGE_TOKEN,
 } from '../entities/User/constants';
 import $api from '../http';
+import { ResponseError } from '../entities/User';
 
 export const login = createAsyncThunk<
   User,
@@ -26,9 +27,9 @@ export const login = createAsyncThunk<
 
     return data.user;
   } catch (e) {
-    const error = e as AxiosError<{ message: string }>;
+    const error = e as AxiosError<ResponseError>;
 
-    return thunkAPI.rejectWithValue(error.response?.data.message);
+    return thunkAPI.rejectWithValue(error.response?.data);
   }
 });
 
@@ -45,9 +46,9 @@ export const registration = createAsyncThunk<
       password,
     });
   } catch (e) {
-    const error = e as AxiosError<{ message: string }>;
+    const error = e as AxiosError<ResponseError>;
 
-    return thunkAPI.rejectWithValue(error.response?.data.message);
+    return thunkAPI.rejectWithValue(error.response?.data);
   }
 });
 
