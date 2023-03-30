@@ -116,6 +116,9 @@ const AuthForm = ({
           </div>
         </ButtonGroup>
       )}
+      <NavLink to={'/'} onClick={resetStatus}>
+        На главную
+      </NavLink>
     </div>
   );
 };

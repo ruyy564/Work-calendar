@@ -13,8 +13,8 @@ import ErrorPage from '../pages/ErrorPage';
 
 export const publicRouter = createBrowserRouter([
   {
-    path: '*',
-    element: <Navigate to={ROUTE_TO_LOGIN} />,
+    path: '/',
+    element: <CalendarPage />,
   },
   {
     path: ROUTE_TO_LOGIN,
@@ -35,6 +35,10 @@ export const publicRouter = createBrowserRouter([
   {
     path: ROUTE_TO_EMAIL_SEND,
     element: <AuthPage />,
+  },
+  {
+    path: '*',
+    element: <Navigate to="/" />,
   },
 ]);
 

@@ -1,12 +1,23 @@
 import { connect } from 'react-redux';
+import { RootState } from '../store';
 
-import { ButtonLogout } from '../components/ui/ButtonIcon';
+import { ButtonLog } from '../components/ui/ButtonIcon';
 import { logout } from '../services/user';
+import { resetState as resetStateModal } from '../store/featurs/modalSlice';
+import { resetState as resetStateEvent } from '../store/featurs/eventSlice';
+
+import { selectUserAuth } from '../entities/User/selectors';
+
+const mapState = (state: RootState) => ({
+  auth: selectUserAuth(state),
+});
 
 const mapDispatch = {
-  onClick: () => logout(),
+  logout: () => logout(),
+  resetStateModal: () => resetStateModal(),
+  resetStateEvent: () => resetStateEvent(),
 };
 
-const connector = connect(null, mapDispatch);
+const connector = connect(mapState, mapDispatch);
 
-export default connector(ButtonLogout);
+export default connector(ButtonLog);

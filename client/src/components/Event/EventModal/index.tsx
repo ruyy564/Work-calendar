@@ -1,6 +1,7 @@
 import { useState, useEffect, memo } from 'react';
+import { NavLink } from 'react-router-dom';
 
-import Input, { InputRadio } from '../../ui/Input';
+import { InputRadio } from '../../ui/Input';
 import FormPlaceworkContainer from '../../../containers/Event/FormPlaceworkContainer';
 import FormTimeBasedContainer from '../../../containers/Event/FormTimeBasedContainer';
 import ModalContainer from '../../../containers/ModalContainer';
@@ -9,15 +10,18 @@ import {
   TYPE_WORK,
   RADIO_GROUP_TYPE_WORK,
 } from '../../../entities/Event/constants';
+import { ROUTE_TO_LOGIN } from '../../../routes/constants';
 
 import css from './index.module.css';
 
 type Props = {
+  auth: boolean;
   date: string;
   type: string;
+  resetStateModal: () => void;
 };
 
-const EventModal = memo(({ date, type }: Props) => {
+const EventModal = memo(({ auth, date, type, resetStateModal }: Props) => {
   const initState = type !== TYPE_WORK.NONE ? type : TYPE_WORK.TIME_BASED;
   const [workType, setWorkType] = useState<string>(initState);
 
@@ -28,6 +32,18 @@ const EventModal = memo(({ date, type }: Props) => {
   const changeHandler = (event: React.FormEvent<HTMLInputElement>) => {
     setWorkType(event.currentTarget.value);
   };
+
+  if (!auth) {
+    return (
+      <ModalContainer modal={MODAL_FORMS.ADD_EVENT_FORM}>
+        <div>Уведомление:</div>
+        <div>Для работы с событиями необходимо авторизоваться</div>
+        <NavLink to={ROUTE_TO_LOGIN} onClick={resetStateModal}>
+          Авторизоваться
+        </NavLink>
+      </ModalContainer>
+    );
+  }
 
   return (
     <ModalContainer modal={MODAL_FORMS.ADD_EVENT_FORM}>

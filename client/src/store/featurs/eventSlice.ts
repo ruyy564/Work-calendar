@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '..';
 
 import { STATUS } from '../../constants';
 import { State, Event, ChangePiecework } from '../../entities/Event';
@@ -20,7 +21,12 @@ const initialState: State = {
 export const eventSlice = createSlice({
   name: 'eventsOfCalendar',
   initialState,
-  reducers: {},
+  reducers: {
+    resetState: (state) => {
+      state.events = [];
+      state.status = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(
@@ -130,5 +136,7 @@ export const eventSlice = createSlice({
       });
   },
 });
+
+export const { resetState } = eventSlice.actions;
 
 export default eventSlice.reducer;

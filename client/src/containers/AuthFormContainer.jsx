@@ -23,6 +23,7 @@ const mapDispatch = {
     registration({ email, password }),
 };
 
+
 const connector = connect(mapState, mapDispatch);
 
 export default connector(AuthForm);

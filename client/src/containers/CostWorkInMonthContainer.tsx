@@ -8,6 +8,7 @@ import {
 } from '../entities/Calendar/selectors';
 import { selectEvents, selectStatus } from '../entities/Event/selectors';
 import calcCostEventByPeriod from '../entities/Event/helpers';
+import { selectUserAuth } from '../entities/User/selectors';
 
 const mapState = (state: RootState) => {
   const selectMonth = selectCalendarSelectMonth(state);
@@ -19,7 +20,7 @@ const mapState = (state: RootState) => {
     `31-${selectMonth + 1}-${selectYear}`
   );
 
-  return { status: selectStatus(state), cost };
+  return { cost, status: selectStatus(state), auth: selectUserAuth(state) };
 };
 
 const connector = connect(mapState, null);

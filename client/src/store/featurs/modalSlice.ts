@@ -19,9 +19,14 @@ export const modalSlice = createSlice({
     closeModal: (state, { payload }: PayloadAction<Modal>) => {
       state[payload] = false;
     },
+    resetState: (state) => {
+      state[MODAL_FORMS.ADD_EVENT_FORM] = false;
+      state[MODAL_FORMS.DOWNLOAD_PAID_LIST_FORM] = false;
+      state[MODAL_FORMS.ADD_ITEM_FORM] = false;
+    },
   },
 });
 
-export const { openModal, closeModal } = modalSlice.actions;
+export const { openModal, closeModal, resetState } = modalSlice.actions;
 
 export default modalSlice.reducer;

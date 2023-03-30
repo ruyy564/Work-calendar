@@ -33,11 +33,12 @@
     color: var(--active);
 }
 
-.btnLogout {
+.btnLog {
     position: absolute;
+    text-decoration: none;
     left: 10px;
     top: 10px;
-    width: 30px;
+    width: 100px;
     height: 30px;
     background: var(--primary);
     color: var(--primary-text);

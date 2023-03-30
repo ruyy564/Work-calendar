@@ -7,6 +7,7 @@ import css from './index.module.css';
 
 type Props = {
   cost: number;
+  auth: boolean;
   status:
     | typeof STATUS.loading
     | typeof STATUS.error
@@ -14,7 +15,11 @@ type Props = {
     | null;
 };
 
-const CostWork = memo(({ cost, status }: Props) => {
+const CostWork = memo(({ auth, cost, status }: Props) => {
+  if (!auth) {
+    return null;
+  }
+
   return (
     <div className={css.root}>
       <div className={css.count}>

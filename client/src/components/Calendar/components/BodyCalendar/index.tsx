@@ -12,6 +12,7 @@ import Loader from '../../../ui/Loader';
 import css from './index.module.css';
 
 type Props = {
+  auth: boolean;
   events: Event[];
   days: CalendarDays;
   status:
@@ -22,13 +23,15 @@ type Props = {
   fetchEvents: () => void;
 };
 
-const Body = memo(({ status, days, events, fetchEvents }: Props) => {
+const Body = memo(({ status, auth, days, events, fetchEvents }: Props) => {
   const { lastMonthDays, currentMonthDays, nextMonthDays } = days;
   const KeysEvents = useMemo(() => getKeysEvent(events), [events]);
 
   useEffect(() => {
-    fetchEvents();
-  }, [fetchEvents]);
+    if (auth) {
+      fetchEvents();
+    }
+  }, [auth, fetchEvents]);
 
   return (
     <div className={css.root}>

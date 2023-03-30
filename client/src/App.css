@@ -16,6 +16,7 @@
     --primary-hover: #bebebe;
     --secondary-hover: #4b4b4b;
     --error: rgb(196, 44, 44);
+    --link: #3057dc;
 }
 
 
@@ -68,7 +69,8 @@ a {
 }
 
 a {
-    color: var(--primary-event)
+    color: var(--link);
+    text-decoration: none;
 }
 
 a:active {
