@@ -14,6 +14,12 @@ class ApiError extends Error {
     return ApiError.badRequest('Некорректные данные', errors);
   }
 
+  static incorrectSendEmail() {
+    return ApiError.badRequest(
+      'Неудается отправить письмо для подтверждения email'
+    );
+  }
+
   static badRequest(message, errors = null) {
     return new ApiError(404, message, errors);
   }

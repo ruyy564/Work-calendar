@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 const getEmailMessage = require('../helpers/getEmailMessage');
+const ApiError = require('../error/ApiError');
 
 class MailService {
   constructor() {
@@ -15,13 +16,17 @@ class MailService {
   }
 
   async sendActivationMail(to, link) {
-    await this.transporter.sendMail({
-      from: `Рабочий календарь <${process.env.SMPT_USER}>`,
-      to,
-      subject: `Подтверждение вашего адреса электронной почты`,
-      text: '',
-      html: getEmailMessage(link, to),
-    });
+    try {
+      await this.transporter.sendMail({
+        from: `Рабочий календарь <${process.env.SMPT_USER}>`,
+        to,
+        subject: `Подтверждение вашего адреса электронной почты`,
+        text: '',
+        html: getEmailMessage(link, to),
+      });
+    } catch (e) {
+      throw ApiError.incorrectSendEmail();
+    }
   }
 }
 

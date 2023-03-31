@@ -15,14 +15,20 @@ class UserService {
     if (person) {
       throw ApiError.badRequest('Пользователь уже существует');
     }
-    const hashPassword = await bcrypt.hash(password, 3);
-    const user = await User.create({ email, password: hashPassword });
-    const accessLink = await AccessLink.create({ UserId: user.id });
+    const activationLink = uuid.v4();
 
     await mailService.sendActivationMail(
       email,
-      `${process.env.API_URL}/api/auth/activate/${accessLink.activationLink}`
+      `${process.env.API_URL}/api/auth/activate/${activationLink}`
     );
+    const hashPassword = await bcrypt.hash(password, 3);
+    const user = await User.create({ email, password: hashPassword });
+
+    await AccessLink.create({
+      UserId: user.id,
+      activationLink,
+    });
+
     const userDto = new UserDto(user);
 
     //удаление неактивированного аккаунта через 2 часа, после регистрации
