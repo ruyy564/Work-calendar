@@ -20,7 +20,7 @@ const getCostTimeBasedWork = (timebased) => {
 
 const getCostPlacework = (pieceworks) =>
   pieceworks.reduce((acc, piecework) => {
-    return acc + getPieceworkCost(piecework) * getPieceworkCount(piecework);
+    return acc + piecework.cost * piecework.count;
   }, 0);
 
 const calcCostEventByPeriod = (events, start, end) =>
@@ -38,11 +38,11 @@ const calcCostEventByPeriod = (events, start, end) =>
       Number(endDate.year) >= Number(date.year);
 
     if (isMoreStart && isLessEnd) {
-      const pieceWork = event.pieceWork;
+      const pieceworks = event.pieceworks;
       const timebased = event.timebased;
 
-      if (pieceWork?.length) {
-        return acc + getCostPlacework(pieceWork);
+      if (pieceworks?.length) {
+        return acc + getCostPlacework(pieceworks);
       }
 
       if (timebased) {
