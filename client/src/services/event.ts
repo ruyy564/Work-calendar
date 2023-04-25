@@ -1,6 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { Event, ChangePiecework, CreateEvent } from '../entities/Event';
+import {
+  Event,
+  ChangePiecework,
+  CreateEvent,
+  EventFetchData,
+} from '../entities/Event';
 import $api from '../http';
 import getUserId from '../helpers/getUserId';
 import { AxiosError } from 'axios';
@@ -26,6 +31,31 @@ export const fetchEvents = createAsyncThunk<
     return thunkAPI.rejectWithValue(error.response?.data.message);
   }
 });
+
+export const fetchEventsCostByPeriod = createAsyncThunk<
+  number,
+  { start: string; end: string },
+  {
+    rejectValue: any;
+  }
+>(
+  'eventsOfCalendar/fetchEventsCostByPeriod',
+  async ({ start, end }, thunkAPI) => {
+    try {
+      const { data } = await $api.post<number>('/event/geteventscostbyperiod', {
+        userId: getUserId(),
+        start,
+        end,
+      });
+
+      return data;
+    } catch (e) {
+      const error = e as AxiosError<{ message: string }>;
+
+      return thunkAPI.rejectWithValue(error.response?.data.message);
+    }
+  }
+);
 
 export const addPieceWorkToEvent = createAsyncThunk<
   ChangePiecework,

@@ -6,8 +6,9 @@ import {
   getPieceworkCount,
   getPieceworkName,
 } from '../entities/Event/getters';
+import { MAX_INPUT_COUNT, MIN_INPUT_COUNT } from '../constants';
 
-const validateInput = validateInputNumber(0);
+const validateInput = validateInputNumber(MIN_INPUT_COUNT, MAX_INPUT_COUNT);
 
 export const useAddItem = (data: Piecework | null) => {
   const cost = useInput(data ? getPieceworkCost(data) : 0, validateInput);

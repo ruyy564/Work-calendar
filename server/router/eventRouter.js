@@ -5,6 +5,11 @@ const authMiddleware = require('../middleware/AuthMiddleware');
 const router = new Router();
 
 router.post('/getevents', authMiddleware, EventController.getEvents);
+router.post(
+  '/geteventscostbyperiod',
+  authMiddleware,
+  EventController.getEventsCostByPeriod
+);
 router.post('/event', authMiddleware, EventController.createEvent);
 router.post('/piecework', authMiddleware, EventController.addPiecework);
 router.put('/piecework', authMiddleware, EventController.updatePiecework);

@@ -3,6 +3,7 @@ const TimebasedService = require('./TimebasedService');
 const PieceworkService = require('./PieceworkService');
 const { Event } = require('../models');
 const EventDto = require('../dtos/EventDto');
+const calcCostEventByPeriod = require('../helpers/calcCostEventByPeriod');
 
 class EventService {
   async getEvent(eventId) {
@@ -31,6 +32,17 @@ class EventService {
     );
 
     return [...events];
+  }
+
+  async getEventsCostByPeriod(
+    userId,
+    start = '2000-01-01',
+    end = '2100-01-01'
+  ) {
+    const events = await this.getEvents(userId, start, end);
+    const cost = calcCostEventByPeriod(events, start, end);
+
+    return cost;
   }
 
   async create(userId, date, timebased, piecework) {

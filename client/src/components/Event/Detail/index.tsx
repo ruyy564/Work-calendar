@@ -28,8 +28,11 @@ const Detail = memo(({ item, openModal, deleteItem, setSelectData }: Props) => {
   return (
     <div className={css.listItems}>
       <div>{getPieceworkName(item) || 'Нет названия'}</div>
-      <div>x {getPieceworkCount(item)}</div>
-      <div>{getPieceworkCost(item)}р.</div>
+      <div>
+        <div className={css.count}>x {getPieceworkCount(item)}</div>
+        <div className={css.count}>{getPieceworkCost(item)}р.</div>
+      </div>
+
       <ButtonEdit onClick={clickHandler} />
       <ButtonDelete
         onClick={() =>

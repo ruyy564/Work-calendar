@@ -2,6 +2,8 @@ import type { RootState } from '../../store';
 import { getEventPieceworks, getEventTimebased, getEventDate } from './getters';
 
 export const selectEvents = (state: RootState) => state.eventsOfCalendar.events;
+export const selectEventsCost = (state: RootState) =>
+  state.eventsOfCalendar.cost;
 
 export const selectEvent = (state: RootState, date: string) =>
   state.eventsOfCalendar.events.find((item) => getEventDate(item) === date);

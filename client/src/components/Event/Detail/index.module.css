@@ -1,7 +1,11 @@
 .listItems {
     display: grid;
     padding: 10px;
-    grid-template-columns: minmax(50px, 2fr) repeat(2, minmax(30px, 1fr)) repeat(2, 30px);
+    grid-template-columns: minmax(50px, 2fr) repeat(1, minmax(30px, 1.5fr)) repeat(2, 30px);
     gap: 10px;
     word-wrap: break-word;
+}
+
+.count {
+    white-space: nowrap;
 }

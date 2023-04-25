@@ -3,27 +3,27 @@ import { connect } from 'react-redux';
 import CostWork from '../components/CostWork';
 import { RootState } from '../store';
 import {
-  selectCalendarSelectMonth,
-  selectCalendarSelectYear,
-} from '../entities/Calendar/selectors';
-import { selectEvents, selectStatus } from '../entities/Event/selectors';
-import calcCostEventByPeriod from '../entities/Event/helpers';
+  selectStatus,
+  selectEventsCost,
+  selectEvents,
+} from '../entities/Event/selectors';
 import { selectUserAuth } from '../entities/User/selectors';
-import { formatDate } from '../entities/Calendar/helpers';
+import { fetchEventsCostByPeriod } from '../services/event';
+import { selectCalendarSelectFirstAndLastDaysFullDate } from '../entities/Calendar/selectors';
 
-const mapState = (state: RootState) => {
-  const selectMonth = selectCalendarSelectMonth(state);
-  const selectYear = selectCalendarSelectYear(state);
-  const events = selectEvents(state);
-  const cost = calcCostEventByPeriod(
-    events,
-    formatDate(selectYear, selectMonth, 1),
-    formatDate(selectYear, selectMonth, 31)
-  );
+const mapState = (state: RootState) => ({
+  events: selectEvents(state),
+  cost: selectEventsCost(state),
+  status: selectStatus(state),
+  firstAndLastDayFullDate: selectCalendarSelectFirstAndLastDaysFullDate(state),
+  auth: selectUserAuth(state),
+});
 
-  return { cost, status: selectStatus(state), auth: selectUserAuth(state) };
+const mapDispatch = {
+  fetchEventsCostByPeriod: (start: string, end: string) =>
+    fetchEventsCostByPeriod({ start, end }),
 };
 
-const connector = connect(mapState, null);
+const connector = connect(mapState, mapDispatch);
 
 export default connector(CostWork);

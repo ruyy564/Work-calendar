@@ -4,8 +4,7 @@ import BodyCalendar from '../../components/Calendar/components/BodyCalendar';
 import { RootState } from '../../store';
 import {
   selectCalendarDays,
-  selectCalendarSelectMonth,
-  selectCalendarSelectYear,
+  selectCalendarSelectFirstAndLastDaysFullDate,
 } from '../../entities/Calendar/selectors';
 import { selectEvents, selectStatus } from '../../entities/Event/selectors';
 import { selectUserAuth } from '../../entities/User/selectors';
@@ -16,8 +15,7 @@ const mapState = (state: RootState) => ({
   status: selectStatus(state),
   days: selectCalendarDays(state),
   events: selectEvents(state),
-  selectMonth: selectCalendarSelectMonth(state),
-  selectYear: selectCalendarSelectYear(state),
+  firstAndLastDayFullDate: selectCalendarSelectFirstAndLastDaysFullDate(state),
 });
 
 const mapDispatch = {

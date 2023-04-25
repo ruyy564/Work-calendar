@@ -1,14 +1,6 @@
-import { Timebased, Piecework, Event } from '.';
-import {
-  getEventPieceworks,
-  getEventTimebased,
-  getEventDate,
-  getPieceworkCost,
-  getPieceworkCount,
-} from './getters';
-import spliteDate from '../../helpers/spliteDate';
+const spliteDate = require('./spliteDate');
 
-const getCostTimeBasedWork = (timebased: Timebased): number => {
+const getCostTimeBasedWork = (timebased) => {
   const {
     costInHour,
     firstTwoHourRatio,
@@ -26,14 +18,14 @@ const getCostTimeBasedWork = (timebased: Timebased): number => {
   return mainCost + secondCost;
 };
 
-const getCostPlacework = (pieceworks: Piecework[]): number =>
+const getCostPlacework = (pieceworks) =>
   pieceworks.reduce((acc, piecework) => {
     return acc + getPieceworkCost(piecework) * getPieceworkCount(piecework);
   }, 0);
 
-const calcCostEventByPeriod = (events: Event[], start: string, end: string) =>
+const calcCostEventByPeriod = (events, start, end) =>
   events.reduce((acc, event) => {
-    const date = spliteDate(getEventDate(event));
+    const date = spliteDate(event.date);
     const startDate = spliteDate(start);
     const endDate = spliteDate(end);
     const isMoreStart =
@@ -46,8 +38,8 @@ const calcCostEventByPeriod = (events: Event[], start: string, end: string) =>
       Number(endDate.year) >= Number(date.year);
 
     if (isMoreStart && isLessEnd) {
-      const pieceWork = getEventPieceworks(event);
-      const timebased = getEventTimebased(event);
+      const pieceWork = event.pieceWork;
+      const timebased = event.timebased;
 
       if (pieceWork?.length) {
         return acc + getCostPlacework(pieceWork);
@@ -61,4 +53,4 @@ const calcCostEventByPeriod = (events: Event[], start: string, end: string) =>
     return acc;
   }, 0);
 
-export default calcCostEventByPeriod;
+module.exports = calcCostEventByPeriod;

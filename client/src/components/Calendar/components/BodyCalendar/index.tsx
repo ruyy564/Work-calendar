@@ -8,7 +8,6 @@ import { Event } from '../../../../entities/Event';
 import { CalendarDays } from '../../../../entities/Calendar';
 import { STATUS } from '../../../../constants';
 import Loader from '../../../ui/Loader';
-import { formatDate } from '../../../../entities/Calendar/helpers';
 
 import css from './index.module.css';
 
@@ -17,15 +16,13 @@ type Props = {
   events: Event[];
   days: CalendarDays;
   status: STATUS | null;
-  selectMonth: number;
-  selectYear: number;
+  firstAndLastDayFullDate: { firstDay: string; lastDay: string };
   fetchEvents: (start: string, end: string) => void;
 };
 
 const Body = memo(
   ({
-    selectMonth,
-    selectYear,
+    firstAndLastDayFullDate,
     status,
     auth,
     days,
@@ -38,15 +35,16 @@ const Body = memo(
     useEffect(() => {
       if (auth) {
         fetchEvents(
-          formatDate(selectYear, selectMonth, currentMonthDays[0]),
-          formatDate(
-            selectYear,
-            selectMonth,
-            currentMonthDays[currentMonthDays.length - 1]
-          )
+          firstAndLastDayFullDate.firstDay,
+          firstAndLastDayFullDate.lastDay
         );
       }
-    }, [auth, fetchEvents, selectYear, selectMonth, currentMonthDays]);
+    }, [
+      auth,
+      fetchEvents,
+      firstAndLastDayFullDate.firstDay,
+      firstAndLastDayFullDate.lastDay,
+    ]);
 
     return (
       <div className={css.root}>

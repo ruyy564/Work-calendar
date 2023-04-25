@@ -9,11 +9,13 @@ import {
   updateTamebasedEvent,
   updatePieceworkEvent,
   deletePiecework,
+  fetchEventsCostByPeriod,
   deleteTimebased,
 } from '../../services/event';
 
 const initialState: State = {
   events: [],
+  cost: 0,
   status: null,
 };
 
@@ -38,6 +40,22 @@ export const eventSlice = createSlice({
       .addCase(fetchEvents.pending, (state) => {
         state.status = STATUS.loading;
       })
+      .addCase(fetchEvents.rejected, (state) => {
+        state.status = STATUS.error;
+      })
+      .addCase(
+        fetchEventsCostByPeriod.fulfilled,
+        (state, { payload }: PayloadAction<number>) => {
+          state.cost = payload;
+          state.status = STATUS.success;
+        }
+      )
+      .addCase(fetchEventsCostByPeriod.pending, (state) => {
+        state.status = STATUS.loading;
+      })
+      .addCase(fetchEventsCostByPeriod.rejected, (state) => {
+        state.status = STATUS.error;
+      })
       .addCase(
         createEvent.fulfilled,
         (state, { payload }: PayloadAction<Event>) => {
@@ -47,6 +65,9 @@ export const eventSlice = createSlice({
       )
       .addCase(createEvent.pending, (state) => {
         state.status = STATUS.loading;
+      })
+      .addCase(createEvent.rejected, (state) => {
+        state.status = STATUS.error;
       })
       .addCase(
         addPieceWorkToEvent.fulfilled,
@@ -62,6 +83,9 @@ export const eventSlice = createSlice({
       .addCase(addPieceWorkToEvent.pending, (state) => {
         state.status = STATUS.loading;
       })
+      .addCase(addPieceWorkToEvent.rejected, (state) => {
+        state.status = STATUS.error;
+      })
       .addCase(
         updateTamebasedEvent.fulfilled,
         (state, { payload }: PayloadAction<Event>) => {
@@ -75,6 +99,9 @@ export const eventSlice = createSlice({
       )
       .addCase(updateTamebasedEvent.pending, (state) => {
         state.status = STATUS.loading;
+      })
+      .addCase(updateTamebasedEvent.rejected, (state) => {
+        state.status = STATUS.error;
       })
       .addCase(
         updatePieceworkEvent.fulfilled,
@@ -97,6 +124,9 @@ export const eventSlice = createSlice({
       )
       .addCase(updatePieceworkEvent.pending, (state) => {
         state.status = STATUS.loading;
+      })
+      .addCase(updatePieceworkEvent.rejected, (state) => {
+        state.status = STATUS.error;
       })
       .addCase(
         deletePiecework.fulfilled,
@@ -121,6 +151,9 @@ export const eventSlice = createSlice({
       .addCase(deletePiecework.pending, (state) => {
         state.status = STATUS.loading;
       })
+      .addCase(deletePiecework.rejected, (state) => {
+        state.status = STATUS.error;
+      })
       .addCase(
         deleteTimebased.fulfilled,
         (state, { payload }: PayloadAction<{ eventId: string }>) => {
@@ -132,6 +165,9 @@ export const eventSlice = createSlice({
       )
       .addCase(deleteTimebased.pending, (state) => {
         state.status = STATUS.loading;
+      })
+      .addCase(deleteTimebased.rejected, (state) => {
+        state.status = STATUS.error;
       });
   },
 });

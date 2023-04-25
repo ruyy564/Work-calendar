@@ -24,6 +24,11 @@ export type Event = {
   pieceworks?: Piecework[];
 };
 
+export type EventFetchData = {
+  events: Event[];
+  cost: number;
+};
+
 export type CreateEvent = {
   date: string;
   piecework?: NewPiecework;
@@ -39,6 +44,7 @@ export type ChangePiecework = {
 export type State = {
   events: Event[];
   status: STATUS | null;
+  cost: number;
 };
 
 export type NewTimebased = {

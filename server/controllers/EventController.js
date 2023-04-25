@@ -14,6 +14,17 @@ class EventController {
     }
   }
 
+  async getEventsCostByPeriod(req, res, next) {
+    try {
+      const { userId, start, end } = req.body;
+      const cost = await EventService.getEventsCostByPeriod(userId, start, end);
+
+      return res.json(cost);
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async createEvent(req, res, next) {
     try {
       const { userId, date, timebased, piecework } = req.body;
