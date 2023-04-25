@@ -20,21 +20,33 @@ input {
     border: none;
     border-radius: 10px;
     outline: 1px solid var(--block-color);
-    color: var(--secondary-text);
+    color: var(--dark-blue);
     text-align: center;
     width: 100%;
     padding: 10px;
 }
 
+label {
+    cursor: pointer;
+}
+
+input:hover {
+    outline: 2px solid var(--dark-blue);
+}
+
+
 input:active, input:focus {
-    outline: 3px solid var(--primary);
-    color: var(--secondary-text);
+    outline: 3px solid var(--dark-blue);
+    color: var(--dark-blue);
+}
+
+input.error:hover {
+    outline: 2px solid var(--red);
 }
 
 input.error:active, input.error:focus {
-    outline: 3px solid var(--error);
+    outline: 3px solid var(--red);
 }
-
 
 .root:has(.input[type="radio"]) {
     cursor: pointer;
@@ -52,7 +64,7 @@ input.error:active, input.error:focus {
 }
 
 .errorText {
-    color: var(--error);
+    color: var(--red);
     width: 50%;
     font-size: 12px;
     height: 15px;
@@ -60,5 +72,5 @@ input.error:active, input.error:focus {
 }
 
 .error {
-    outline: 1px solid var(--error);
+    outline: 1px solid var(--red);
 }

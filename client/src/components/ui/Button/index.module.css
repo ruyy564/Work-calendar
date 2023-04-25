@@ -2,11 +2,15 @@
     cursor: pointer;
     border: none;
     border-radius: 20px;
-    background-color: var(--primary);
-    color: var(--primary-text);
+    background-color: var(--dark-blue);
+    color: var(--white);
     padding: 10px;
     width: 100%;
     max-width: 350px;
+}
+
+.root:hover {
+    background-color: var(--hover);
 }
 
 .root:active {

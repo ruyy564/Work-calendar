@@ -8,6 +8,8 @@ import { Event } from '../../../../entities/Event';
 import { CalendarDays } from '../../../../entities/Calendar';
 import { STATUS } from '../../../../constants';
 import Loader from '../../../ui/Loader';
+import { getWeekend, isWeekend } from '../../../../entities/Calendar/helpers';
+import { WEEKENDS_KEYS } from '../../../../entities/Calendar/constants';
 
 import css from './index.module.css';
 
@@ -31,6 +33,7 @@ const Body = memo(
   }: Props) => {
     const { lastMonthDays, currentMonthDays, nextMonthDays } = days;
     const KeysEvents = useMemo(() => getKeysEvent(events), [events]);
+    const weekends = getWeekend(days);
 
     useEffect(() => {
       if (auth) {
@@ -50,13 +53,38 @@ const Body = memo(
       <div className={css.root}>
         <Loader isPrimary={false} status={status} />
         {lastMonthDays.map((day, index) => (
-          <OtherDay key={index} day={day} />
+          <OtherDay
+            key={index}
+            day={day}
+            isWeekend={isWeekend(
+              weekends,
+              WEEKENDS_KEYS.lastMonthDaysWeekend,
+              day
+            )}
+          />
         ))}
         {currentMonthDays.map((day, index) => (
-          <DayContainer keyEvents={KeysEvents} day={day} key={index} />
+          <DayContainer
+            keyEvents={KeysEvents}
+            day={day}
+            key={index}
+            isWeekend={isWeekend(
+              weekends,
+              WEEKENDS_KEYS.currentMonthDaysWeekend,
+              day
+            )}
+          />
         ))}
         {nextMonthDays.map((day, index) => (
-          <OtherDay key={index} day={day} />
+          <OtherDay
+            key={index}
+            day={day}
+            isWeekend={isWeekend(
+              weekends,
+              WEEKENDS_KEYS.nextMonthDaysWeekend,
+              day
+            )}
+          />
         ))}
         <EventModalContainer />
       </div>

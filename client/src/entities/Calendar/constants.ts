@@ -13,3 +13,9 @@ export const MONTHS = [
   'Ноябрь',
   'Декабрь',
 ];
+
+export enum WEEKENDS_KEYS {
+  lastMonthDaysWeekend = 'lastMonthDaysWeekend',
+  currentMonthDaysWeekend = 'currentMonthDaysWeekend',
+  nextMonthDaysWeekend = 'nextMonthDaysWeekend',
+}

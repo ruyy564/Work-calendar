@@ -6,6 +6,10 @@
     cursor: pointer;
 }
 
+.today:hover {
+    color: var(--hover);
+}
+
 .today:active {
     color: var(--active);
 }

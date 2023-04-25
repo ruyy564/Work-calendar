@@ -6,23 +6,19 @@
     font-size: 15px;
     font-weight: 800;
 
-    --primary: #1D252C;
-    --primary-text: #FFF;
-    --primary-event: #c51adb;
-    --secondary: #FFF;
-    --secondary-text: #1D252C;
+    --dark-blue: #1D252C;
+    --white: #FFF;
+    --violet: #c51adb;
     --active: #777777;
+    --hover: #4f4f4f;
     --block-color: #777777;
-    --primary-hover: #bebebe;
-    --secondary-hover: #4b4b4b;
-    --error: rgb(196, 44, 44);
-    --link: #3057dc;
+    --red: #d70f0c;
+    --dark-red: #6a2d2d;
 }
 
-
 html, body, #root, .App {
-    background-color: var(--primary);
-    color: var(--primary-text);
+    background-color: var(--dark-blue);
+    color: var(--white);
     min-width: 330px;
     height: 100vh;
 }
@@ -33,7 +29,7 @@ html, body, #root, .App {
 }
 
 *::-webkit-scrollbar-track {
-    background: var(--secondary);
+    background: var(--white);
     border-radius: 20px;
 }
 
@@ -45,8 +41,8 @@ html, body, #root, .App {
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-    -webkit-text-fill-color: var(--secondary-text);
-    -webkit-box-shadow: 0 0 0px 40rem var(--secondary) inset;
+    -webkit-text-fill-color: var(--dark-blue);
+    -webkit-box-shadow: 0 0 0px 40rem var(--white) inset;
 }
 
 input[type="radio"] {
@@ -69,8 +65,12 @@ a {
 }
 
 a {
-    color: var(--link);
+    color: var(--violet);
     text-decoration: none;
+}
+
+a:hover {
+    color: var(--hover)
 }
 
 a:active {

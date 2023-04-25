@@ -10,17 +10,15 @@ type Props = {
   events: Event[];
   firstAndLastDayFullDate: { firstDay: string; lastDay: string };
   cost: number;
-  auth: boolean;
   status: STATUS | null;
   fetchEventsCostByPeriod: (start: string, end: string) => void;
 };
 
-const CostWork = memo(
+const CostWorkComponent = memo(
   ({
     events,
     firstAndLastDayFullDate,
     fetchEventsCostByPeriod,
-    auth,
     cost,
     status,
   }: Props) => {
@@ -36,10 +34,6 @@ const CostWork = memo(
       firstAndLastDayFullDate.lastDay,
     ]);
 
-    if (!auth) {
-      return null;
-    }
-
     return (
       <div className={css.root}>
         <div className={css.count}>
@@ -47,6 +41,31 @@ const CostWork = memo(
           Итог за месяц: {cost} руб.
         </div>
       </div>
+    );
+  }
+);
+
+const CostWork = memo(
+  ({
+    events,
+    firstAndLastDayFullDate,
+    fetchEventsCostByPeriod,
+    auth,
+    cost,
+    status,
+  }: Props & { auth: boolean }) => {
+    if (!auth) {
+      return null;
+    }
+
+    return (
+      <CostWorkComponent
+        events={events}
+        firstAndLastDayFullDate={firstAndLastDayFullDate}
+        fetchEventsCostByPeriod={fetchEventsCostByPeriod}
+        cost={cost}
+        status={status}
+      />
     );
   }
 );

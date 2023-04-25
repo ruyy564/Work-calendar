@@ -1,5 +1,5 @@
-import { MONTHS, DAYS_OF_WEEK } from './constants';
-import { CalendarDays, CalendarDate } from '.';
+import { MONTHS, DAYS_OF_WEEK, WEEKENDS_KEYS } from './constants';
+import { CalendarDays, CalendarDate, WeekendDays, Weekends } from '.';
 
 export const getCurrentMonth = (month: number): string => {
   return MONTHS[month - 1];
@@ -84,4 +84,42 @@ export const initState = () => {
   const days = calcDaysOfMonth(selectMonth, selectYear);
 
   return { selectMonth, selectYear, currentDay, days, selectDate: currentDay };
+};
+
+export const getWeekend = (days: CalendarDays) => {
+  const { lastMonthDays, currentMonthDays, nextMonthDays } = days;
+  let currentCount = 1;
+  let countSix = 6;
+  let countSeven = 7;
+
+  function reduceDays(days: number[]) {
+    return days.reduce((acc, day) => {
+      if (currentCount % countSix === 0) {
+        acc[day] = day;
+        countSix += 7;
+      }
+
+      if (currentCount % countSeven === 0) {
+        acc[day] = day;
+        countSeven += 7;
+      }
+      currentCount += 1;
+
+      return acc;
+    }, {} as WeekendDays);
+  }
+
+  return {
+    [WEEKENDS_KEYS.lastMonthDaysWeekend]: reduceDays(lastMonthDays),
+    [WEEKENDS_KEYS.currentMonthDaysWeekend]: reduceDays(currentMonthDays),
+    [WEEKENDS_KEYS.nextMonthDaysWeekend]: reduceDays(nextMonthDays),
+  };
+};
+
+export const isWeekend = (
+  weekends: Weekends,
+  key: WEEKENDS_KEYS,
+  day: number
+) => {
+  return Boolean(weekends[key][day]);
 };

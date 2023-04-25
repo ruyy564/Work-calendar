@@ -6,7 +6,7 @@
     bottom: 0;
     backdrop-filter: blur(2px);
     opacity: 0;
-    transition: 0.5s;
+    transition: all 0.3s;
     z-index: 10;
     display: flex;
     justify-content: center;
@@ -40,13 +40,13 @@
 }
 
 .loader.white:after {
-    border: 6px solid var(--secondary);
-    border-color: var(--secondary) transparent var(--secondary) transparent;
+    border: 6px solid var(--white);
+    border-color: var(--white) transparent var(--white) transparent;
 }
 
 .loader.dark:after {
-    border: 6px solid var(--primary);
-    border-color: var(--primary) transparent var(--primary) transparent;
+    border: 6px solid var(--dark-blue);
+    border-color: var(--dark-blue) transparent var(--dark-blue) transparent;
 }
 
 @keyframes loader {

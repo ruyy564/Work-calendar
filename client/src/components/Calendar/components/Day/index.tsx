@@ -11,6 +11,7 @@ type Props = {
   currentDay: string;
   currentMonth: number;
   currentYear: number;
+  isWeekend: boolean;
   day: number;
   openModal: () => void;
   setSelectDate: (data: string) => void;
@@ -18,10 +19,15 @@ type Props = {
 
 type PropsOtherDay = {
   day: number;
+  isWeekend: boolean;
 };
 
-export const OtherDay = memo(({ day }: PropsOtherDay) => {
-  return <div className={getClasses(css.day, css.blockDay)}>{day}</div>;
+export const OtherDay = memo(({ day, isWeekend }: PropsOtherDay) => {
+  const weekend = isWeekend ? css.weekend : '';
+
+  return (
+    <div className={getClasses(css.day, css.blockDay, weekend)}>{day}</div>
+  );
 });
 
 const Day = memo(
@@ -31,12 +37,14 @@ const Day = memo(
     currentMonth,
     currentYear,
     currentDay,
+    isWeekend,
     openModal,
     setSelectDate,
   }: Props) => {
     const fullDate = formatDate(currentYear, currentMonth, day);
     const hasEventClass = keyEvents[fullDate] ? css.hasEvent : '';
     const isCurrentDayClass = currentDay === fullDate ? css.currentDay : '';
+    const weekend = isWeekend ? css.weekend : '';
 
     const clickHandler = () => {
       setSelectDate(fullDate);
@@ -49,7 +57,8 @@ const Day = memo(
           css.day,
           css.currentMonth,
           hasEventClass,
-          isCurrentDayClass
+          isCurrentDayClass,
+          weekend
         )}
         onClick={clickHandler}
       >

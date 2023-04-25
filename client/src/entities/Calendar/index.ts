@@ -1,3 +1,5 @@
+import { WEEKENDS_KEYS } from './constants';
+
 export type State = {
   days: CalendarDays;
   selectMonth: number;
@@ -16,3 +18,9 @@ export type CalendarDays = {
   nextMonthDays: number[];
   currentMonthDays: number[];
 };
+
+export type Weekends = {
+  [key in WEEKENDS_KEYS]: WeekendDays;
+};
+
+export type WeekendDays = { [key: string]: number };
