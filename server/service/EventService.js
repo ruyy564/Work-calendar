@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const TimebasedService = require('./TimebasedService');
 const PieceworkService = require('./PieceworkService');
 const { Event } = require('../models');
@@ -11,9 +12,9 @@ class EventService {
 
     return findEvent ? new EventDto(findEvent) : null;
   }
-  async getEvents(userId) {
+  async getEvents(userId, start = '2000-01-01', end = '2100-01-01') {
     const findEvents = await Event.findAll({
-      where: { UserId: userId },
+      where: { UserId: userId, date: { [Op.between]: [start, end] } },
     });
     const events = await Promise.all(
       findEvents.map(async (item) => {

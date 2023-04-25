@@ -13,11 +13,7 @@ import css from './index.module.css';
 type Props = {
   date: string;
   pieceworks?: Piecework[];
-  status:
-    | typeof STATUS.loading
-    | typeof STATUS.error
-    | typeof STATUS.success
-    | null;
+  status: STATUS | null;
   openModal: () => void;
   deleteItem: (date: string, key: string) => void;
 };

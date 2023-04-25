@@ -7,14 +7,16 @@ import { AxiosError } from 'axios';
 
 export const fetchEvents = createAsyncThunk<
   Event[],
-  void,
+  { start: string; end: string },
   {
     rejectValue: any;
   }
->('eventsOfCalendar/fetchEvents', async (_, thunkAPI) => {
+>('eventsOfCalendar/fetchEvents', async ({ start, end }, thunkAPI) => {
   try {
     const { data } = await $api.post<Event[]>('/event/getevents', {
       userId: getUserId(),
+      start,
+      end,
     });
 
     return data;

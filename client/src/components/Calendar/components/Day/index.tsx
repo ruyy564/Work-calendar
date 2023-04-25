@@ -1,8 +1,9 @@
 import { memo } from 'react';
 
 import { KeyEvents } from '../../../../helpers/getKeysEvent';
-
+import { formatDate } from '../../../../entities/Calendar/helpers';
 import getClasses from '../../../../helpers/getClasses';
+
 import css from './index.module.css';
 
 type Props = {
@@ -33,17 +34,14 @@ const Day = memo(
     openModal,
     setSelectDate,
   }: Props) => {
+    const fullDate = formatDate(currentYear, currentMonth, day);
+    const hasEventClass = keyEvents[fullDate] ? css.hasEvent : '';
+    const isCurrentDayClass = currentDay === fullDate ? css.currentDay : '';
+
     const clickHandler = () => {
-      setSelectDate(`${day}-${currentMonth + 1}-${currentYear}`);
+      setSelectDate(fullDate);
       openModal();
     };
-    const hasEventClass = keyEvents[`${day}-${currentMonth + 1}-${currentYear}`]
-      ? css.hasEvent
-      : '';
-    const isCurrentDayClass =
-      currentDay === `${day}-${currentMonth}-${currentYear}`
-        ? css.currentDay
-        : '';
 
     return (
       <div

@@ -7,21 +7,9 @@ import {
   getPrevMonth,
 } from '../../entities/Calendar/helpers';
 import spilteDate from '../../helpers/spliteDate';
+import { initState } from '../../entities/Calendar/helpers';
 
-const date = new Date();
-const selectMonth = date.getMonth();
-const selectYear = date.getFullYear();
-const selectDay = date.getDate();
-const currentDay = `${selectDay}-${selectMonth}-${selectYear}`;
-const days = calcDaysOfMonth(selectMonth, selectYear);
-
-const initialState: State = {
-  selectMonth,
-  selectYear,
-  currentDay,
-  days,
-  selectDate: currentDay,
-};
+const initialState: State = initState();
 
 export const calendarSlice = createSlice({
   name: 'calendar',

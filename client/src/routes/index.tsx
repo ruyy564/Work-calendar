@@ -6,6 +6,7 @@ import {
   ROUTE_TO_REGISTRATION_COMPLITE,
   ROUTE_TO_EMAIL_SEND,
   ROUTE_TO_ERROR,
+  ROUTE_TO_MAIN,
 } from './constants';
 import AuthPage from '../pages/AuthPage';
 import CalendarPage from '../pages/CalendarPage';
@@ -13,7 +14,7 @@ import ErrorPage from '../pages/ErrorPage';
 
 export const publicRouter = createBrowserRouter([
   {
-    path: '/',
+    path: ROUTE_TO_MAIN,
     element: <CalendarPage />,
   },
   {
@@ -38,13 +39,13 @@ export const publicRouter = createBrowserRouter([
   },
   {
     path: '*',
-    element: <Navigate to="/" />,
+    element: <Navigate to={ROUTE_TO_MAIN} replace />,
   },
 ]);
 
 export const privateRouter = createBrowserRouter([
   {
-    path: '/',
+    path: ROUTE_TO_MAIN,
     element: <CalendarPage />,
   },
   {
@@ -53,6 +54,6 @@ export const privateRouter = createBrowserRouter([
   },
   {
     path: '*',
-    element: <Navigate to="/" />,
+    element: <Navigate to={ROUTE_TO_MAIN} replace />,
   },
 ]);

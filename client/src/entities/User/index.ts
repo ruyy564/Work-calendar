@@ -18,11 +18,7 @@ export type UserDataRequest = {
 export type State = {
   user: User | null;
   auth: boolean;
-  status:
-    | typeof STATUS.loading
-    | typeof STATUS.error
-    | typeof STATUS.success
-    | null;
+  status: STATUS | null;
   errors: Error | null;
   message: string | null;
 };

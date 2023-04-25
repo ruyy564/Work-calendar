@@ -1,5 +1,5 @@
 const spilteDate = (date: string) => {
-  const [day, month, year] = date.split('-');
+  const [year, month, day] = date.split('-');
 
   return { day, month, year };
 };

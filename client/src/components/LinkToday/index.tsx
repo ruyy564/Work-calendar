@@ -4,19 +4,15 @@ import { BiCalendar } from 'react-icons/bi';
 import css from './index.module.css';
 
 type Props = {
-  day: string;
-  month: string;
-  year: string;
+  currentDay: string;
   toCurrentMonth: () => void;
 };
 
-const LinkToday = memo(({ day, month, year, toCurrentMonth }: Props) => {
+const LinkToday = memo(({ currentDay, toCurrentMonth }: Props) => {
   return (
     <div className={css.today} onClick={toCurrentMonth}>
-      <BiCalendar style={{ width: '30px', height: '30px' }} />
-      <span>
-        {day}-{Number(month) + 1}-{year}
-      </span>
+      <BiCalendar className={css.icon} />
+      <span>{currentDay}</span>
     </div>
   );
 });

@@ -8,11 +8,7 @@ import css from './index.module.css';
 type Props = {
   cost: number;
   auth: boolean;
-  status:
-    | typeof STATUS.loading
-    | typeof STATUS.error
-    | typeof STATUS.success
-    | null;
+  status: STATUS | null;
 };
 
 const CostWork = memo(({ auth, cost, status }: Props) => {

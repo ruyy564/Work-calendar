@@ -38,11 +38,7 @@ export type ChangePiecework = {
 
 export type State = {
   events: Event[];
-  status:
-    | typeof STATUS.loading
-    | typeof STATUS.error
-    | typeof STATUS.success
-    | null;
+  status: STATUS | null;
 };
 
 export type NewTimebased = {

@@ -2,7 +2,7 @@ import { MONTHS, DAYS_OF_WEEK } from './constants';
 import { CalendarDays, CalendarDate } from '.';
 
 export const getCurrentMonth = (month: number): string => {
-  return MONTHS[month];
+  return MONTHS[month - 1];
 };
 
 export const getCurrentDayOfWeek = (dayOfWeek: number): string => {
@@ -10,8 +10,8 @@ export const getCurrentDayOfWeek = (dayOfWeek: number): string => {
 };
 
 export const getNextMonth = (month: number, year: number): CalendarDate => {
-  if (month === 11) {
-    month = 0;
+  if (month === 12) {
+    month = 1;
     year = year + 1;
   } else {
     month = month + 1;
@@ -21,8 +21,8 @@ export const getNextMonth = (month: number, year: number): CalendarDate => {
 };
 
 export const getPrevMonth = (month: number, year: number): CalendarDate => {
-  if (month === 0) {
-    month = 11;
+  if (month === 1) {
+    month = 12;
     year = year - 1;
   } else {
     month = month - 1;
@@ -31,7 +31,11 @@ export const getPrevMonth = (month: number, year: number): CalendarDate => {
   return { month, year };
 };
 
-export const calcDaysOfMonth = (month: number, year: number): CalendarDays => {
+export const calcDaysOfMonth = (
+  monthFormat: number,
+  year: number
+): CalendarDays => {
+  const month = monthFormat - 1;
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
   const firstDayOfWeek = firstDay.getDay();
@@ -62,4 +66,22 @@ export const calcDaysOfMonth = (month: number, year: number): CalendarDays => {
   }
 
   return { lastMonthDays, currentMonthDays, nextMonthDays };
+};
+
+export const formatDate = (year: number, month: number, day: number) => {
+  let mm = month < 10 ? '0' + month : month;
+  let dd = day < 10 ? '0' + day : day;
+
+  return `${year}-${mm}-${dd}`;
+};
+
+export const initState = () => {
+  const date = new Date();
+  const selectMonth = date.getMonth() + 1;
+  const selectYear = date.getFullYear();
+  const SelectDay = date.getDate();
+  const currentDay = formatDate(selectYear, selectMonth, SelectDay);
+  const days = calcDaysOfMonth(selectMonth, selectYear);
+
+  return { selectMonth, selectYear, currentDay, days, selectDate: currentDay };
 };

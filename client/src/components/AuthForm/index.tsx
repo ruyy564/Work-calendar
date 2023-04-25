@@ -1,6 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom';
 
-import { ROUTE_TO_REGISTRATION } from '../../routes/constants';
 import { useLogin } from '../../hooks/useLogin';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
@@ -12,6 +11,8 @@ import {
   ROUTE_TO_REGISTRATION_COMPLITE,
   ROUTE_TO_EMAIL_SEND,
   ROUTE_TO_LOGIN,
+  ROUTE_TO_REGISTRATION,
+  ROUTE_TO_MAIN,
 } from '../../routes/constants';
 
 import css from './index.module.css';
@@ -19,11 +20,7 @@ import css from './index.module.css';
 type Props = {
   errors: Error | null;
   message: string | null;
-  status:
-    | typeof STATUS.loading
-    | typeof STATUS.error
-    | typeof STATUS.success
-    | null;
+  status: STATUS | null;
   resetStatus: () => void;
   login: (email: string, password: string) => void;
   registration: (email: string, password: string) => void;
@@ -38,33 +35,22 @@ const AuthForm = ({
   resetStatus,
 }: Props) => {
   const { pathname } = useLocation();
-  const { email, pass, clear } = useLogin();
-
-  const isEmailConfirmed = pathname === ROUTE_TO_REGISTRATION_COMPLITE;
-  const isEmailSend = pathname === ROUTE_TO_EMAIL_SEND;
-  const isLogin =
-    pathname === ROUTE_TO_LOGIN || isEmailConfirmed || isEmailSend;
-
-  const loginHandler = () => login(String(email.value), String(pass.value));
-
-  const registrationHandler = () =>
-    registration(String(email.value), String(pass.value));
-
-  const resetHandler = () => {
-    clear();
-    resetStatus();
-  };
+  const {
+    email,
+    pass,
+    isLogin,
+    loginHandler,
+    registrationHandler,
+    resetHandler,
+  } = useLogin({ login, registration, resetStatus, pathname });
 
   return (
     <div className={css.root}>
       {isLogin ? <div>Авторизация</div> : <div>Регистрация</div>}
-      {isEmailConfirmed && <div>Ваш email успешно подтвержден</div>}
-      {status === STATUS.success && (
-        <div className={css.alert}>
-          На вашу почту отправлено письмо для подтверждения email{' '}
-        </div>
+      {pathname === ROUTE_TO_REGISTRATION_COMPLITE && (
+        <div>Ваш email успешно подтвержден</div>
       )}
-      {isEmailSend && <div>Письмо отправлено</div>}
+      {pathname === ROUTE_TO_EMAIL_SEND && <div>Письмо отправлено</div>}
       {message && <div className={css.error}>{message}</div>}
       {Boolean(errors && errors['sendActivationEmail']) && (
         <NavLink
@@ -95,9 +81,7 @@ const AuthForm = ({
       </div>
       {isLogin ? (
         <ButtonGroup>
-          <NavLink to={ROUTE_TO_LOGIN}>
-            <Button onClick={loginHandler} text="Войти" />
-          </NavLink>
+          <Button onClick={loginHandler} text="Войти" />
           <div>
             Нет аккаунта?{' '}
             <NavLink to={ROUTE_TO_REGISTRATION} onClick={resetHandler}>
@@ -116,7 +100,7 @@ const AuthForm = ({
           </div>
         </ButtonGroup>
       )}
-      <NavLink to={'/'} onClick={resetStatus}>
+      <NavLink to={ROUTE_TO_MAIN} onClick={resetStatus}>
         На главную
       </NavLink>
     </div>

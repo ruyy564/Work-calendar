@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '..';
 
 import { STATUS } from '../../constants';
 import { State, Event, ChangePiecework } from '../../entities/Event';

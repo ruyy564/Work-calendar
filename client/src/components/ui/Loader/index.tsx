@@ -7,11 +7,7 @@ import css from './index.module.css';
 
 type Props = {
   isPrimary: boolean;
-  status:
-    | typeof STATUS.loading
-    | typeof STATUS.error
-    | typeof STATUS.success
-    | null;
+  status: STATUS | null;
 };
 
 const Loader = memo(({ status, isPrimary }: Props) => {

@@ -2,25 +2,25 @@ const sequelize = require('../db');
 const { DataTypes, UUIDV4 } = require('sequelize');
 
 const User = sequelize.define('User', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  id: { type: DataTypes.UUID, primaryKey: true, defaultValue: UUIDV4 },
   email: { type: DataTypes.STRING, unique: true, require: true },
   password: { type: DataTypes.STRING, require: true },
   isActivated: { type: DataTypes.BOOLEAN, defaultValue: false },
 });
 
 const AccessLink = sequelize.define('AccessLink', {
-  UserId: { type: DataTypes.INTEGER, primaryKey: true },
+  UserId: { type: DataTypes.UUID, primaryKey: true },
   activationLink: { type: DataTypes.UUID, defaultValue: UUIDV4 },
   sendingLink: { type: DataTypes.UUID, defaultValue: UUIDV4 },
 });
 
 const Event = sequelize.define('Event', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  date: { type: DataTypes.STRING, require: true },
+  id: { type: DataTypes.UUID, primaryKey: true, defaultValue: UUIDV4 },
+  date: { type: DataTypes.DATEONLY, require: true },
 });
 
 const Timebased = sequelize.define('Timebased', {
-  EventId: { type: DataTypes.INTEGER, primaryKey: true },
+  EventId: { type: DataTypes.UUID, primaryKey: true },
   costInHour: { type: DataTypes.INTEGER, require: true },
   mainWorkTime: { type: DataTypes.INTEGER, require: true },
   overTime: { type: DataTypes.INTEGER, require: true },
@@ -29,7 +29,7 @@ const Timebased = sequelize.define('Timebased', {
 });
 
 const Piecework = sequelize.define('Piecework', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  id: { type: DataTypes.UUID, primaryKey: true, defaultValue: UUIDV4 },
   cost: { type: DataTypes.INTEGER, require: true },
   count: { type: DataTypes.INTEGER, require: true },
   name: { type: DataTypes.STRING },

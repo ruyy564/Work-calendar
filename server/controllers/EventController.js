@@ -5,8 +5,8 @@ const PieceworkService = require('../service/PieceworkService');
 class EventController {
   async getEvents(req, res, next) {
     try {
-      const { userId } = req.body;
-      const events = await EventService.getEvents(userId);
+      const { userId, start, end } = req.body;
+      const events = await EventService.getEvents(userId, start, end);
 
       return res.json(events);
     } catch (e) {
