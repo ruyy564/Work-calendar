@@ -10,6 +10,12 @@
     color: var(--hover);
 }
 
+@media (hover: none) {
+    .today:hover {
+        color: inherit;
+    }
+}
+
 .today:active {
     color: var(--active);
 }

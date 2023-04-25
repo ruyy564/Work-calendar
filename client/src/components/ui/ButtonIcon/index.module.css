@@ -15,10 +15,6 @@
     color: var(--hover);
 }
 
-.btnDark:hover {
-    color: var(--hover);
-}
-
 .btnArrow {
     background: var(--dark-blue);
     color: var(--white);
@@ -28,6 +24,24 @@
     width: 100%;
     height: 100%;
 }
+
+.btnDark:hover {
+    color: var(--hover);
+}
+
+@media (hover: none) {
+    .root:hover, .btnArrow:hover {
+        background: var(--dark-blue);
+        color: var(--white);
+    }
+
+    .btnDark:hover {
+        background: inherit;
+        color: inherit;
+    }
+}
+
+
 
 .root:active {
     color: var(--active);
@@ -41,12 +55,4 @@
     width: 100px;
     background: var(--dark-blue);
     color: var(--white);
-}
-
-@media (hover: none) {
-
-    .root,
-    .btnDark:hover {
-        color: inherit;
-    }
 }

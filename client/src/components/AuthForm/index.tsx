@@ -9,7 +9,6 @@ import Loader from '../ui/Loader';
 import { Error } from '../../entities/User';
 import {
   ROUTE_TO_REGISTRATION_COMPLITE,
-  ROUTE_TO_EMAIL_SEND,
   ROUTE_TO_LOGIN,
   ROUTE_TO_REGISTRATION,
   ROUTE_TO_MAIN,
@@ -50,7 +49,9 @@ const AuthForm = ({
       {pathname === ROUTE_TO_REGISTRATION_COMPLITE && (
         <div>Ваш email успешно подтвержден</div>
       )}
-      {pathname === ROUTE_TO_EMAIL_SEND && <div>Письмо отправлено</div>}
+      {pathname === ROUTE_TO_REGISTRATION && status === STATUS.success && (
+        <div>Письмо отправлено</div>
+      )}
       {message && <div className={css.error}>{message}</div>}
       {Boolean(errors && errors['sendActivationEmail']) && (
         <NavLink

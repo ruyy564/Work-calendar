@@ -13,6 +13,12 @@
     background-color: var(--hover);
 }
 
+@media (hover: none) {
+    .root:hover {
+        background-color: var(--dark-blue);
+    }
+}
+
 .root:active {
     background-color: var(--active);
 }

@@ -36,6 +36,13 @@
     color: var(--dark-blue);
 }
 
+@media (hover: none) {
+    .currentMonth:hover {
+        background: inherit;
+        color: inherit;
+    }
+}
+
 .currentMonth:active {
     background: var(--active);
     color: var(--white);

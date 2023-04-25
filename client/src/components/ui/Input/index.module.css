@@ -34,14 +34,19 @@ input:hover {
     outline: 2px solid var(--dark-blue);
 }
 
+input.error:hover {
+    outline: 2px solid var(--red);
+}
+
+@media (hover: none) {
+    input:hover {
+        outline: 1px solid var(--block-color);
+    }
+}
 
 input:active, input:focus {
     outline: 3px solid var(--dark-blue);
     color: var(--dark-blue);
-}
-
-input.error:hover {
-    outline: 2px solid var(--red);
 }
 
 input.error:active, input.error:focus {
